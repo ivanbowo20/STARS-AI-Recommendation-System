@@ -539,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(this);
 
             // Fetch AJAX to predict proxy
-            fetch('predict.php', {
+            fetch('/api/prediksi', {
                 method: 'POST',
                 body: formData
             })
