@@ -337,6 +337,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/kontak")
+@app.route("/api/kontak")
 def kontak():
     return render_template("kontak.html")
 
