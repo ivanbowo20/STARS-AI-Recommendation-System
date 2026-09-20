@@ -1,6 +1,11 @@
 {
   "version": 2,
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "model/**,templates/**,dataset/**,public/**,api.py"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.py" }
+    { "source": "/(.*)", "destination": "/api/index" }
   ]
 }

@@ -16,12 +16,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
-# Initialize Flask App
-app = Flask(__name__, static_folder='public', static_url_path='')
-CORS(app)  # Enable Cross-Origin Resource Sharing
-
-# --- Logging setup for contact errors ---
-# Vercel filesystem is read-only, log to stdout
+# --- Logging setup for contact errors (stdout for Serverless) ---
 import sys
 logging.basicConfig(
     stream=sys.stdout,
@@ -30,10 +25,19 @@ logging.basicConfig(
 )
 contact_logger = logging.getLogger("contact")
 
-# Get absolute paths of model files
+# Get absolute paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model", "model_decision_tree.pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "model", "encoders.pkl")
+
+# Initialize Flask App
+app = Flask(
+    __name__,
+    static_folder=os.path.join(BASE_DIR, 'public'),
+    static_url_path='',
+    template_folder=os.path.join(BASE_DIR, 'templates')
+)
+CORS(app)  # Enable Cross-Origin Resource Sharing
 
 # Load model and encoders
 if not os.path.exists(MODEL_PATH) or not os.path.exists(ENCODER_PATH):
@@ -327,6 +331,8 @@ def prediksi_jurusan(data_siswa: dict) -> dict:
 
 # Flask Routes
 @app.route("/")
+@app.route("/api/index")
+@app.route("/api")
 def index():
     return render_template("index.html")
 
