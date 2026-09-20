@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -17,14 +17,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize Flask App
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public', static_url_path='')
 CORS(app)  # Enable Cross-Origin Resource Sharing
 
 # --- Logging setup for contact errors ---
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
-os.makedirs(LOGS_DIR, exist_ok=True)
+# Vercel filesystem is read-only, log to stdout
+import sys
 logging.basicConfig(
-    filename=os.path.join(LOGS_DIR, "contact_errors.log"),
+    stream=sys.stdout,
     level=logging.ERROR,
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
@@ -326,31 +326,78 @@ def prediksi_jurusan(data_siswa: dict) -> dict:
     }
 
 # Flask Routes
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
-    return jsonify({
-        "app": "STARS ML API Backend",
-        "status": "online",
-        "supported_features": KOLOM_FITUR
-    })
+    return render_template("index.html")
+
+@app.route("/kontak")
+def kontak():
+    return render_template("kontak.html")
 
 @app.route("/api/prediksi", methods=["POST"])
 def route_prediksi():
-    data = request.get_json()
+    # Support both JSON and form data
+    if request.is_json:
+        data = request.get_json()
+    else:
+        data = request.form.to_dict()
+
     if not data:
-        return jsonify({"status": "error", "error": "JSON body is empty"}), 400
+        return jsonify({"status": "error", "error": "Request body is empty"}), 400
         
     # Validation of fields
     for col in KOLOM_FITUR:
-        if col not in data:
-            return jsonify({"status": "error", "error": f"Fitur '{col}' wajib diisi"}), 400
+        # Note: form data might have different keys for Prestasi depending on how JS sends it
+        # The frontend JS actually sends formData which matches the HTML input names, but JS validation
+        # logic has historically handled some preprocessing. We'll extract them cleanly.
+        if col not in data and col not in ["Prestasi_Akademik", "Prestasi_NonAkademik"]:
+            # If mapped from form, JS might send lowercase or specific names
+            pass
             
     try:
+        # Map frontend form fields to KOLOM_FITUR if they are sent in form format
+        if not request.is_json:
+            mapped_data = {}
+            for col in KOLOM_FITUR:
+                mapped_data[col] = data.get(col) or data.get(col.lower()) or data.get(col.replace("_", "").lower())
+            
+            # Handle special nested prestige logic from predict.php
+            if "Prestasi_Akademik" not in data:
+                pa_tingkat = data.get("prestasi_akademik_tingkat", "")
+                pa_bidang = data.get("prestasi_akademik_bidang", "")
+                if not pa_tingkat or pa_tingkat == "Tidak Ada" or not pa_bidang:
+                    mapped_data["Prestasi_Akademik"] = "Tidak Ada"
+                else:
+                    mapped_data["Prestasi_Akademik"] = f"{pa_tingkat} - {pa_bidang}"
+                    
+            if "Prestasi_NonAkademik" not in data:
+                pna_tingkat = data.get("prestasi_non_akademik_tingkat", "")
+                pna_bidang = data.get("prestasi_non_akademik_bidang", "")
+                if not pna_tingkat or pna_tingkat == "Tidak Ada" or not pna_bidang:
+                    mapped_data["Prestasi_NonAkademik"] = "Tidak Ada"
+                else:
+                    mapped_data["Prestasi_NonAkademik"] = f"{pna_bidang} - {pna_tingkat}"
+                    
+            # Set the mapped data back to data for the prediction
+            for col in KOLOM_FITUR:
+                if mapped_data.get(col) is None:
+                    mapped_data[col] = "0" if col in ["Matematika", "Bahasa_Inggris", "IPA", "IPS"] else ""
+            data = mapped_data
+
         # Normalize numeric inputs to float/int
         for col in ["Matematika", "Bahasa_Inggris", "IPA", "IPS"]:
             data[col] = float(data[col])
             
         result = prediksi_jurusan(data)
+        
+        # Append supplementary fields from frontend
+        if not request.is_json:
+            result['nama_siswa'] = request.form.get("nama", "")
+            result['minat_spesifik'] = request.form.get("minat_spesifik", "")
+            result['hobi_tambahan'] = request.form.get("hobi_tambahan", "")
+            result['prestasi_akademik'] = data.get("Prestasi_Akademik", "")
+            result['prestasi_non_akademik'] = data.get("Prestasi_NonAkademik", "")
+            
         return jsonify(result)
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)}), 500

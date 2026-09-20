@@ -1,0 +1,418 @@
+﻿Nama_Kampus,Jenis_Kampus,Provinsi,Kota_Kabupaten,Jurusan,Akreditasi,Keunggulan,Website
+Universitas Indonesia,PTN,Jawa Barat,Depok,Kedokteran,Unggul,Pendidikan Dokter Umum dan Spesialis, Rumah Sakit Pendidikan, Penelitian Biomedis,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Bioteknologi Farmasi,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Hukum,Unggul,Hukum Internasional, Hukum Bisnis, Hukum Tata Negara,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Perpajakan, Akuntansi Manajemen,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Manajemen,Unggul,Manajemen Strategik, Keuangan Korporat, Pemasaran Internasional,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Psikologi,Unggul,Psikologi Klinis, Psikologi Industri dan Organisasi, Psikologi Perkembangan,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Ilmu Komunikasi,Unggul,Jurnalisme, Hubungan Masyarakat, Media Digital,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Teknik Informatika,Unggul,AI dan Machine Learning, Cyber Security, Software Engineering,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Teknik Sipil,Unggul,Struktur Bangunan, Manajemen Konstruksi, Geoteknik,https://www.ui.ac.id
+Universitas Indonesia,PTN,Jawa Barat,Depok,Arsitektur,Unggul,Perancangan Bangunan, Urban Design, Arsitektur Berkelanjutan,https://www.ui.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Internasional, Hukum Agraria,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Kesehatan, Rumah Sakit Pendidikan,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Manajemen,Unggul,Manajemen Strategik, Keuangan Internasional, Manajemen Operasi,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Akuntansi,Unggul,Akuntansi Publik, Audit dan Assurance, Perpajakan,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Teknik Sipil,Unggul,Teknik Struktur, Manajemen Konstruksi, Teknik Sumber Daya Air,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Arsitektur,Unggul,Perancangan Bangunan, Arsitektur Kota, Desain Interior,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Psikologi,Unggul,Psikologi Klinis, Psikologi Pendidikan, Psikologi Sosial,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Teknik Industri,Unggul,Sistem Produksi, Ergonomi, Manajemen Rantai Pasok,https://www.ugm.ac.id
+Universitas Gadjah Mada,PTN,DI Yogyakarta,Sleman,Teknik Mesin,Unggul,Manufaktur, Konversi Energi, Mekatronika,https://www.ugm.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Arsitektur,Unggul,Perancangan Bangunan, Urban Design, Arsitektur Tropis,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Informatika,Unggul,AI dan Data Science, Software Engineering, Cyber Security,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Elektro,Unggul,Sistem Tenaga, Elektronika, Telekomunikasi,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Sipil,Unggul,Rekayasa Struktur, Teknik Geoteknik, Manajemen Konstruksi,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Mesin,Unggul,Konversi Energi, Manufaktur, Dinamika dan Kontrol,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Industri,Unggul,Rekayasa Sistem Industri, Riset Operasi, Manajemen Kualitas,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Teknik Lingkungan,Unggul,Pengelolaan Air Limbah, Kualitas Udara, Manajemen Limbah B3,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Desain Komunikasi Visual,Unggul,Branding, Desain Digital, Tipografi, Ilustrasi,https://www.itb.ac.id
+Institut Teknologi Bandung,PTN,Jawa Barat,Bandung,Sistem Informasi,Unggul,Business Intelligence, Digital Transformation, Enterprise Systems,https://www.itb.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Mesin,Unggul,Manufaktur, Konversi Energi, Mekatronika, Material Teknik,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Informatika,Unggul,AI, Data Science, Cyber Security, Software Engineering,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Elektro,Unggul,Robotika, Embedded System, IoT, Sistem Kontrol,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Sipil,Unggul,Rekayasa Struktur, Manajemen Konstruksi, Teknik Pantai,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Industri,Unggul,Sistem Produksi, Supply Chain Management, Analitik Industri,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Teknik Lingkungan,Unggul,Teknologi Pengolahan Air, Pengelolaan Lingkungan, Remediasi,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Desain Komunikasi Visual,Unggul,Desain Interaktif, Visual Identity, Motion Graphics,https://www.its.ac.id
+Institut Teknologi Sepuluh Nopember,PTN,Jawa Timur,Surabaya,Sistem Informasi,Unggul,Business Technology, Enterprise Architecture, Digital Analytics,https://www.its.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Bioteknologi Farmasi,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Biomedis, Rumah Sakit Pendidikan,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Psikologi,Unggul,Psikologi Klinis, Psikologi Industri dan Organisasi, Neuropsikologi,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Hukum,Unggul,Hukum Bisnis, Hukum Internasional, Hukum Pidana,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Akuntansi Syariah,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Manajemen,Unggul,Manajemen Keuangan, Pemasaran, Manajemen SDM,https://www.unair.ac.id
+Universitas Airlangga,PTN,Jawa Timur,Surabaya,Ilmu Komunikasi,Unggul,Jurnalisme, Hubungan Masyarakat, Komunikasi Korporat,https://www.unair.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Teknik Lingkungan,Unggul,Pengelolaan Limbah, Kualitas Air, Sanitasi Lingkungan,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Teknik Sipil,Unggul,Struktur Bangunan, Geoteknik, Manajemen Konstruksi,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Teknik Mesin,Unggul,Manufaktur, Konversi Energi, Desain Produk,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Teknik Industri,Unggul,Optimasi Sistem, Analitik Industri, Ergonomi,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Teknik Elektro,Unggul,Sistem Tenaga Listrik, Elektronika, Telekomunikasi,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Tata Negara,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Akuntansi,Unggul,Akuntansi Keuangan, Perpajakan, Sistem Informasi Akuntansi,https://www.undip.ac.id
+Universitas Diponegoro,PTN,Jawa Tengah,Semarang,Manajemen,Unggul,Manajemen Strategik, Kewirausahaan, Manajemen Pemasaran,https://www.undip.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Psikologi,Unggul,Psikologi Klinis, Psikologi Pendidikan, Psikologi Forensik,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Kesehatan, Kedokteran Komunitas,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Kimia Medisinal,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Hukum,Unggul,Hukum Bisnis, Hukum Internasional, Hukum Lingkungan,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Ilmu Komunikasi,Unggul,Komunikasi Massa, Hubungan Masyarakat, Komunikasi Digital,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Manajemen,Unggul,Manajemen Bisnis, Manajemen Keuangan, Kewirausahaan,https://www.unpad.ac.id
+Universitas Padjadjaran,PTN,Jawa Barat,Sumedang,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Akuntansi Pemerintahan,https://www.unpad.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Teknik Industri,Unggul,Rekayasa Sistem Industri, Manajemen Kualitas, Rantai Pasok,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Teknik Informatika,Unggul,AI dan Software Engineering, Data Science, Jaringan Komputer,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Sistem Informasi,Unggul,Business Technology, Digital Transformation, Sistem Enterprise,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Teknik Sipil,Unggul,Rekayasa Struktur, Teknik Pengairan, Manajemen Konstruksi,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Teknik Mesin,Unggul,Manufaktur, Konversi Energi, Mekatronika,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Teknik Elektro,Unggul,Sistem Kontrol, Elektronika Daya, Telekomunikasi,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Perpajakan,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Manajemen,Unggul,Manajemen Strategik, Manajemen Pemasaran, Kewirausahaan,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Hukum,Unggul,Hukum Bisnis, Hukum Pidana, Hukum Agraria,https://www.ub.ac.id
+Universitas Brawijaya,PTN,Jawa Timur,Malang,Ilmu Komunikasi,Unggul,Jurnalisme, Hubungan Masyarakat, Komunikasi Digital,https://www.ub.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Teknik Sipil,Unggul,Teknik Struktur, Geoteknik, Manajemen Konstruksi,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Bisnis,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Perpajakan,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Manajemen,Unggul,Manajemen Pemasaran, Keuangan, Kewirausahaan,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Ilmu Komunikasi,Unggul,Jurnalisme, Broadcasting, Komunikasi Digital,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Psikologi,Unggul,Psikologi Klinis, Psikologi Pendidikan, Psikologi Industri,https://www.uns.ac.id
+Universitas Sebelas Maret,PTN,Jawa Tengah,Surakarta,Teknik Industri,Unggul,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://www.uns.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Teknik Informatika,Unggul,AI, Software Engineering, Cyber Security, Game Technology,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Sistem Informasi,Unggul,Business Intelligence, Digital Transformation, ERP Systems,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Desain Komunikasi Visual,Unggul,Branding, Digital Design, UI/UX Design, Motion Graphics,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Manajemen,Unggul,Manajemen Bisnis Digital, Kewirausahaan, Manajemen Pemasaran,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Akuntansi,Unggul,Akuntansi Digital, Audit, Sistem Informasi Akuntansi,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Ilmu Komunikasi,Unggul,Media Digital, Komunikasi Korporat, Hubungan Masyarakat,https://binus.ac.id
+Universitas Bina Nusantara,PTS,DKI Jakarta,Jakarta,Arsitektur,Baik Sekali,Perancangan Bangunan, Desain Interior, Arsitektur Digital,https://binus.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Sistem Informasi,Unggul,Business Technology, Digital Transformation, Cloud Computing,https://telkomuniversity.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Teknik Informatika,Unggul,AI, Data Science, Cyber Security, Software Engineering,https://telkomuniversity.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Teknik Elektro,Unggul,Telekomunikasi, IoT, Embedded System, Jaringan Nirkabel,https://telkomuniversity.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Desain Komunikasi Visual,Unggul,UI/UX Design, Branding Digital, Motion Design, Ilustrasi Digital,https://telkomuniversity.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Manajemen Bisnis,Unggul,Digital Business, E-Commerce, Manajemen Inovasi,https://telkomuniversity.ac.id
+Universitas Telkom,PTS,Jawa Barat,Bandung,Teknik Industri,Baik Sekali,Sistem Produksi, Analitik Industri, Manajemen Kualitas,https://telkomuniversity.ac.id
+Universitas Pendidikan Indonesia,PTN,Jawa Barat,Bandung,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://www.upi.edu
+Universitas Pendidikan Indonesia,PTN,Jawa Barat,Bandung,Ilmu Keolahragaan,Unggul,Kepelatihan Olahraga, Manajemen Olahraga, Pendidikan Jasmani,https://www.upi.edu
+Universitas Pendidikan Indonesia,PTN,Jawa Barat,Bandung,Psikologi,Baik Sekali,Psikologi Pendidikan, Psikologi Klinis, Konseling,https://www.upi.edu
+Universitas Negeri Yogyakarta,PTN,DI Yogyakarta,Sleman,Ilmu Keolahragaan,Unggul,Kepelatihan Olahraga, Pendidikan Jasmani, Manajemen Olahraga,https://www.uny.ac.id
+Universitas Negeri Yogyakarta,PTN,DI Yogyakarta,Sleman,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Kurikulum dan Teknologi Pendidikan,https://www.uny.ac.id
+Universitas Negeri Yogyakarta,PTN,DI Yogyakarta,Sleman,Manajemen,Baik Sekali,Manajemen Pendidikan, Manajemen Bisnis, Kewirausahaan,https://www.uny.ac.id
+Universitas Negeri Yogyakarta,PTN,DI Yogyakarta,Sleman,Akuntansi,Baik Sekali,Akuntansi Keuangan, Akuntansi Pendidikan, Perpajakan,https://www.uny.ac.id
+Universitas Negeri Semarang,PTN,Jawa Tengah,Semarang,Pendidikan,Unggul,Pendidikan Dasar, Teknologi Pendidikan, Bimbingan Konseling,https://unnes.ac.id
+Universitas Negeri Semarang,PTN,Jawa Tengah,Semarang,Ilmu Keolahragaan,Unggul,Pendidikan Jasmani, Kepelatihan Olahraga, Ilmu Gizi Olahraga,https://unnes.ac.id
+Universitas Negeri Semarang,PTN,Jawa Tengah,Semarang,Manajemen,Baik Sekali,Manajemen Pendidikan, Kewirausahaan, Manajemen Bisnis,https://unnes.ac.id
+Universitas Negeri Malang,PTN,Jawa Timur,Malang,Desain Komunikasi Visual,Unggul,Ilustrasi, Branding, Desain Grafis, Media Interaktif,https://um.ac.id
+Universitas Negeri Malang,PTN,Jawa Timur,Malang,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://um.ac.id
+Universitas Negeri Malang,PTN,Jawa Timur,Malang,Ilmu Keolahragaan,Baik Sekali,Pendidikan Jasmani, Kepelatihan, Manajemen Olahraga,https://um.ac.id
+Universitas Multimedia Nusantara,PTS,Banten,Tangerang,Desain Komunikasi Visual,Unggul,UI/UX Design, Branding, Digital Media, Motion Graphics,https://www.umn.ac.id
+Universitas Multimedia Nusantara,PTS,Banten,Tangerang,Ilmu Komunikasi,Unggul,Jurnalisme Multimedia, Public Relations, Komunikasi Digital,https://www.umn.ac.id
+Universitas Multimedia Nusantara,PTS,Banten,Tangerang,Teknik Informatika,Baik Sekali,Software Engineering, Mobile Development, Game Technology,https://www.umn.ac.id
+Universitas Multimedia Nusantara,PTS,Banten,Tangerang,Sistem Informasi,Baik Sekali,Business Technology, Digital Analytics, ERP Systems,https://www.umn.ac.id
+Universitas Islam Indonesia,PTS,DI Yogyakarta,Sleman,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Perpajakan, Akuntansi Syariah,https://www.uii.ac.id
+Universitas Islam Indonesia,PTS,DI Yogyakarta,Sleman,Hukum,Unggul,Hukum Bisnis, Hukum Islam, Hukum Internasional,https://www.uii.ac.id
+Universitas Islam Indonesia,PTS,DI Yogyakarta,Sleman,Manajemen,Unggul,Manajemen Strategik, Manajemen Keuangan Syariah, Kewirausahaan,https://www.uii.ac.id
+Universitas Islam Indonesia,PTS,DI Yogyakarta,Sleman,Teknik Informatika,Baik Sekali,Software Engineering, AI, Keamanan Sistem Informasi,https://www.uii.ac.id
+Universitas Islam Indonesia,PTS,DI Yogyakarta,Sleman,Teknik Industri,Unggul,Rekayasa Sistem, Manajemen Kualitas, Ergonomi,https://www.uii.ac.id
+Universitas Muhammadiyah Yogyakarta,PTS,DI Yogyakarta,Bantul,Ilmu Komunikasi,Unggul,Komunikasi Dakwah, Hubungan Masyarakat, Jurnalisme,https://www.umy.ac.id
+Universitas Muhammadiyah Yogyakarta,PTS,DI Yogyakarta,Bantul,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.umy.ac.id
+Universitas Muhammadiyah Yogyakarta,PTS,DI Yogyakarta,Bantul,Hukum,Baik Sekali,Hukum Bisnis, Hukum Islam, Hukum Ketenagakerjaan,https://www.umy.ac.id
+Universitas Muhammadiyah Yogyakarta,PTS,DI Yogyakarta,Bantul,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.umy.ac.id
+Universitas Muhammadiyah Malang,PTS,Jawa Timur,Malang,Ilmu Komunikasi,Unggul,Jurnalisme, Komunikasi Digital, Hubungan Masyarakat,https://www.umm.ac.id
+Universitas Muhammadiyah Malang,PTS,Jawa Timur,Malang,Psikologi,Unggul,Psikologi Klinis, Psikologi Pendidikan, Psikologi Industri,https://www.umm.ac.id
+Universitas Muhammadiyah Malang,PTS,Jawa Timur,Malang,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.umm.ac.id
+Universitas Muhammadiyah Malang,PTS,Jawa Timur,Malang,Hukum,Baik Sekali,Hukum Bisnis, Hukum Islam, Hukum Pidana,https://www.umm.ac.id
+Universitas Muhammadiyah Malang,PTS,Jawa Timur,Malang,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, Keamanan Informasi,https://www.umm.ac.id
+Universitas Muhammadiyah Surakarta,PTS,Jawa Tengah,Surakarta,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://www.ums.ac.id
+Universitas Muhammadiyah Surakarta,PTS,Jawa Tengah,Surakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://www.ums.ac.id
+Universitas Muhammadiyah Surakarta,PTS,Jawa Tengah,Surakarta,Hukum,Baik Sekali,Hukum Bisnis, Hukum Islam, Hukum Ketenagakerjaan,https://www.ums.ac.id
+Universitas Muhammadiyah Surakarta,PTS,Jawa Tengah,Surakarta,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Jalan,https://www.ums.ac.id
+Universitas Muhammadiyah Surakarta,PTS,Jawa Tengah,Surakarta,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, AI,https://www.ums.ac.id
+Universitas Tarumanagara,PTS,DKI Jakarta,Jakarta,Arsitektur,Unggul,Perancangan Bangunan, Urban Design, Arsitektur Interior,https://untar.ac.id
+Universitas Tarumanagara,PTS,DKI Jakarta,Jakarta,Teknik Sipil,Unggul,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://untar.ac.id
+Universitas Tarumanagara,PTS,DKI Jakarta,Jakarta,Psikologi,Unggul,Psikologi Klinis, Psikologi Pendidikan, Psikologi Industri,https://untar.ac.id
+Universitas Tarumanagara,PTS,DKI Jakarta,Jakarta,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Internasional,https://untar.ac.id
+Universitas Tarumanagara,PTS,DKI Jakarta,Jakarta,Teknik Industri,Baik Sekali,Rekayasa Sistem, Manajemen Produksi, Ergonomi,https://untar.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Teknik Sipil,Unggul,Rekayasa Struktur, Manajemen Konstruksi, Teknik Geoteknik,https://www.trisakti.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Arsitektur,Unggul,Perancangan Bangunan, Arsitektur Kota, Desain Interior,https://www.trisakti.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Teknik Material,https://www.trisakti.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Optimasi Proses,https://www.trisakti.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://www.trisakti.ac.id
+Universitas Trisakti,PTS,DKI Jakarta,Jakarta,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://www.trisakti.ac.id
+Universitas Katolik Indonesia Atma Jaya,PTS,DKI Jakarta,Jakarta,Psikologi,Unggul,Psikologi Klinis, Psikologi Industri dan Organisasi, Psikologi Pendidikan,https://www.atmajaya.ac.id
+Universitas Katolik Indonesia Atma Jaya,PTS,DKI Jakarta,Jakarta,Hukum,Unggul,Hukum Perdata, Hukum Internasional, Hukum Bisnis,https://www.atmajaya.ac.id
+Universitas Katolik Indonesia Atma Jaya,PTS,DKI Jakarta,Jakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Keuangan, Pemasaran Digital,https://www.atmajaya.ac.id
+Universitas Katolik Indonesia Atma Jaya,PTS,DKI Jakarta,Jakarta,Teknik Informatika,Baik Sekali,Software Engineering, Sistem Cerdas, Keamanan Siber,https://www.atmajaya.ac.id
+Universitas Katolik Indonesia Atma Jaya,PTS,DKI Jakarta,Jakarta,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://www.atmajaya.ac.id
+Universitas Katolik Parahyangan,PTS,Jawa Barat,Bandung,Hukum,Unggul,Hukum Bisnis, Hukum Internasional, Hukum Tata Negara,https://unpar.ac.id
+Universitas Katolik Parahyangan,PTS,Jawa Barat,Bandung,Arsitektur,Unggul,Perancangan Bangunan, Urban Design, Arsitektur Berkelanjutan,https://unpar.ac.id
+Universitas Katolik Parahyangan,PTS,Jawa Barat,Bandung,Teknik Sipil,Unggul,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://unpar.ac.id
+Universitas Katolik Parahyangan,PTS,Jawa Barat,Bandung,Manajemen,Unggul,Manajemen Strategik, Keuangan, Kewirausahaan,https://unpar.ac.id
+Universitas Katolik Parahyangan,PTS,Jawa Barat,Bandung,Akuntansi,Unggul,Akuntansi Keuangan, Audit, Perpajakan,https://unpar.ac.id
+Universitas Kristen Petra,PTS,Jawa Timur,Surabaya,Arsitektur,Unggul,Perancangan Bangunan, Arsitektur Interior, Urban Design,https://www.petra.ac.id
+Universitas Kristen Petra,PTS,Jawa Timur,Surabaya,Desain Komunikasi Visual,Unggul,Branding, Digital Advertising, UI/UX Design,https://www.petra.ac.id
+Universitas Kristen Petra,PTS,Jawa Timur,Surabaya,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.petra.ac.id
+Universitas Kristen Petra,PTS,Jawa Timur,Surabaya,Manajemen Bisnis,Baik Sekali,Manajemen Digital, Kewirausahaan, Manajemen Strategik,https://www.petra.ac.id
+Universitas Kristen Petra,PTS,Jawa Timur,Surabaya,Ilmu Komunikasi,Baik Sekali,Jurnalisme, Hubungan Masyarakat, Media Digital,https://www.petra.ac.id
+Universitas Surabaya,PTS,Jawa Timur,Surabaya,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://www.ubaya.ac.id
+Universitas Surabaya,PTS,Jawa Timur,Surabaya,Psikologi,Unggul,Psikologi Klinis, Psikologi Industri, Psikologi Pendidikan,https://www.ubaya.ac.id
+Universitas Surabaya,PTS,Jawa Timur,Surabaya,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.ubaya.ac.id
+Universitas Surabaya,PTS,Jawa Timur,Surabaya,Teknik Industri,Baik Sekali,Rekayasa Sistem, Manajemen Kualitas, Rantai Pasok,https://www.ubaya.ac.id
+Universitas Dian Nuswantoro,PTS,Jawa Tengah,Semarang,Teknik Informatika,Unggul,Software Engineering, AI, Game Technology, Keamanan Siber,https://dinus.ac.id
+Universitas Dian Nuswantoro,PTS,Jawa Tengah,Semarang,Sistem Informasi,Baik Sekali,Business Intelligence, Digital Analytics, ERP Systems,https://dinus.ac.id
+Universitas Dian Nuswantoro,PTS,Jawa Tengah,Semarang,Desain Komunikasi Visual,Baik Sekali,Desain Grafis, UI/UX, Animasi Digital,https://dinus.ac.id
+Universitas Dian Nuswantoro,PTS,Jawa Tengah,Semarang,Ilmu Komunikasi,Baik Sekali,Jurnalisme, Komunikasi Digital, Hubungan Masyarakat,https://dinus.ac.id
+Universitas AMIKOM Yogyakarta,PTS,DI Yogyakarta,Sleman,Teknik Informatika,Unggul,AI, Game Technology, Software Engineering, Cyber Security,https://amikom.ac.id
+Universitas AMIKOM Yogyakarta,PTS,DI Yogyakarta,Sleman,Sistem Informasi,Unggul,Business Technology, Digital Business, ERP Systems,https://amikom.ac.id
+Universitas AMIKOM Yogyakarta,PTS,DI Yogyakarta,Sleman,Desain Komunikasi Visual,Baik Sekali,Animasi 2D/3D, Visual Effects, Branding Digital,https://amikom.ac.id
+Universitas AMIKOM Yogyakarta,PTS,DI Yogyakarta,Sleman,Manajemen Bisnis,Baik Sekali,E-Commerce, Manajemen Digital, Kewirausahaan Teknologi,https://amikom.ac.id
+Universitas Sanata Dharma,PTS,DI Yogyakarta,Sleman,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://www.usd.ac.id
+Universitas Sanata Dharma,PTS,DI Yogyakarta,Sleman,Psikologi,Baik Sekali,Psikologi Klinis, Psikologi Pendidikan, Psikologi Sosial,https://www.usd.ac.id
+Universitas Sanata Dharma,PTS,DI Yogyakarta,Sleman,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen SDM,https://www.usd.ac.id
+Universitas Jenderal Soedirman,PTN,Jawa Tengah,Banyumas,Administrasi Bisnis,Unggul,Manajemen Publik, Kebijakan Bisnis, Administrasi Perkantoran,https://unsoed.ac.id
+Universitas Jenderal Soedirman,PTN,Jawa Tengah,Banyumas,Hukum,Unggul,Hukum Pidana, Hukum Perdata, Hukum Bisnis,https://unsoed.ac.id
+Universitas Jenderal Soedirman,PTN,Jawa Tengah,Banyumas,Manajemen,Baik Sekali,Manajemen Bisnis, Manajemen Keuangan, Kewirausahaan,https://unsoed.ac.id
+Universitas Jenderal Soedirman,PTN,Jawa Tengah,Banyumas,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, Sistem Cerdas,https://unsoed.ac.id
+Universitas Jember,PTN,Jawa Timur,Jember,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Biomedis, Kedokteran Komunitas,https://unej.ac.id
+Universitas Jember,PTN,Jawa Timur,Jember,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Pidana,https://unej.ac.id
+Universitas Jember,PTN,Jawa Timur,Jember,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://unej.ac.id
+Universitas Jember,PTN,Jawa Timur,Jember,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://unej.ac.id
+Universitas Sultan Ageng Tirtayasa,PTN,Banten,Serang,Teknik Elektro,Baik Sekali,Sistem Tenaga Listrik, Elektronika, Telekomunikasi,https://untirta.ac.id
+Universitas Sultan Ageng Tirtayasa,PTN,Banten,Serang,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://untirta.ac.id
+Universitas Sultan Ageng Tirtayasa,PTN,Banten,Serang,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Rantai Pasok,https://untirta.ac.id
+Universitas Sultan Ageng Tirtayasa,PTN,Banten,Serang,Administrasi Bisnis,Baik Sekali,Administrasi Publik, Kebijakan Bisnis, Manajemen Perkantoran,https://untirta.ac.id
+Universitas Pembangunan Nasional Veteran Jawa Timur,PTN,Jawa Timur,Surabaya,Manajemen Bisnis,Baik Sekali,Manajemen Strategik, Kewirausahaan, Manajemen Digital,https://upnjatim.ac.id
+Universitas Pembangunan Nasional Veteran Jawa Timur,PTN,Jawa Timur,Surabaya,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://upnjatim.ac.id
+Universitas Pembangunan Nasional Veteran Jawa Timur,PTN,Jawa Timur,Surabaya,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://upnjatim.ac.id
+Universitas Pembangunan Nasional Veteran Jakarta,PTN,DKI Jakarta,Jakarta,Kedokteran,Baik Sekali,Pendidikan Dokter, Kedokteran Komunitas, Penelitian Kesehatan,https://upnvj.ac.id
+Universitas Pembangunan Nasional Veteran Jakarta,PTN,DKI Jakarta,Jakarta,Hukum,Baik Sekali,Hukum Bisnis, Hukum Internasional, Hukum Pidana,https://upnvj.ac.id
+Universitas Pembangunan Nasional Veteran Jakarta,PTN,DKI Jakarta,Jakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://upnvj.ac.id
+Universitas Pembangunan Nasional Veteran Yogyakarta,PTN,DI Yogyakarta,Sleman,Teknik Industri,Baik Sekali,Rekayasa Sistem, Manajemen Kualitas, Optimasi Proses,https://upnyk.ac.id
+Universitas Pembangunan Nasional Veteran Yogyakarta,PTN,DI Yogyakarta,Sleman,Teknik Informatika,Baik Sekali,Software Engineering, Keamanan Siber, Jaringan Komputer,https://upnyk.ac.id
+Universitas Pembangunan Nasional Veteran Yogyakarta,PTN,DI Yogyakarta,Sleman,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://upnyk.ac.id
+Universitas Mercu Buana,PTS,DKI Jakarta,Jakarta,Desain Komunikasi Visual,Baik Sekali,Branding, Digital Design, Fotografi, Ilustrasi,https://www.mercubuana.ac.id
+Universitas Mercu Buana,PTS,DKI Jakarta,Jakarta,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://www.mercubuana.ac.id
+Universitas Mercu Buana,PTS,DKI Jakarta,Jakarta,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.mercubuana.ac.id
+Universitas Mercu Buana,PTS,DKI Jakarta,Jakarta,Ilmu Komunikasi,Baik Sekali,Jurnalisme, Hubungan Masyarakat, Komunikasi Digital,https://www.mercubuana.ac.id
+Universitas Mercu Buana,PTS,DKI Jakarta,Jakarta,Arsitektur,Baik Sekali,Perancangan Bangunan, Desain Interior, Arsitektur Kota,https://www.mercubuana.ac.id
+Universitas Gunadarma,PTS,Jawa Barat,Depok,Sistem Informasi,Baik Sekali,Business Intelligence, Digital Analytics, ERP Systems,https://www.gunadarma.ac.id
+Universitas Gunadarma,PTS,Jawa Barat,Depok,Teknik Informatika,Baik Sekali,Software Engineering, AI, Keamanan Siber,https://www.gunadarma.ac.id
+Universitas Gunadarma,PTS,Jawa Barat,Depok,Teknik Elektro,Baik Sekali,Sistem Kontrol, Elektronika, Telekomunikasi,https://www.gunadarma.ac.id
+Universitas Gunadarma,PTS,Jawa Barat,Depok,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://www.gunadarma.ac.id
+Universitas Gunadarma,PTS,Jawa Barat,Depok,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Sistem Informasi Akuntansi,https://www.gunadarma.ac.id
+Universitas Pelita Harapan,PTS,Banten,Tangerang,Hukum,Unggul,Hukum Bisnis, Hukum Internasional, Hukum Korporat,https://www.uph.edu
+Universitas Pelita Harapan,PTS,Banten,Tangerang,Manajemen,Unggul,Manajemen Internasional, Keuangan, Kewirausahaan,https://www.uph.edu
+Universitas Pelita Harapan,PTS,Banten,Tangerang,Psikologi,Baik Sekali,Psikologi Klinis, Psikologi Pendidikan, Konseling,https://www.uph.edu
+Universitas Pelita Harapan,PTS,Banten,Tangerang,Teknik Informatika,Baik Sekali,Software Engineering, Cyber Security, Data Science,https://www.uph.edu
+Universitas Pelita Harapan,PTS,Banten,Tangerang,Arsitektur,Baik Sekali,Perancangan Bangunan, Desain Interior, Arsitektur Berkelanjutan,https://www.uph.edu
+Universitas Ciputra,PTS,Jawa Timur,Surabaya,Manajemen Bisnis,Unggul,Kewirausahaan, Digital Business, Manajemen Kreatif,https://uc.ac.id
+Universitas Ciputra,PTS,Jawa Timur,Surabaya,Desain Komunikasi Visual,Unggul,Branding, Digital Media, UI/UX Design, Ilustrasi,https://uc.ac.id
+Universitas Ciputra,PTS,Jawa Timur,Surabaya,Arsitektur,Baik Sekali,Perancangan Bangunan, Desain Interior, Arsitektur Kota,https://uc.ac.id
+Universitas Islam Sultan Agung,PTS,Jawa Tengah,Semarang,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://unissula.ac.id
+Universitas Islam Sultan Agung,PTS,Jawa Tengah,Semarang,Hukum,Baik Sekali,Hukum Islam, Hukum Bisnis, Hukum Pidana,https://unissula.ac.id
+Universitas Islam Sultan Agung,PTS,Jawa Tengah,Semarang,Kedokteran,Baik Sekali,Pendidikan Dokter, Kedokteran Islami, Penelitian Kesehatan,https://unissula.ac.id
+Universitas Islam Sultan Agung,PTS,Jawa Tengah,Semarang,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://unissula.ac.id
+Institut Teknologi Nasional Bandung,PTS,Jawa Barat,Bandung,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Desain Produk,https://www.itenas.ac.id
+Institut Teknologi Nasional Bandung,PTS,Jawa Barat,Bandung,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.itenas.ac.id
+Institut Teknologi Nasional Bandung,PTS,Jawa Barat,Bandung,Teknik Elektro,Baik Sekali,Elektronika, Sistem Tenaga, Telekomunikasi,https://www.itenas.ac.id
+Institut Teknologi Nasional Bandung,PTS,Jawa Barat,Bandung,Teknik Industri,Baik Sekali,Rekayasa Sistem, Manajemen Produksi, Ergonomi,https://www.itenas.ac.id
+Institut Teknologi Nasional Bandung,PTS,Jawa Barat,Bandung,Arsitektur,Baik Sekali,Perancangan Bangunan, Urban Design, Desain Interior,https://www.itenas.ac.id
+Universitas Kristen Satya Wacana,PTS,Jawa Tengah,Salatiga,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://www.uksw.edu
+Universitas Kristen Satya Wacana,PTS,Jawa Tengah,Salatiga,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, Sistem Cerdas,https://www.uksw.edu
+Universitas Kristen Satya Wacana,PTS,Jawa Tengah,Salatiga,Ilmu Komunikasi,Baik,Komunikasi Digital, Jurnalisme, Hubungan Masyarakat,https://www.uksw.edu
+Universitas Esa Unggul,PTS,DKI Jakarta,Jakarta,Desain Komunikasi Visual,Baik Sekali,Branding, Digital Design, UI/UX, Fotografi,https://www.esaunggul.ac.id
+Universitas Esa Unggul,PTS,DKI Jakarta,Jakarta,Ilmu Komunikasi,Baik Sekali,Hubungan Masyarakat, Komunikasi Digital, Jurnalisme,https://www.esaunggul.ac.id
+Universitas Esa Unggul,PTS,DKI Jakarta,Jakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.esaunggul.ac.id
+Universitas Esa Unggul,PTS,DKI Jakarta,Jakarta,Teknik Industri,Baik Sekali,Rekayasa Sistem, Manajemen Produksi, Ergonomi,https://www.esaunggul.ac.id
+Universitas Ahmad Dahlan,PTS,DI Yogyakarta,Yogyakarta,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Teknologi Sediaan Farmasi,https://uad.ac.id
+Universitas Ahmad Dahlan,PTS,DI Yogyakarta,Yogyakarta,Teknik Informatika,Baik Sekali,Software Engineering, AI, Keamanan Informasi,https://uad.ac.id
+Universitas Ahmad Dahlan,PTS,DI Yogyakarta,Yogyakarta,Psikologi,Baik Sekali,Psikologi Klinis, Psikologi Pendidikan, Psikologi Sosial,https://uad.ac.id
+Universitas Ahmad Dahlan,PTS,DI Yogyakarta,Yogyakarta,Pendidikan,Baik Sekali,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://uad.ac.id
+Universitas Ahmad Dahlan,PTS,DI Yogyakarta,Yogyakarta,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Syariah,https://uad.ac.id
+Universitas Negeri Jakarta,PTN,DKI Jakarta,Jakarta,Ilmu Keolahragaan,Unggul,Kepelatihan Olahraga, Pendidikan Jasmani, Manajemen Olahraga,https://www.unj.ac.id
+Universitas Negeri Jakarta,PTN,DKI Jakarta,Jakarta,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://www.unj.ac.id
+Universitas Negeri Jakarta,PTN,DKI Jakarta,Jakarta,Manajemen,Baik Sekali,Manajemen Pendidikan, Kewirausahaan, Manajemen Bisnis,https://www.unj.ac.id
+Universitas Negeri Jakarta,PTN,DKI Jakarta,Jakarta,Desain Komunikasi Visual,Baik Sekali,Desain Grafis, Ilustrasi, Media Pendidikan,https://www.unj.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Biomedis, Rumah Sakit Pendidikan,https://www.usu.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Internasional,https://www.usu.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Farmasi,Baik Sekali,Farmasi Klinis, Kimia Farmasi, Farmasi Industri,https://www.usu.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://www.usu.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://www.usu.ac.id
+Universitas Sumatera Utara,PTN,Sumatera Utara,Medan,Manajemen,Baik Sekali,Manajemen Bisnis, Keuangan, Kewirausahaan,https://www.usu.ac.id
+Universitas Andalas,PTN,Sumatera Barat,Padang,Farmasi,Unggul,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://www.unand.ac.id
+Universitas Andalas,PTN,Sumatera Barat,Padang,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Kesehatan, Kedokteran Komunitas,https://www.unand.ac.id
+Universitas Andalas,PTN,Sumatera Barat,Padang,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Adat,https://www.unand.ac.id
+Universitas Andalas,PTN,Sumatera Barat,Padang,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Teknik Gempa,https://www.unand.ac.id
+Universitas Andalas,PTN,Sumatera Barat,Padang,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://www.unand.ac.id
+Universitas Sriwijaya,PTN,Sumatera Selatan,Palembang,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Teknik Material,https://unsri.ac.id
+Universitas Sriwijaya,PTN,Sumatera Selatan,Palembang,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unsri.ac.id
+Universitas Sriwijaya,PTN,Sumatera Selatan,Palembang,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, Telekomunikasi,https://unsri.ac.id
+Universitas Sriwijaya,PTN,Sumatera Selatan,Palembang,Hukum,Baik Sekali,Hukum Perdata, Hukum Pidana, Hukum Bisnis,https://unsri.ac.id
+Universitas Sriwijaya,PTN,Sumatera Selatan,Palembang,Manajemen,Baik Sekali,Manajemen Bisnis, Keuangan, Kewirausahaan,https://unsri.ac.id
+Universitas Lampung,PTN,Lampung,Bandar Lampung,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Agraria,https://www.unila.ac.id
+Universitas Lampung,PTN,Lampung,Bandar Lampung,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.unila.ac.id
+Universitas Lampung,PTN,Lampung,Bandar Lampung,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://www.unila.ac.id
+Universitas Lampung,PTN,Lampung,Bandar Lampung,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.unila.ac.id
+Universitas Syiah Kuala,PTN,Aceh,Banda Aceh,Teknik Sipil,Unggul,Rekayasa Struktur, Teknik Gempa, Manajemen Konstruksi,https://usk.ac.id
+Universitas Syiah Kuala,PTN,Aceh,Banda Aceh,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, Telekomunikasi,https://usk.ac.id
+Universitas Syiah Kuala,PTN,Aceh,Banda Aceh,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://usk.ac.id
+Universitas Syiah Kuala,PTN,Aceh,Banda Aceh,Hukum,Baik Sekali,Hukum Islam, Hukum Adat, Hukum Bisnis,https://usk.ac.id
+Universitas Riau,PTN,Riau,Pekanbaru,Teknik Lingkungan,Baik Sekali,Pengelolaan Lingkungan, Pengolahan Air Limbah, Konservasi Sumber Daya Alam,https://unri.ac.id
+Universitas Riau,PTN,Riau,Pekanbaru,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unri.ac.id
+Universitas Riau,PTN,Riau,Pekanbaru,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://unri.ac.id
+Universitas Riau,PTN,Riau,Pekanbaru,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Lingkungan,https://unri.ac.id
+Universitas Jambi,PTN,Jambi,Jambi,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://www.unja.ac.id
+Universitas Jambi,PTN,Jambi,Jambi,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://www.unja.ac.id
+Universitas Jambi,PTN,Jambi,Jambi,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Agraria,https://www.unja.ac.id
+Universitas Bengkulu,PTN,Bengkulu,Bengkulu,Akuntansi,Baik Sekali,Akuntansi Keuangan, Perpajakan, Sistem Informasi Akuntansi,https://www.unib.ac.id
+Universitas Bengkulu,PTN,Bengkulu,Bengkulu,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.unib.ac.id
+Universitas Bengkulu,PTN,Bengkulu,Bengkulu,Hukum,Baik Sekali,Hukum Perdata, Hukum Pidana, Hukum Tata Negara,https://www.unib.ac.id
+Universitas Negeri Padang,PTN,Sumatera Barat,Padang,Ilmu Keolahragaan,Unggul,Kepelatihan Olahraga, Pendidikan Jasmani, Ilmu Gizi Olahraga,https://unp.ac.id
+Universitas Negeri Padang,PTN,Sumatera Barat,Padang,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://unp.ac.id
+Universitas Negeri Padang,PTN,Sumatera Barat,Padang,Teknik Industri,Baik Sekali,Sistem Produksi, Ergonomi, Manajemen Kualitas,https://unp.ac.id
+Universitas Negeri Medan,PTN,Sumatera Utara,Medan,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Kurikulum dan Pembelajaran,https://www.unimed.ac.id
+Universitas Negeri Medan,PTN,Sumatera Utara,Medan,Ilmu Keolahragaan,Baik Sekali,Pendidikan Jasmani, Kepelatihan Olahraga, Manajemen Olahraga,https://www.unimed.ac.id
+Universitas Islam Negeri Sultan Syarif Kasim,PTN,Riau,Pekanbaru,Sistem Informasi,Baik Sekali,Business Intelligence, Digital Analytics, Sistem Informasi Manajemen,https://uin-suska.ac.id
+Universitas Islam Negeri Sultan Syarif Kasim,PTN,Riau,Pekanbaru,Teknik Informatika,Baik Sekali,Software Engineering, Keamanan Siber, Jaringan Komputer,https://uin-suska.ac.id
+Universitas Islam Negeri Sultan Syarif Kasim,PTN,Riau,Pekanbaru,Manajemen,Baik Sekali,Manajemen Bisnis Syariah, Kewirausahaan, Manajemen Keuangan,https://uin-suska.ac.id
+Universitas Muhammadiyah Sumatera Utara,PTS,Sumatera Utara,Medan,Akuntansi,Baik Sekali,Akuntansi Keuangan, Perpajakan, Audit,https://umsu.ac.id
+Universitas Muhammadiyah Sumatera Utara,PTS,Sumatera Utara,Medan,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://umsu.ac.id
+Universitas Muhammadiyah Sumatera Utara,PTS,Sumatera Utara,Medan,Hukum,Baik Sekali,Hukum Perdata, Hukum Islam, Hukum Pidana,https://umsu.ac.id
+Universitas Teknokrat Indonesia,PTS,Lampung,Bandar Lampung,Teknik Informatika,Baik Sekali,Software Engineering, AI, Game Technology,https://teknokrat.ac.id
+Universitas Teknokrat Indonesia,PTS,Lampung,Bandar Lampung,Sistem Informasi,Baik Sekali,Business Intelligence, Digital Analytics, ERP Systems,https://teknokrat.ac.id
+Universitas Teknokrat Indonesia,PTS,Lampung,Bandar Lampung,Teknik Elektro,Baik,Elektronika, Sistem Kontrol, Telekomunikasi,https://teknokrat.ac.id
+Universitas Medan Area,PTS,Sumatera Utara,Medan,Psikologi,Baik Sekali,Psikologi Klinis, Psikologi Industri, Psikologi Sosial,https://www.uma.ac.id
+Universitas Medan Area,PTS,Sumatera Utara,Medan,Hukum,Baik Sekali,Hukum Perdata, Hukum Pidana, Hukum Agraria,https://www.uma.ac.id
+Universitas Medan Area,PTS,Sumatera Utara,Medan,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://www.uma.ac.id
+Universitas Islam Riau,PTS,Riau,Pekanbaru,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://uir.ac.id
+Universitas Islam Riau,PTS,Riau,Pekanbaru,Hukum,Baik Sekali,Hukum Islam, Hukum Perdata, Hukum Bisnis,https://uir.ac.id
+Universitas Islam Riau,PTS,Riau,Pekanbaru,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Keuangan,https://uir.ac.id
+Universitas Bung Hatta,PTS,Sumatera Barat,Padang,Arsitektur,Baik Sekali,Perancangan Bangunan, Arsitektur Kota, Desain Interior,https://bunghatta.ac.id
+Universitas Bung Hatta,PTS,Sumatera Barat,Padang,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://bunghatta.ac.id
+Universitas Bung Hatta,PTS,Sumatera Barat,Padang,Teknik Elektro,Baik,Sistem Tenaga, Elektronika, Telekomunikasi,https://bunghatta.ac.id
+Universitas Baiturrahmah,PTS,Sumatera Barat,Padang,Kedokteran,Baik Sekali,Pendidikan Dokter, Kedokteran Komunitas, Penelitian Kesehatan,https://unbrah.ac.id
+Universitas Baiturrahmah,PTS,Sumatera Barat,Padang,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://unbrah.ac.id
+Universitas Prima Indonesia,PTS,Sumatera Utara,Medan,Kedokteran,Baik Sekali,Pendidikan Dokter, Kedokteran Komunitas, Penelitian Biomedis,https://unprimdn.ac.id
+Universitas Prima Indonesia,PTS,Sumatera Utara,Medan,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://unprimdn.ac.id
+Universitas Prima Indonesia,PTS,Sumatera Utara,Medan,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://unprimdn.ac.id
+Universitas Potensi Utama,PTS,Sumatera Utara,Medan,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, Keamanan Siber,https://potensi-utama.ac.id
+Universitas Potensi Utama,PTS,Sumatera Utara,Medan,Sistem Informasi,Baik,Business Intelligence, Digital Analytics, Sistem Informasi Manajemen,https://potensi-utama.ac.id
+Universitas Indo Global Mandiri,PTS,Sumatera Selatan,Palembang,Sistem Informasi,Baik Sekali,Business Intelligence, Digital Analytics, Sistem Informasi Manajemen,https://uigm.ac.id
+Universitas Indo Global Mandiri,PTS,Sumatera Selatan,Palembang,Teknik Informatika,Baik,Software Engineering, Jaringan Komputer, Keamanan Siber,https://uigm.ac.id
+Universitas Indo Global Mandiri,PTS,Sumatera Selatan,Palembang,Administrasi Bisnis,Baik,Administrasi Publik, Manajemen Perkantoran, Kebijakan Bisnis,https://uigm.ac.id
+Universitas Lambung Mangkurat,PTN,Kalimantan Selatan,Banjarmasin,Teknik Lingkungan,Baik Sekali,Pengelolaan Lingkungan Tambang, Pengolahan Air Limbah, Konservasi,https://ulm.ac.id
+Universitas Lambung Mangkurat,PTN,Kalimantan Selatan,Banjarmasin,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Rawa,https://ulm.ac.id
+Universitas Lambung Mangkurat,PTN,Kalimantan Selatan,Banjarmasin,Hukum,Baik Sekali,Hukum Perdata, Hukum Pidana, Hukum Sumber Daya Alam,https://ulm.ac.id
+Universitas Lambung Mangkurat,PTN,Kalimantan Selatan,Banjarmasin,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://ulm.ac.id
+Universitas Mulawarman,PTN,Kalimantan Timur,Samarinda,Teknik Lingkungan,Baik Sekali,Pengelolaan Lingkungan Tambang, Kualitas Air, Reklamasi Lahan,https://unmul.ac.id
+Universitas Mulawarman,PTN,Kalimantan Timur,Samarinda,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unmul.ac.id
+Universitas Mulawarman,PTN,Kalimantan Timur,Samarinda,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Sumber Daya,https://unmul.ac.id
+Universitas Mulawarman,PTN,Kalimantan Timur,Samarinda,Hukum,Baik Sekali,Hukum Sumber Daya Alam, Hukum Bisnis, Hukum Adat,https://unmul.ac.id
+Universitas Tanjungpura,PTN,Kalimantan Barat,Pontianak,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, Telekomunikasi,https://www.untan.ac.id
+Universitas Tanjungpura,PTN,Kalimantan Barat,Pontianak,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://www.untan.ac.id
+Universitas Tanjungpura,PTN,Kalimantan Barat,Pontianak,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Adat,https://www.untan.ac.id
+Universitas Tanjungpura,PTN,Kalimantan Barat,Pontianak,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.untan.ac.id
+Universitas Palangka Raya,PTN,Kalimantan Tengah,Palangka Raya,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Lahan Gambut,https://upr.ac.id
+Universitas Palangka Raya,PTN,Kalimantan Tengah,Palangka Raya,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Kehutanan,https://upr.ac.id
+Universitas Palangka Raya,PTN,Kalimantan Tengah,Palangka Raya,Hukum,Baik,Hukum Sumber Daya Alam, Hukum Adat, Hukum Perdata,https://upr.ac.id
+Universitas Borneo Tarakan,PTN,Kalimantan Utara,Tarakan,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Logistik,https://www.ubt.ac.id
+Universitas Borneo Tarakan,PTN,Kalimantan Utara,Tarakan,Teknik Sipil,Baik,Rekayasa Struktur, Manajemen Konstruksi, Infrastruktur Perbatasan,https://www.ubt.ac.id
+Universitas Borneo Tarakan,PTN,Kalimantan Utara,Tarakan,Administrasi Bisnis,Baik,Administrasi Publik, Manajemen Perbatasan, Kebijakan Bisnis,https://www.ubt.ac.id
+Institut Teknologi Kalimantan,PTN,Kalimantan Timur,Balikpapan,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Teknik Material,https://itk.ac.id
+Institut Teknologi Kalimantan,PTN,Kalimantan Timur,Balikpapan,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, IoT,https://itk.ac.id
+Institut Teknologi Kalimantan,PTN,Kalimantan Timur,Balikpapan,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Rekayasa Sistem,https://itk.ac.id
+Institut Teknologi Kalimantan,PTN,Kalimantan Timur,Balikpapan,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://itk.ac.id
+Institut Teknologi Kalimantan,PTN,Kalimantan Timur,Balikpapan,Teknik Lingkungan,Baik Sekali,Pengelolaan Lingkungan, Teknologi Pengolahan Air, Reklamasi,https://itk.ac.id
+Universitas Islam Kalimantan MAB,PTS,Kalimantan Selatan,Banjarmasin,Teknik Informatika,Baik Sekali,Software Engineering, Jaringan Komputer, Keamanan Siber,https://uniska-bjm.ac.id
+Universitas Islam Kalimantan MAB,PTS,Kalimantan Selatan,Banjarmasin,Sistem Informasi,Baik,Business Intelligence, Digital Analytics, ERP Systems,https://uniska-bjm.ac.id
+Universitas Islam Kalimantan MAB,PTS,Kalimantan Selatan,Banjarmasin,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Syariah,https://uniska-bjm.ac.id
+Universitas Balikpapan,PTS,Kalimantan Timur,Balikpapan,Hukum,Baik Sekali,Hukum Bisnis, Hukum Sumber Daya Alam, Hukum Perdata,https://uniba-bpn.ac.id
+Universitas Balikpapan,PTS,Kalimantan Timur,Balikpapan,Teknik Sipil,Baik,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://uniba-bpn.ac.id
+Universitas Balikpapan,PTS,Kalimantan Timur,Balikpapan,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Industri,https://uniba-bpn.ac.id
+Universitas Muhammadiyah Pontianak,PTS,Kalimantan Barat,Pontianak,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://unmuhpnk.ac.id
+Universitas Muhammadiyah Pontianak,PTS,Kalimantan Barat,Pontianak,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://unmuhpnk.ac.id
+Universitas Muhammadiyah Banjarmasin,PTS,Kalimantan Selatan,Banjarmasin,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Teknologi Sediaan Farmasi,https://umbanjarmasin.ac.id
+Universitas Muhammadiyah Banjarmasin,PTS,Kalimantan Selatan,Banjarmasin,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Syariah,https://umbanjarmasin.ac.id
+Universitas Widya Gama Mahakam,PTS,Kalimantan Timur,Samarinda,Administrasi Bisnis,Baik,Administrasi Publik, Manajemen Perkantoran, Kebijakan Bisnis,https://uwgmahakam.ac.id
+Universitas Widya Gama Mahakam,PTS,Kalimantan Timur,Samarinda,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Sumber Daya,https://uwgmahakam.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Biomedis, Rumah Sakit Pendidikan,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Teknik Sipil,Unggul,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Hukum,Unggul,Hukum Perdata, Hukum Pidana, Hukum Adat,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Teknik Industri,Baik Sekali,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Material Teknik,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, Telekomunikasi,https://unhas.ac.id
+Universitas Hasanuddin,PTN,Sulawesi Selatan,Makassar,Manajemen,Baik Sekali,Manajemen Bisnis, Keuangan, Kewirausahaan,https://unhas.ac.id
+Universitas Sam Ratulangi,PTN,Sulawesi Utara,Manado,Teknik Elektro,Baik Sekali,Sistem Tenaga, Elektronika, Telekomunikasi,https://www.unsrat.ac.id
+Universitas Sam Ratulangi,PTN,Sulawesi Utara,Manado,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.unsrat.ac.id
+Universitas Sam Ratulangi,PTN,Sulawesi Utara,Manado,Hukum,Baik Sekali,Hukum Perdata, Hukum Bisnis, Hukum Internasional,https://www.unsrat.ac.id
+Universitas Sam Ratulangi,PTN,Sulawesi Utara,Manado,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.unsrat.ac.id
+Universitas Negeri Makassar,PTN,Sulawesi Selatan,Makassar,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://unm.ac.id
+Universitas Negeri Makassar,PTN,Sulawesi Selatan,Makassar,Ilmu Keolahragaan,Baik Sekali,Pendidikan Jasmani, Kepelatihan Olahraga, Manajemen Olahraga,https://unm.ac.id
+Universitas Negeri Makassar,PTN,Sulawesi Selatan,Makassar,Desain Komunikasi Visual,Baik Sekali,Desain Grafis, Ilustrasi, Media Pendidikan,https://unm.ac.id
+Universitas Tadulako,PTN,Sulawesi Tengah,Palu,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Gempa,https://untad.ac.id
+Universitas Tadulako,PTN,Sulawesi Tengah,Palu,Hukum,Baik Sekali,Hukum Perdata, Hukum Pidana, Hukum Adat,https://untad.ac.id
+Universitas Tadulako,PTN,Sulawesi Tengah,Palu,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://untad.ac.id
+Universitas Halu Oleo,PTN,Sulawesi Tenggara,Kendari,Akuntansi,Baik Sekali,Akuntansi Keuangan, Perpajakan, Audit,https://uho.ac.id
+Universitas Halu Oleo,PTN,Sulawesi Tenggara,Kendari,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://uho.ac.id
+Universitas Halu Oleo,PTN,Sulawesi Tenggara,Kendari,Hukum,Baik Sekali,Hukum Adat, Hukum Bisnis, Hukum Sumber Daya Alam,https://uho.ac.id
+Universitas Negeri Gorontalo,PTN,Gorontalo,Gorontalo,Pendidikan,Baik Sekali,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://www.ung.ac.id
+Universitas Negeri Gorontalo,PTN,Gorontalo,Gorontalo,Teknik Sipil,Baik,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://www.ung.ac.id
+Universitas Negeri Gorontalo,PTN,Gorontalo,Gorontalo,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Pendidikan,https://www.ung.ac.id
+Universitas Muslim Indonesia,PTS,Sulawesi Selatan,Makassar,Hukum,Baik Sekali,Hukum Islam, Hukum Bisnis, Hukum Pidana,https://umi.ac.id
+Universitas Muslim Indonesia,PTS,Sulawesi Selatan,Makassar,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://umi.ac.id
+Universitas Muslim Indonesia,PTS,Sulawesi Selatan,Makassar,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Syariah,https://umi.ac.id
+Universitas Muslim Indonesia,PTS,Sulawesi Selatan,Makassar,Teknik Industri,Baik,Rekayasa Sistem, Manajemen Produksi, Ergonomi,https://umi.ac.id
+Universitas Muhammadiyah Makassar,PTS,Sulawesi Selatan,Makassar,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Syariah,https://unismuh.ac.id
+Universitas Muhammadiyah Makassar,PTS,Sulawesi Selatan,Makassar,Hukum,Baik Sekali,Hukum Islam, Hukum Bisnis, Hukum Ketenagakerjaan,https://unismuh.ac.id
+Universitas Muhammadiyah Makassar,PTS,Sulawesi Selatan,Makassar,Pendidikan,Baik Sekali,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://unismuh.ac.id
+Universitas Muhammadiyah Makassar,PTS,Sulawesi Selatan,Makassar,Akuntansi,Baik,Akuntansi Keuangan, Audit, Perpajakan,https://unismuh.ac.id
+Universitas Kristen Indonesia Paulus,PTS,Sulawesi Selatan,Makassar,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Geoteknik, Manajemen Konstruksi,https://ukipaulus.ac.id
+Universitas Kristen Indonesia Paulus,PTS,Sulawesi Selatan,Makassar,Teknik Mesin,Baik,Manufaktur, Konversi Energi, Desain Produk,https://ukipaulus.ac.id
+Universitas Kristen Indonesia Paulus,PTS,Sulawesi Selatan,Makassar,Teknik Industri,Baik,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://ukipaulus.ac.id
+Universitas Katolik De La Salle,PTS,Sulawesi Utara,Manado,Teknik Informatika,Baik Sekali,Software Engineering, AI, Keamanan Siber,https://www.delasalle.ac.id
+Universitas Katolik De La Salle,PTS,Sulawesi Utara,Manado,Sistem Informasi,Baik,Business Intelligence, Digital Analytics, Sistem Informasi Manajemen,https://www.delasalle.ac.id
+Universitas Katolik De La Salle,PTS,Sulawesi Utara,Manado,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://www.delasalle.ac.id
+Universitas Bosowa,PTS,Sulawesi Selatan,Makassar,Arsitektur,Baik Sekali,Perancangan Bangunan, Urban Design, Arsitektur Interior,https://universitasbosowa.ac.id
+Universitas Bosowa,PTS,Sulawesi Selatan,Makassar,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://universitasbosowa.ac.id
+Universitas Bosowa,PTS,Sulawesi Selatan,Makassar,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Pemasaran,https://universitasbosowa.ac.id
+Universitas Sulawesi Barat,PTN,Sulawesi Barat,Majene,Sistem Informasi,Baik,Business Intelligence, Digital Analytics, Sistem Informasi Manajemen,https://unsulbar.ac.id
+Universitas Sulawesi Barat,PTN,Sulawesi Barat,Majene,Teknik Informatika,Baik,Software Engineering, Jaringan Komputer, Keamanan Siber,https://unsulbar.ac.id
+Universitas Sulawesi Barat,PTN,Sulawesi Barat,Majene,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://unsulbar.ac.id
+Universitas Udayana,PTN,Bali,Badung,Kedokteran,Unggul,Pendidikan Dokter, Penelitian Biomedis, Kedokteran Tropis,https://www.unud.ac.id
+Universitas Udayana,PTN,Bali,Badung,Hukum,Unggul,Hukum Adat Bali, Hukum Bisnis Pariwisata, Hukum Internasional,https://www.unud.ac.id
+Universitas Udayana,PTN,Bali,Badung,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Pantai,https://www.unud.ac.id
+Universitas Udayana,PTN,Bali,Badung,Manajemen,Baik Sekali,Manajemen Pariwisata, Manajemen Bisnis, Kewirausahaan,https://www.unud.ac.id
+Universitas Udayana,PTN,Bali,Badung,Arsitektur,Baik Sekali,Arsitektur Bali, Perancangan Bangunan, Urban Design,https://www.unud.ac.id
+Universitas Udayana,PTN,Bali,Badung,Teknik Informatika,Baik Sekali,Software Engineering, AI, Keamanan Siber,https://www.unud.ac.id
+Universitas Pendidikan Ganesha,PTN,Bali,Singaraja,Pendidikan,Unggul,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://undiksha.ac.id
+Universitas Pendidikan Ganesha,PTN,Bali,Singaraja,Teknik Informatika,Baik Sekali,Software Engineering, AI, Jaringan Komputer,https://undiksha.ac.id
+Universitas Pendidikan Ganesha,PTN,Bali,Singaraja,Ilmu Keolahragaan,Baik Sekali,Pendidikan Jasmani, Kepelatihan Olahraga, Manajemen Olahraga,https://undiksha.ac.id
+Universitas Mataram,PTN,Nusa Tenggara Barat,Mataram,Hukum,Unggul,Hukum Perdata, Hukum Bisnis, Hukum Adat,https://unram.ac.id
+Universitas Mataram,PTN,Nusa Tenggara Barat,Mataram,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unram.ac.id
+Universitas Mataram,PTN,Nusa Tenggara Barat,Mataram,Manajemen,Baik Sekali,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://unram.ac.id
+Universitas Mataram,PTN,Nusa Tenggara Barat,Mataram,Akuntansi,Baik Sekali,Akuntansi Keuangan, Audit, Perpajakan,https://unram.ac.id
+Universitas Nusa Cendana,PTN,Nusa Tenggara Timur,Kupang,Administrasi Bisnis,Baik Sekali,Administrasi Publik, Manajemen Perkantoran, Kebijakan Bisnis,https://undana.ac.id
+Universitas Nusa Cendana,PTN,Nusa Tenggara Timur,Kupang,Hukum,Baik Sekali,Hukum Adat, Hukum Perdata, Hukum Sumber Daya Alam,https://undana.ac.id
+Universitas Nusa Cendana,PTN,Nusa Tenggara Timur,Kupang,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://undana.ac.id
+Universitas Pattimura,PTN,Maluku,Ambon,Teknik Mesin,Baik Sekali,Manufaktur, Konversi Energi, Teknik Perkapalan,https://unpatti.ac.id
+Universitas Pattimura,PTN,Maluku,Ambon,Teknik Sipil,Baik Sekali,Rekayasa Struktur, Manajemen Konstruksi, Teknik Kelautan,https://unpatti.ac.id
+Universitas Pattimura,PTN,Maluku,Ambon,Hukum,Baik Sekali,Hukum Adat, Hukum Perdata, Hukum Laut,https://unpatti.ac.id
+Universitas Pattimura,PTN,Maluku,Ambon,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Logistik,https://unpatti.ac.id
+Universitas Khairun,PTN,Maluku Utara,Ternate,Teknik Elektro,Baik,Sistem Tenaga, Elektronika, Telekomunikasi,https://unkhair.ac.id
+Universitas Khairun,PTN,Maluku Utara,Ternate,Teknik Sipil,Baik,Rekayasa Struktur, Manajemen Konstruksi, Geoteknik,https://unkhair.ac.id
+Universitas Khairun,PTN,Maluku Utara,Ternate,Hukum,Baik,Hukum Perdata, Hukum Adat, Hukum Islam,https://unkhair.ac.id
+Universitas Warmadewa,PTS,Bali,Denpasar,Hukum,Unggul,Hukum Adat Bali, Hukum Bisnis Pariwisata, Hukum Perdata,https://www.warmadewa.ac.id
+Universitas Warmadewa,PTS,Bali,Denpasar,Manajemen,Baik Sekali,Manajemen Pariwisata, Manajemen Bisnis, Kewirausahaan,https://www.warmadewa.ac.id
+Universitas Warmadewa,PTS,Bali,Denpasar,Arsitektur,Baik Sekali,Arsitektur Bali, Perancangan Bangunan, Desain Interior,https://www.warmadewa.ac.id
+Universitas Pendidikan Nasional,PTS,Bali,Denpasar,Manajemen Bisnis,Baik Sekali,Manajemen Pariwisata, Kewirausahaan, Manajemen Digital,https://undiknas.ac.id
+Universitas Pendidikan Nasional,PTS,Bali,Denpasar,Administrasi Bisnis,Baik Sekali,Administrasi Publik, Manajemen Perkantoran, Kebijakan Bisnis,https://undiknas.ac.id
+Universitas Pendidikan Nasional,PTS,Bali,Denpasar,Akuntansi,Baik,Akuntansi Keuangan, Audit, Perpajakan,https://undiknas.ac.id
+Universitas Mahasaraswati Denpasar,PTS,Bali,Denpasar,Pendidikan,Baik Sekali,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://unmas.ac.id
+Universitas Mahasaraswati Denpasar,PTS,Bali,Denpasar,Hukum,Baik Sekali,Hukum Adat Bali, Hukum Bisnis, Hukum Perdata,https://unmas.ac.id
+Universitas Mahasaraswati Denpasar,PTS,Bali,Denpasar,Farmasi,Baik Sekali,Farmasi Klinis, Farmasi Industri, Kimia Farmasi,https://unmas.ac.id
+Universitas Teknologi Sumbawa,PTS,Nusa Tenggara Barat,Sumbawa,Teknik Informatika,Baik Sekali,Software Engineering, AI, Mobile Development,https://uts.ac.id
+Universitas Teknologi Sumbawa,PTS,Nusa Tenggara Barat,Sumbawa,Sistem Informasi,Baik,Business Intelligence, Digital Analytics, ERP Systems,https://uts.ac.id
+Universitas Teknologi Sumbawa,PTS,Nusa Tenggara Barat,Sumbawa,Teknik Industri,Baik,Sistem Produksi, Manajemen Kualitas, Ergonomi,https://uts.ac.id
+Universitas Muhammadiyah Mataram,PTS,Nusa Tenggara Barat,Mataram,Administrasi Bisnis,Baik Sekali,Administrasi Publik, Manajemen Perkantoran, Kebijakan Bisnis,https://ummat.ac.id
+Universitas Muhammadiyah Mataram,PTS,Nusa Tenggara Barat,Mataram,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://ummat.ac.id
+Universitas Muhammadiyah Mataram,PTS,Nusa Tenggara Barat,Mataram,Hukum,Baik,Hukum Islam, Hukum Bisnis, Hukum Perdata,https://ummat.ac.id
+Universitas Kristen Indonesia Maluku,PTS,Maluku,Ambon,Pendidikan,Baik,Pendidikan Dasar, Bimbingan Konseling, Teknologi Pendidikan,https://ukim.ac.id
+Universitas Kristen Indonesia Maluku,PTS,Maluku,Ambon,Manajemen,Baik,Manajemen Bisnis, Kewirausahaan, Manajemen Agribisnis,https://ukim.ac.id
+Universitas Kristen Indonesia Maluku,PTS,Maluku,Ambon,Administrasi Bisnis,Baik,Administrasi Publik, Manajemen Perkantoran, Kebijakan Publik,https://ukim.ac.id
