@@ -1,0 +1,328 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AIRC - Prediksi Jurusan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#484949",
+                    "outline": "#8e9192",
+                    "inverse-on-surface": "#313030",
+                    "on-primary-container": "#636565",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary": "#ffffff",
+                    "on-tertiary": "#2f3131",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-bright": "#3a3939",
+                    "error-container": "#93000a",
+                    "on-background": "#e5e2e1",
+                    "on-secondary": "#2f3131",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#636565",
+                    "outline-variant": "#444748",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "secondary-fixed": "#e3e2e2",
+                    "secondary": "#c6c6c6",
+                    "tertiary-container": "#e2e2e2",
+                    "surface-container-highest": "#353434",
+                    "inverse-surface": "#e5e2e1",
+                    "primary-container": "#e2e2e2",
+                    "primary-fixed": "#e2e2e2",
+                    "background": "#141313",
+                    "on-error": "#690005",
+                    "surface-tint": "#c6c6c7",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#141313",
+                    "on-secondary-container": "#b8b8b8",
+                    "on-primary": "#2f3131",
+                    "surface-variant": "#353434",
+                    "surface": "#141313",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "inverse-primary": "#5d5f5f",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "surface-container-high": "#2a2a2a",
+                    "on-secondary-fixed-variant": "#464747",
+                    "primary-fixed-dim": "#c6c6c7",
+                    "on-primary-fixed-variant": "#454747",
+                    "on-surface": "#e5e2e1",
+                    "primary": "#ffffff",
+                    "on-surface-variant": "#c4c7c8",
+                    "on-primary-fixed": "#1a1c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "lg": "2rem",
+                    "xl": "4rem",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "md": "1.5rem",
+                    "sm": "1rem",
+                    "unit": "4px",
+                    "xs": "0.5rem"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "title-md": ["18px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #141313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Scrollbar for hidden overflow containers */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Input styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -7px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 2px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-radius: 1px;
+        }
+        
+        .glass-card {
+            background: #181818;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-active {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: #201f1f;
+        }
+        
+        .progress-line {
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Premium Transitions */
+        @keyframes reveal-curtain {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .page-reveal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #141313;
+            z-index: 9999;
+            animation: reveal-curtain 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Page Reveal Curtain -->
+<div class="page-reveal"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5 shadow-[0_20px_40px_rgba(255,255,255,0.02)] flex justify-between items-center px-margin-desktop py-6 max-w-7xl mx-auto md:flex hidden animate-fade-in-up" style="animation-delay: 0.8s;">
+<div class="font-display-lg text-display-lg font-bold tracking-tighter text-primary">AIRC</div>
+<nav class="flex gap-lg">
+<a class="text-on-surface-variant font-title-md text-title-md hover:text-primary transition-colors duration-300 scale-95 duration-200" href="#">Beranda</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-title-md text-title-md hover:text-primary transition-colors duration-300 scale-95 duration-200" href="#">Prediksi Jurusan</a>
+<a class="text-on-surface-variant font-title-md text-title-md hover:text-primary transition-colors duration-300 scale-95 duration-200" href="#">Tentang AI</a>
+<a class="text-on-surface-variant font-title-md text-title-md hover:text-primary transition-colors duration-300 scale-95 duration-200" href="#">Contact</a>
+</nav>
+<button class="bg-primary text-background font-title-md text-title-md px-6 py-2 rounded scale-95 duration-200 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all">Get Started</button>
+</header>
+<!-- Mobile Nav Anchor (Hidden on Desktop) -->
+<header class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-white/5 flex justify-between items-center px-margin-mobile py-4 md:hidden animate-fade-in-up" style="animation-delay: 0.8s;">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tighter text-primary">AIRC</div>
+<button class="text-primary"><span class="material-symbols-outlined">menu</span></button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto w-full flex flex-col gap-xl relative animate-fade-in-up">
+<!-- Background Ambient Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<!-- Header & Progress -->
+<div class="flex flex-col gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg md:text-display-lg text-headline-lg-mobile font-bold text-primary mb-2">Engine Prediksi</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Lengkapi profil data akademik dan minat Anda. AI kami akan memproses variabel tersebut untuk merekomendasikan jalur pendidikan yang optimal.</p>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-4">
+<div class="h-full bg-gradient-to-r from-surface-variant via-primary to-primary progress-line w-1/6" id="progress-bar"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-outline-variant">
+<span class="">01 Identitas</span>
+<span class="">06 Selesai</span>
+</div>
+</div>
+<!-- Form Steps Container -->
+<div class="flex flex-col gap-xl">
+<!-- Step 1: Identitas -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+<div class="flex items-center gap-sm border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-outline">badge</span>
+<h2 class="font-title-md text-title-md text-primary">1. Identitas</h2>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Nama Lengkap</label>
+<input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="Masukkan nama lengkap" type="text">
+</div>
+</section>
+<!-- Step 2: Nilai Akademik -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md relative overflow-hidden"><div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div><div class="flex items-center gap-sm border-b border-white/5 pb-4"><span class="material-symbols-outlined text-outline">analytics</span><h2 class="font-title-md text-title-md text-primary">2. Metrik Akademik</h2></div><div class="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-lg"><div class="flex flex-col gap-2">
+  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Matematika</label>
+  <input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="0-100" type="number" min="0" max="100" value="85">
+</div>
+<div class="flex flex-col gap-2">
+  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Bahasa Inggris</label>
+  <input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="0-100" type="number" min="0" max="100" value="78">
+</div>
+<div class="flex flex-col gap-2">
+  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">IPA</label>
+  <input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="0-100" type="number" min="0" max="100" value="90">
+</div>
+<div class="flex flex-col gap-2">
+  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">IPS</label>
+  <input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="0-100" type="number" min="0" max="100" value="75">
+</div></div></section>
+<!-- Step 3: Minat -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md"><div class="flex items-center gap-sm border-b border-white/5 pb-4"><span class="material-symbols-outlined text-outline">explore</span><h2 class="font-title-md text-title-md text-primary">3. Kluster Minat</h2></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Minat Utama (AI)</label><div class="relative"><select class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none appearance-none cursor-pointer"><option disabled="" selected="" value="">Pilih kategori minat...</option><option value="teknologi">Teknologi &amp; Informasi</option><option value="bisnis">Bisnis &amp; Manajemen</option><option value="sosial">Ilmu Sosial &amp; Humaniora</option><option value="pendidikan">Pendidikan</option><option value="seni">Seni &amp; Desain</option><option value="olahraga">Olahraga &amp; Kesehatan</option></select><span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span></div></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Minat Spesifik (Info)</label><input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="Contoh: AI, Cyber Security" type="text"></div></div></section>
+<!-- Step 4: Hobi / Chips -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md"><div class="flex items-center gap-sm border-b border-white/5 pb-4"><span class="material-symbols-outlined text-outline">code</span><h2 class="font-title-md text-title-md text-primary">4. Aktivitas &amp; Hobi</h2></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hobi Utama (AI)</label><div class="relative"><select class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none appearance-none cursor-pointer"><option disabled="" selected="" value="">Pilih hobi utama...</option><option value="coding">Coding</option><option value="web_dev">Web Development</option><option value="mobile_dev">Mobile Development</option><option value="robotika">Robotika</option><option value="game_dev">Game Development</option><option value="public_speaking">Public Speaking</option><option value="menulis">Menulis</option><option value="membaca">Membaca</option><option value="fotografi">Fotografi</option><option value="menggambar">Menggambar</option><option value="taekwondo">Taekwondo</option><option value="sepak_bola">Sepak Bola</option><option value="basket">Basket</option><option value="renang">Renang</option><option value="atletik">Atletik</option><option value="musik">Musik</option><option value="video_editing">Video Editing</option><option value="content_creator">Content Creator</option></select><span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span></div></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hobi Tambahan (Info)</label><input class="w-full bg-[#111111] border border-white/5 focus:border-white/20 rounded px-4 py-3 font-body-md text-body-md text-primary outline-none transition-colors placeholder-[#454545]" placeholder="Hobi lainnya..." type="text"></div></div></section>
+<!-- Step 5: Kemampuan (Cards) -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md">
+<div class="flex items-center gap-sm border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-outline">psychology</span>
+<h2 class="font-title-md text-title-md text-primary">5. Evaluasi Kapasitas</h2>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Skill Row -->
+<div class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+<span class="font-body-md text-body-md text-primary w-1/3">Literasi Komputer</span>
+<div class="flex gap-2 flex-grow w-full md:w-2/3">
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Rendah</button>
+<button class="flex-1 bg-[#201f1f] border border-white/20 rounded py-2 font-label-sm text-label-sm text-primary transition-all">Sedang</button>
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Tinggi</button>
+</div>
+</div>
+<!-- Skill Row -->
+<div class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+<span class="font-body-md text-body-md text-primary w-1/3">Komunikasi Interpersonal</span>
+<div class="flex gap-2 flex-grow w-full md:w-2/3">
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Rendah</button>
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Sedang</button>
+<button class="flex-1 bg-[#201f1f] border border-white/20 rounded py-2 font-label-sm text-label-sm text-primary transition-all">Tinggi</button>
+</div>
+</div>
+<!-- Skill Row -->
+<div class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+<span class="font-body-md text-body-md text-primary w-1/3">Kepemimpinan</span>
+<div class="flex gap-2 flex-grow w-full md:w-2/3">
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Rendah</button>
+<button class="flex-1 bg-[#201f1f] border border-white/20 rounded py-2 font-label-sm text-label-sm text-primary transition-all">Sedang</button>
+<button class="flex-1 bg-[#111111] border border-white/5 hover:border-white/20 rounded py-2 font-label-sm text-label-sm text-on-surface-variant transition-all">Tinggi</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 6: Prestasi -->
+<section class="glass-card rounded-xl p-lg flex flex-col gap-md"><div class="flex items-center gap-sm border-b border-white/5 pb-4"><span class="material-symbols-outlined text-outline">emoji_events</span><h2 class="font-title-md text-title-md text-primary">6. Prestasi Akademik</h2></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tingkat (AI)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="none">Tidak Ada</option><option value="sekolah">Sekolah</option><option value="kabupaten">Kabupaten</option><option value="provinsi">Provinsi</option><option value="nasional">Nasional</option><option value="internasional">Internasional</option></select></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Bidang (Info)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="matematika">Matematika</option><option value="fisika">Fisika</option><option value="kimia">Kimia</option><option value="biologi">Biologi</option><option value="informatika">Informatika</option><option value="astronomi">Astronomi</option><option value="ekonomi">Ekonomi</option><option value="akuntansi">Akuntansi</option><option value="inggris">Bahasa Inggris</option><option value="debat">Debat</option><option value="karya_tulis">Karya Tulis Ilmiah</option><option value="lainnya">Lainnya</option></select></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Peringkat (Info)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="juara1">Juara 1</option><option value="juara2">Juara 2</option><option value="juara3">Juara 3</option><option value="finalis">Finalis</option><option value="peserta">Peserta</option></select></div></div></section><section class="glass-card rounded-xl p-lg flex flex-col gap-md"><div class="flex items-center gap-sm border-b border-white/5 pb-4"><span class="material-symbols-outlined text-outline">military_tech</span><h2 class="font-title-md text-title-md text-primary">7. Prestasi Non-Akademik</h2></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tingkat (AI)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="none">Tidak Ada</option><option value="organisasi">Organisasi</option><option value="kepemimpinan">Kepemimpinan</option><option value="seni_olahraga_sekolah">Sekolah/Kabupaten</option><option value="provinsi">Provinsi</option><option value="nasional">Nasional</option><option value="internasional">Internasional</option></select></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Bidang (Info)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="taekwondo">Taekwondo</option><option value="karate">Karate</option><option value="pencak_silat">Pencak Silat</option><option value="basket">Basket</option><option value="sepak_bola">Sepak Bola</option><option value="voli">Voli</option><option value="renang">Renang</option><option value="atletik">Atletik</option><option value="paskibra">Paskibra</option><option value="pramuka">Pramuka</option><option value="pmr">PMR</option><option value="osis">OSIS</option><option value="seni_tari">Seni Tari</option><option value="seni_musik">Seni Musik</option><option value="seni_lukis">Seni Lukis</option><option value="fotografi">Fotografi</option><option value="content_creator">Content Creator</option><option value="kepemimpinan">Kepemimpinan</option><option value="lainnya">Lainnya</option></select></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Peringkat (Info)</label><select class="w-full bg-[#111111] border border-white/5 rounded px-3 py-2 text-sm text-primary outline-none"><option value="juara1">Juara 1</option><option value="juara2">Juara 2</option><option value="juara3">Juara 3</option><option value="finalis">Finalis</option><option value="peserta">Peserta</option></select></div></div></section>
+<!-- Action Area -->
+<div class="flex justify-end mt-8 border-t border-white/5 pt-8">
+<button class="bg-primary text-background font-title-md text-title-md px-8 py-4 rounded flex items-center gap-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all group">
+                    Jalankan Prediksi AI
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-background border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-lg mt-auto">
+<div class="font-display-lg text-display-lg text-primary font-bold">AIRC</div>
+<div class="text-on-surface-variant font-body-md text-body-md font-label-sm text-label-sm">© 2024 AIRC. All rights reserved.</div>
+<nav class="flex gap-lg">
+<a class="text-on-surface-variant font-body-md text-body-md font-label-sm text-label-sm hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-body-md text-body-md font-label-sm text-label-sm hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-body-md text-body-md font-label-sm text-label-sm hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Contact Us</a>
+</nav>
+</footer>
+<script>
+        // Simple script to update progress bar width based on scroll/interaction could go here.
+        // Currently static for styling demonstration.
+    </script>
+
+
+</body></html>

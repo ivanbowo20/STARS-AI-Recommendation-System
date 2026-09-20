@@ -1,0 +1,13 @@
+{
+    "name": "stars/rekomendasi-jurusan",
+    "description": "Student Talent And Recommendation System",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stars\\": "src/"
+        }
+    }
+}

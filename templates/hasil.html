@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIRC - Hasil Prediksi Jurusan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-container": "#484949",
+                        "outline": "#8e9192",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#bdbdbd",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary": "#ffffff",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-low": "rgba(24, 24, 24, 0.7)",
+                        "surface-bright": "#3a3939",
+                        "error-container": "#93000a",
+                        "on-background": "#ffffff",
+                        "on-secondary": "#2f3131",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#636565",
+                        "outline-variant": "#444748",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed": "#e3e2e2",
+                        "secondary": "#c6c6c6",
+                        "tertiary-container": "#e2e2e2",
+                        "surface-container-highest": "#353434",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#e2e2e2",
+                        "primary-fixed": "#e2e2e2",
+                        "background": "#000000",
+                        "on-error": "#690005",
+                        "surface-tint": "#c6c6c7",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#141313",
+                        "on-secondary-container": "#b8b8b8",
+                        "on-primary": "#000000",
+                        "surface-variant": "#353434",
+                        "surface": "#141313",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "inverse-primary": "#5d5f5f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-fixed-variant": "#464747",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed-variant": "#454747",
+                        "on-surface": "#ffffff",
+                        "primary": "#ffffff",
+                        "on-surface-variant": "#bdbdbd",
+                        "on-primary-fixed": "#1a1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "lg": "2rem",
+                        "xl": "4rem",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "md": "1.5rem",
+                        "sm": "1rem",
+                        "unit": "4px",
+                        "xs": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+                        "body-md": ["15px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        
+        .glass-card {
+            background-color: rgba(24, 24, 24, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.02);
+        }
+
+        .ai-gradient-text {
+            background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+
+        .progress-bar-animated {
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar-animated::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: progress-shimmer 2s infinite;
+        }
+
+        @keyframes progress-shimmer {
+            100% { left: 200%; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-24 bg-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5 shadow-[0_20px_40px_rgba(255,255,255,0.02)]">
+<div class="flex justify-between items-center px-margin-desktop py-6 max-w-7xl mx-auto">
+<div class="font-display-lg text-display-lg font-bold tracking-tighter text-primary">AIRC</div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-title-md font-title-md text-title-md hover:text-primary transition-colors duration-300" href="#">Beranda</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-title-md text-title-md hover:text-primary transition-colors duration-300" href="#">Prediksi Jurusan</a>
+<a class="text-on-surface-variant font-title-md font-title-md text-title-md hover:text-primary transition-colors duration-300" href="#">Tentang AI</a>
+<a class="text-on-surface-variant font-title-md font-title-md text-title-md hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="bg-primary text-on-primary px-lg py-xs rounded hover:bg-primary-container transition-colors font-title-md text-title-md scale-95 duration-200 hidden md:block">
+                Get Started
+            </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-xl flex flex-col gap-xl">
+<!-- Top Section: Animated Success State -->
+<section class="flex flex-col items-center justify-center text-center space-y-md py-xl">
+<div class="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center animate-pulse-slow relative">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-xl"></div>
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-display-lg ai-gradient-text tracking-tight">Analisis Selesai</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                AI kami telah mensintesis profil akademis, minat, dan tren industri masa depan Anda. Berikut adalah jalur optimal Anda.
+            </p>
+</section><section class="glass-card rounded-xl p-lg md:p-xl border border-white/5 bg-[#1C1B1B] glow-effect">
+<div class="flex items-center gap-3 mb-md">
+<span class="material-symbols-outlined text-primary">person_search</span>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Ringkasan Profil Siswa</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<div>
+<p class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-1">Minat Spesifik</p>
+<p class="font-body-md text-body-md text-on-surface">Artificial Intelligence</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-1">Hobi Tambahan</p>
+<p class="font-body-md text-body-md text-on-surface">Membuat Aplikasi Android</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div>
+<p class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-1">Prestasi Akademik</p>
+<p class="font-body-md text-body-md text-on-surface">Juara 1 Olimpiade Informatika Tingkat Nasional</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-1">Prestasi Non-Akademik</p>
+<p class="font-body-md text-body-md text-on-surface">Juara 2 Taekwondo Tingkat Provinsi</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Recommendation Hero -->
+<section class="glass-card rounded-xl p-lg md:p-xl relative overflow-hidden border-t border-t-white/20 glow-effect bg-surface-container-low">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl relative z-10">
+<div>
+<div class="inline-flex items-center gap-2 bg-[rgba(24,24,24,0.7)] border border-white/5 px-3 py-1 rounded-full mb-md backdrop-blur">
+<span class="material-symbols-outlined text-sm text-primary">psychology</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">Rekomendasi Utama AI</span>
+</div>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-display-lg font-bold text-primary mb-2 text-on-surface">Teknik Elektro</h2>
+<p class="font-title-md text-title-md text-on-surface-variant">Fakultas Teknik &amp; Ilmu Komputer</p>
+</div>
+<div class="mt-md md:mt-0 flex flex-col items-start md:items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">Tingkat Kecocokan</span>
+<div class="flex items-center gap-3">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">98%</span>
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<span class="text-sm text-on-primary-container mt-1 font-body-md text-body-md">Sangat Tinggi</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl relative z-10">
+<div class="space-y-md">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold border-b border-white/10 pb-2">Mengapa jurusan ini?</h3>
+<ul class="space-y-3 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check</span>
+<span>Skor Logika &amp; Matematika Anda (95) sangat selaras dengan kurikulum inti.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check</span>
+<span>Minat kuat pada 'Hardware' dan 'Sistem Kendali' terdeteksi dari esai Anda.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check</span>
+<span>Prospek pertumbuhan industri semikonduktor diprediksi naik 40% dalam 5 tahun.</span>
+</li>
+</ul>
+</div>
+<div class="space-y-md">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold border-b border-white/10 pb-2">Prospek Karir Utama</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+<div class="bg-[rgba(24,24,24,0.7)] backdrop-blur p-sm rounded border border-white/5 flex items-center gap-3 bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">memory</span>
+<span class="font-body-md text-body-md text-on-surface">Hardware Engineer</span>
+</div>
+<div class="bg-[rgba(24,24,24,0.7)] backdrop-blur p-sm rounded border border-white/5 flex items-center gap-3 bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">router</span>
+<span class="font-body-md text-body-md text-on-surface">Network Architect</span>
+</div>
+<div class="bg-[rgba(24,24,24,0.7)] backdrop-blur p-sm rounded border border-white/5 flex items-center gap-3 bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">electric_car</span>
+<span class="font-body-md text-body-md text-on-surface">Control Systems</span>
+</div>
+<div class="bg-[rgba(24,24,24,0.7)] backdrop-blur p-sm rounded border border-white/5 flex items-center gap-3 bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">precision_manufacturing</span>
+<span class="font-body-md text-body-md text-on-surface">Robotics Engineer</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal Alternatives -->
+<section class="space-y-md">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">alt_route</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold text-on-surface">Alternatif Teratas</h3>
+</div>
+<div class="flex overflow-x-auto gap-md pb-4 snap-x snap-mandatory hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+<!-- Card 2 -->
+<div class="glass-card rounded-xl p-md min-w-[300px] md:min-w-[400px] flex-shrink-0 snap-center hover:border-white/20 transition-colors bg-surface-container-low">
+<div class="flex justify-between items-center mb-sm">
+<span class="text-2xl">🥈</span>
+<span class="font-label-sm text-label-sm bg-[rgba(24,24,24,0.7)] px-2 py-1 border border-white/5 rounded-full text-on-surface">Kecocokan 92%</span>
+</div>
+<h4 class="font-title-md text-title-md font-bold text-primary mb-1 text-on-surface">Teknik Informatika</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-md line-clamp-2">Fokus pada rekayasa perangkat lunak dan kecerdasan buatan. Sangat cocok dengan profil komputasi Anda.</p>
+<div class="w-full bg-[#181818] h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[92%] progress-bar-animated"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-xl p-md min-w-[300px] md:min-w-[400px] flex-shrink-0 snap-center hover:border-white/20 transition-colors bg-surface-container-low">
+<div class="flex justify-between items-center mb-sm">
+<span class="text-2xl">🥉</span>
+<span class="font-label-sm text-label-sm bg-[rgba(24,24,24,0.7)] px-2 py-1 border border-white/5 rounded-full text-on-surface">Kecocokan 88%</span>
+</div>
+<h4 class="font-title-md text-title-md font-bold text-primary mb-1 text-on-surface">Sistem Informasi</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-md line-clamp-2">Menjembatani teknologi dan bisnis. Ideal mengingat nilai manajemen proyek Anda yang tinggi.</p>
+<div class="w-full bg-[#181818] h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[88%] progress-bar-animated opacity-80"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-background border-t border-white/5 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-lg max-w-7xl mx-auto">
+<div class="font-display-lg text-display-lg text-primary font-bold">AIRC</div>
+<div class="flex gap-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Contact Us</a>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">
+                © 2024 AIRC. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>
