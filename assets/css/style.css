@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif;
     scroll-behavior: smooth;
     
     /* Transition Speed */
@@ -19,8 +19,8 @@
     --text-muted: #64748b;
     
     --accent-1: #8b5cf6;
-    --accent-2: #d946ef;
-    --accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #d946ef 100%);
+    --accent-2: #6d28d9;
+    --accent-gradient: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
     
     --card-bg: rgba(255, 255, 255, 0.85);
     --card-border: rgba(139, 92, 246, 0.12);
@@ -51,7 +51,7 @@ html.dark {
     --text-secondary: #c9c9c9;
     --text-muted: #71717a;
     
-    --accent-gradient: linear-gradient(135deg, #6f7cff 0%, #9b5dff 100%);
+    --accent-gradient: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
     
     --card-bg: rgba(18, 18, 20, 0.65);
     --card-border: rgba(255, 255, 255, 0.08);
@@ -74,6 +74,16 @@ html.dark {
 
 /* Global Container Rules (Fix Horizontal Overflow / AOS Blowout) */
 html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.font-elegant {
+    font-family: 'Playfair Display', serif;
+}
+
+body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
@@ -214,7 +224,7 @@ html.dark .theme-toggle-dark-icon {
     background-clip: text;
 }
 html:not(.dark) .text-gradient-silver {
-    background: linear-gradient(135deg, #6d28d9 0%, #a855f7 50%, #4f46e5 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 50%, #4f46e5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -274,12 +284,12 @@ html.dark .galaxy-nebula {
     transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 html:not(.dark) #home {
-    background: linear-gradient(-45deg, #ffffff 0%, #f3e8ff 25%, #edd9ff 50%, #e0e7ff 75%, #ffffff 100%);
+    background: linear-gradient(-45deg, rgba(255,255,255,0.6) 0%, rgba(243,232,255,0.6) 25%, rgba(237,217,255,0.6) 50%, rgba(224,231,255,0.6) 75%, rgba(255,255,255,0.6) 100%);
     background-size: 400% 400%;
     animation: light-gradient-bg 15s ease infinite;
 }
 html.dark #home {
-    background: var(--bg-primary);
+    background: transparent;
 }
 @keyframes light-gradient-bg {
     0% { background-position: 0% 50%; }
@@ -371,9 +381,6 @@ html:not(.dark) .light-blob {
 .blob-br { width: 600px; height: 600px; bottom: -15%; right: -5%; background-color: #E0E7FF; }
 
 /* Light Mode Section Background Gradients (cohesive theme) */
-html:not(.dark) #tentang {
-    background: radial-gradient(circle at 10% 30%, rgba(245, 243, 255, 0.9) 0%, rgba(255, 255, 255, 1) 70%) !important;
-}
 html:not(.dark) #prediksi {
     background: radial-gradient(circle at 90% 70%, rgba(243, 232, 255, 0.8) 0%, rgba(255, 255, 255, 1) 70%) !important;
 }
@@ -737,9 +744,9 @@ html:not(.dark) .campus-card:hover { box-shadow:0 8px 32px color-mix(in srgb,var
     min-height: 100%;
     width: auto;
     height: auto;
-    transform: translate(-50%, -50%) scale(1.05); /* Scale up slightly to prevent white edges when blurred */
+    transform: translate(-50%, -50%) scale(1);
     object-fit: cover;
-    filter: blur(2px); /* Blur sangat tipis agar video sangat jelas */
+    filter: none !important;
     transition: opacity 0.8s ease-in-out;
 }
 
@@ -755,10 +762,43 @@ html.dark .video-light { opacity: 0; display: none; }
 .hero-video-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.6) 80%, var(--bg-primary) 100%);
+    background: linear-gradient(to bottom, transparent 70%, var(--bg-primary) 100%);
     z-index: 1;
 }
 
 html.dark .hero-video-overlay {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.7) 80%, var(--bg-primary) 100%);
+    background: linear-gradient(to bottom, transparent 85%, var(--bg-primary) 100%);
 }
+
+/* ==========================================================================
+   Premium Frosted Glass Card (Tentang Section)
+   ========================================================================== */
+.premium-glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark .premium-glass-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Hover Interaction */
+@media (hover: hover) {
+    .premium-glass-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(111, 124, 255, 0.3);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    
+    html.dark .premium-glass-card:hover {
+        border-color: rgba(111, 124, 255, 0.4);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+}
+

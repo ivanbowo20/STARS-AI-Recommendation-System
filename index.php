@@ -24,30 +24,42 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Hero Content -->
-    <div class="max-w-5xl mx-auto text-center relative z-10 space-y-8 mt-8">
-        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] backdrop-blur-md mb-2" data-aos="fade-down" data-aos-duration="1000">
-            <span class="h-2 w-2 rounded-full bg-[var(--text-primary)] animate-pulse"></span>
-            <span class="text-xs font-semibold text-[var(--text-primary)] uppercase tracking-widest">Decision Tree Classifier v6.0</span>
-        </div>
-        
-        <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-[var(--text-primary)] leading-tight" data-aos="fade-up" data-aos-duration="1000">
-            <span class="text-gradient-silver">STARS</span> <br>
-            <span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide text-[var(--text-muted)] uppercase">Student Talent And Recommendation System</span>
-        </h1>
-        
-        <p class="text-base md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            Temukan rekomendasi jurusan kuliah yang paling sesuai dengan kemampuan akademik, minat bakat, hobi, serta prestasi akademik maupun non-akademikmu menggunakan algoritma Machine Learning yang presisi.
-        </p>
+    <div class="max-w-7xl mx-auto relative z-10 w-full mt-12 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-start text-left justify-center h-full min-h-[75vh]">
+            
+            <div class="flex flex-col items-start space-y-6 pb-8 lg:pb-0 w-full max-w-3xl">
+                
+                <!-- Futuristic Micro Tag -->
+                <div class="flex items-center space-x-3 mb-2" data-aos="fade-down" data-aos-duration="1000">
+                    <div class="h-[2px] w-8 bg-blue-500"></div>
+                    <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-blue-500">
+                        // NEXT-GEN AI GUIDANCE
+                    </span>
+                </div>
+                
+                <h1 class="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.05]" data-aos="fade-up" data-aos-duration="1000">
+                    <span class="text-gradient-silver font-extrabold">STARS</span> <br>
+                    <span class="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-[var(--text-muted)] uppercase">Student Talent And Recommendation System</span>
+                </h1>
+                
+                <!-- Editorial Subtitle with Vertical Accent Line -->
+                <div class="relative pl-5 mt-6 border-l-2 border-blue-500/30 dark:border-blue-500/50" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                    <p class="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-xl font-medium tracking-wide">
+                        Temukan rekomendasi jurusan kuliah yang paling sesuai dengan kemampuan akademik, minat bakat, hobi, serta prestasi akademik maupun non-akademikmu menggunakan algoritma Machine Learning yang presisi.
+                    </p>
+                </div>
 
-        <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-            <a href="#prediksi" class="w-full sm:w-auto px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-full hover:opacity-90 transition-all shadow-lg flex items-center justify-center space-x-2">
-                <span>Mulai Prediksi</span>
-                <i class="fas fa-sparkles text-sm ml-1"></i>
-            </a>
-            <a href="#tentang" class="w-full sm:w-auto px-8 py-4 border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-semibold rounded-full transition-all flex items-center justify-center">
-                <span>Pelajari AI</span>
-            </a>
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 pt-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                    <a href="#prediksi" class="w-full sm:w-auto px-8 py-3.5 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-xl hover:opacity-90 transition-all flex items-center justify-center">
+                        <span>Mulai Prediksi</span>
+                    </a>
+                    <a href="#tentang" class="w-full sm:w-auto px-8 py-3.5 border border-[var(--input-border)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-semibold rounded-xl transition-all flex items-center justify-center backdrop-blur-sm">
+                        <span>Pelajari AI</span>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

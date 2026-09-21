@@ -78,7 +78,7 @@ $kontak_active = ($current_page == 'kontak.php');
 <body class="bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col min-h-screen">
 
     <!-- Sticky Navbar -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-[var(--nav-bg)] border-b border-[var(--nav-border)] backdrop-blur-md transition-all duration-300">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-300">
         <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
             <!-- Logo -->
             <a href="<?php echo $is_home ? '#home' : 'index.php'; ?>" class="flex items-center space-x-3 group">
@@ -98,8 +98,8 @@ $kontak_active = ($current_page == 'kontak.php');
                 <!-- Theme Toggle Button Desktop -->
                 <button id="theme-toggle" type="button" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 rounded-full p-2 text-sm transition-all focus:outline-none" aria-label="Toggle Theme">
                     <!-- Sun icon -->
-                    <svg id="theme-toggle-light-icon" class="theme-toggle-light-icon w-5 h-5 transition-transform duration-300 hover:rotate-45" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.293a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-2.293 4a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM6.293 14.707a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM3 10a1 1 0 011-1h1a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-5.707a1 1 0 011.414 0L7 5.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM10 6a4 4 0 100 8 4 4 0 000-8z"></path>
+                    <svg id="theme-toggle-light-icon" class="theme-toggle-light-icon w-5 h-5 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/>
                     </svg>
                     <!-- Moon icon -->
                     <svg id="theme-toggle-dark-icon" class="theme-toggle-dark-icon w-5 h-5 transition-transform duration-300 hover:-rotate-12" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -115,8 +115,8 @@ $kontak_active = ($current_page == 'kontak.php');
                 <!-- Theme Toggle Button Mobile -->
                 <button id="theme-toggle-mobile" type="button" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 rounded-full p-2 text-sm transition-all focus:outline-none" aria-label="Toggle Theme">
                     <!-- Sun icon -->
-                    <svg id="theme-toggle-light-icon-mobile" class="theme-toggle-light-icon w-5 h-5 transition-transform duration-300 hover:rotate-45" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.293a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-2.293 4a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM6.293 14.707a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM3 10a1 1 0 011-1h1a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-5.707a1 1 0 011.414 0L7 5.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM10 6a4 4 0 100 8 4 4 0 000-8z"></path>
+                    <svg id="theme-toggle-light-icon-mobile" class="theme-toggle-light-icon w-5 h-5 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/>
                     </svg>
                     <!-- Moon icon -->
                     <svg id="theme-toggle-dark-icon-mobile" class="theme-toggle-dark-icon w-5 h-5 transition-transform duration-300 hover:-rotate-12" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -189,4 +189,4 @@ $kontak_active = ($current_page == 'kontak.php');
     </nav>
 
     <!-- Main Content wrapper to push footer down -->
-    <main class="flex-grow pt-20">
+    <main class="flex-grow <?php echo $is_home ? '' : 'pt-20'; ?>">
