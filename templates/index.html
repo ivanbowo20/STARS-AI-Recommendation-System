@@ -125,7 +125,7 @@
 
     <!-- Custom CSS -->
 
-    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=2.1">
 
     
 
@@ -398,23 +398,26 @@
 <!-- ================================================================ -->
 <!-- 1. HERO SECTION -->
 <!-- ================================================================ -->
-<section id="home" class="relative min-h-screen flex items-center justify-center py-12 px-4 overflow-hidden">
+<!-- Shared Wrapper untuk Hero & Tentang agar background membentang -->
+<div class="relative w-full overflow-hidden">
 
-    <!-- Video Background (contained strictly within #home) -->
+    <!-- Video Background (membentang di Hero & Tentang) -->
     <div class="hero-video-wrapper">
         <!-- Video Dark Mode -->
         <video class="hero-video video-dark" autoplay loop muted playsinline disablePictureInPicture>
-            <source src="image live/hero-dark.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074309/Cosmic_space_and_milky_way_20260922174610.mp4" type="video/mp4">
         </video>
         
         <!-- Video Light Mode -->
         <video class="hero-video video-light" autoplay loop muted playsinline disablePictureInPicture>
-            <source src="image live/hero-light.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074533/Clouds_drifting_in_sky_1080p_20260922174746.mp4" type="video/mp4">
         </video>
 
         <!-- Overlay Layer untuk Kontras Teks -->
         <div class="hero-video-overlay"></div>
     </div>
+
+<section id="home" class="relative min-h-screen flex items-center justify-center py-12 px-4">
 
     <!-- Hero Content -->
     <div class="max-w-7xl mx-auto relative z-10 w-full mt-12 px-4 sm:px-6 lg:px-8">
@@ -436,9 +439,9 @@
                     Nggak Perlu <span class="text-gradient-silver font-extrabold uppercase">Galau.</span>
                 </h1>
                 
-                <!-- Editorial Subtitle with Vertical Accent Line -->
-                <div class="relative pl-5 mt-6 border-l-2 border-blue-500/30 dark:border-blue-500/50" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
-                    <p class="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-xl font-medium tracking-wide">
+                <!-- Editorial Subtitle with Frosted Glass -->
+                <div class="hero-glass-card relative px-4 py-3.5 sm:p-6 mt-5 sm:mt-6 w-[96%] sm:w-full rounded-xl sm:rounded-2xl" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
+                    <p class="text-sm sm:text-lg md:text-xl text-[var(--text-primary)] leading-relaxed max-w-xl font-medium tracking-wide">
                         Analisis rapor, minat, dan prestasimu dalam 3 menit. STARS menggunakan AI untuk memetakan potensimu ke program studi yang paling pas. Akurat, gratis, dan tanpa tebak-tebakan.
                     </p>
                 </div>
@@ -595,6 +598,7 @@
     </div>
 
 </section> <!-- END #tentang -->
+</div> <!-- END Shared Wrapper Hero & Tentang -->
 
 <!-- ================================================================ -->
 <!-- 3. FORM PREDIKSI SECTION -->
