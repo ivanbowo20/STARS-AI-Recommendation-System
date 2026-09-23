@@ -553,6 +553,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderPredictionResults(data);
                     resultData.classList.remove('hidden');
 
+                    if (typeof AOS !== 'undefined') {
+                        setTimeout(() => AOS.refresh(), 100);
+                    }
+
                     // --- V4.5: Campus Recommendation Engine ---
                     const campusSection = document.getElementById('campus-recommendation-section');
                     if (campusSection && typeof STARSCampus !== 'undefined') {
