@@ -13,6 +13,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 
+from services.prediction_engine import predict_recommendations
+
 # Load environment variables from .env
 load_dotenv()
 
@@ -208,58 +210,44 @@ def proba_ke_kategori(prob: float) -> dict:
 def buat_alasan(siswa: dict, jurusan: str) -> list:
     """
     Hasilkan poin-poin alasan berdasarkan kesesuaian data siswa
-    dengan profil jurusan yang direkomendasikan.
+    dengan profil jurusan yang direkomendasikan (V4.2 format).
     """
-    f      = FAKTOR.get(jurusan, {})
     alasan = []
+    
+    # 1. Akademik Wajib (Nilai_Matematika_Umum, Nilai_Bahasa_Indonesia, dsb)
+    nilai_tertinggi = []
+    for k, v in siswa.items():
+        if k.startswith("Nilai_") and isinstance(v, (int, float)) and v >= 85:
+            mapel = k.replace("Nilai_", "").replace("_", " ")
+            nilai_tertinggi.append((mapel, v))
+    if nilai_tertinggi:
+        # ambil top 2
+        nilai_tertinggi.sort(key=lambda x: x[1], reverse=True)
+        for mapel, v in nilai_tertinggi[:2]:
+            alasan.append(f"Nilai {mapel} sangat tinggi ({v}) — mendukung kuat bidang ini")
 
-    # Minat
-    minat = siswa.get("Minat","")
-    cocok = minat in f.get("minat",[])
-    alasan.append(f"Minat {minat} {'sangat sesuai' if cocok else 'dapat berkembang'} di bidang {jurusan}")
+    # 2. Minat
+    minat_siswa = [k.replace("Minat_", "") for k, v in siswa.items() if k.startswith("Minat_") and v == 1]
+    if minat_siswa:
+        alasan.append(f"Minat pada bidang {', '.join(minat_siswa)} sangat relevan dengan profil lulusan {jurusan}")
 
-    # Hobi
-    hobi = siswa.get("Hobi","")
-    if hobi in f.get("hobi",[]):
-        alasan.append(f"Hobi {hobi} mendukung keahlian yang dibutuhkan jurusan ini")
+    # 3. Strength
+    strength_siswa = [k.replace("Strength_", "").replace("_", " ") for k, v in siswa.items() if k.startswith("Strength_") and v == 1]
+    if strength_siswa:
+        alasan.append(f"Kekuatan utama di bidang {', '.join(strength_siswa)} menjadi nilai plus di jurusan ini")
+        
+    # 4. Hobi
+    hobi_siswa = [k.replace("Hobi_", "") for k, v in siswa.items() if k.startswith("Hobi_") and v == 1]
+    if hobi_siswa:
+        alasan.append(f"Aktivitas hobi {', '.join(hobi_siswa)} mendukung pengembangan keahlian yang dibutuhkan")
 
-    # Mata pelajaran favorit
-    mapel = siswa.get("Mata_Pelajaran_Favorit","")
-    if mapel in f.get("mapel",[]):
-        alasan.append(f"Mata pelajaran favorit {mapel} relevan dengan materi kuliah jurusan ini")
-
-    # Nilai akademik
-    for col in f.get("nilai",[]):
-        v = siswa.get(col, 0)
-        lbl = NAMA_KOLOM.get(col, col)
-        if   v >= 85: alasan.append(f"Nilai {lbl} sangat tinggi ({v}) — mendukung kuat bidang ini")
-        elif v >= 75: alasan.append(f"Nilai {lbl} baik ({v}) — sesuai tuntutan jurusan")
-
-    # Kemampuan komputer
-    komp = siswa.get("Kemampuan_Komputer","")
-    if komp in f.get("komp",[]):
-        alasan.append(f"Kemampuan Komputer {komp} mendukung bidang ini")
-
-    # Tujuan karier
-    tujuan = siswa.get("Tujuan_Karier","")
-    if tujuan in PROFIL_SKOR.get(jurusan,{}).get("tujuan",[]):
-        alasan.append(f"Tujuan karier '{tujuan}' sangat selaras dengan lulusan jurusan ini")
-
-    # Kemampuan analisis / problem solving
-    for kap, label in [("Kemampuan_Analisis","Analisis"),("Kemampuan_Problem_Solving","Problem Solving")]:
-        if siswa.get(kap) == "Tinggi":
-            alasan.append(f"Kemampuan {label} tinggi menjadi nilai plus di jurusan ini")
-            break
-
-    # Prestasi akademik
-    pa = siswa.get("Prestasi_Akademik","")
-    if pa != "Tidak Ada":
-        alasan.append(f"Memiliki prestasi akademik: {pa}")
-
-    # Prestasi non-akademik
-    pn = siswa.get("Prestasi_NonAkademik","")
-    if pn != "Tidak Ada":
-        alasan.append(f"Aktif berprestasi non-akademik: {pn}")
+    # 5. Prestasi
+    prestasi_siswa = [k.replace("Prestasi_", "") for k, v in siswa.items() if k.startswith("Prestasi_") and v == 1]
+    if prestasi_siswa:
+        alasan.append(f"Rekam jejak prestasi di bidang {', '.join(prestasi_siswa)} menunjukkan potensi luar biasa")
+        
+    if not alasan:
+        alasan.append(f"Kombinasi nilai dan profil Anda secara umum cocok dengan jurusan {jurusan}")
 
     return alasan
 
@@ -350,64 +338,47 @@ def route_prediksi():
         data = request.form.to_dict()
 
     if not data:
-        return jsonify({"status": "error", "error": "Request body is empty"}), 400
-        
-    # Validation of fields
-    for col in KOLOM_FITUR:
-        # Note: form data might have different keys for Prestasi depending on how JS sends it
-        # The frontend JS actually sends formData which matches the HTML input names, but JS validation
-        # logic has historically handled some preprocessing. We'll extract them cleanly.
-        if col not in data and col not in ["Prestasi_Akademik", "Prestasi_NonAkademik"]:
-            # If mapped from form, JS might send lowercase or specific names
-            pass
+        return jsonify({"success": False, "error": "Request body is empty"}), 400
             
     try:
-        # Map frontend form fields to KOLOM_FITUR if they are sent in form format
-        if not request.is_json:
-            mapped_data = {}
-            for col in KOLOM_FITUR:
-                mapped_data[col] = data.get(col) or data.get(col.lower()) or data.get(col.replace("_", "").lower())
-            
-            # Handle special nested prestige logic from predict.php
-            if "Prestasi_Akademik" not in data:
-                pa_tingkat = data.get("prestasi_akademik_tingkat", "")
-                pa_bidang = data.get("prestasi_akademik_bidang", "")
-                if not pa_tingkat or pa_tingkat == "Tidak Ada" or not pa_bidang:
-                    mapped_data["Prestasi_Akademik"] = "Tidak Ada"
-                else:
-                    mapped_data["Prestasi_Akademik"] = f"{pa_tingkat} - {pa_bidang}"
-                    
-            if "Prestasi_NonAkademik" not in data:
-                pna_tingkat = data.get("prestasi_non_akademik_tingkat", "")
-                pna_bidang = data.get("prestasi_non_akademik_bidang", "")
-                if not pna_tingkat or pna_tingkat == "Tidak Ada" or not pna_bidang:
-                    mapped_data["Prestasi_NonAkademik"] = "Tidak Ada"
-                else:
-                    mapped_data["Prestasi_NonAkademik"] = f"{pna_bidang} - {pna_tingkat}"
-                    
-            # Set the mapped data back to data for the prediction
-            for col in KOLOM_FITUR:
-                if mapped_data.get(col) is None:
-                    mapped_data[col] = "0" if col in ["Matematika", "Bahasa_Inggris", "IPA", "IPS"] else ""
-            data = mapped_data
-
-        # Normalize numeric inputs to float/int
-        for col in ["Matematika", "Bahasa_Inggris", "IPA", "IPS"]:
-            data[col] = float(data[col])
-            
-        result = prediksi_jurusan(data)
+        # Pass the payload directly to the new prediction engine.
+        # It expects a dictionary matching V4.2 feature names.
+        results = predict_recommendations(data)
         
-        # Append supplementary fields from frontend
-        if not request.is_json:
-            result['nama_siswa'] = request.form.get("nama", "")
-            result['minat_spesifik'] = request.form.get("minat_spesifik", "")
-            result['hobi_tambahan'] = request.form.get("hobi_tambahan", "")
-            result['prestasi_akademik'] = data.get("Prestasi_Akademik", "")
-            result['prestasi_non_akademik'] = data.get("Prestasi_NonAkademik", "")
+        jurusan_utama = results[0]['jurusan']
+        prob_utama = results[0]['probability']
+        
+        ranking = []
+        for i, res in enumerate(results):
+            ranking.append({
+                "rank": i + 1,
+                "jurusan": res['jurusan'],
+                "probabilitas": res['probability'],
+                "persen": f"{res['probability'] * 100:.1f}%",
+                "tingkat_kecocokan": proba_ke_kategori(res['probability'])
+            })
             
-        return jsonify(result)
+        alt_list = []
+        for nama in ALTERNATIF.get(jurusan_utama, []):
+            # Attempt to find probability in results, otherwise 0.0
+            p_alt = next((r["probability"] for r in results if r["jurusan"] == nama), 0.0)
+            alt_list.append({
+                "jurusan": nama,
+                "tingkat_kecocokan": proba_ke_kategori(p_alt),
+            })
+            
+        return jsonify({
+            "status": "success",
+            "jurusan_utama": jurusan_utama,
+            "tingkat_kecocokan": proba_ke_kategori(prob_utama),
+            "alasan": buat_alasan(data, jurusan_utama),
+            "alternatif": alt_list,
+            "prospek_karier": KARIER.get(jurusan_utama, []),
+            "ranking": ranking,
+        })
     except Exception as e:
-        return jsonify({"status": "error", "error": str(e)}), 500
+        logging.getLogger("api").error(f"Prediction error: {str(e)}")
+        return jsonify({"status": "error", "error": "Failed to process prediction request."}), 500
 
 # ─────────────────────────────────────────────
 # Route: POST /api/contact  — Kirim Pesan/Saran

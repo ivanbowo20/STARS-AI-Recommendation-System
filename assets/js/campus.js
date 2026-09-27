@@ -149,9 +149,14 @@ const STARSCampus = (function () {
                 reasons: buildReasons(campus, scores, studentData),
             };
         });
-
         // Filter to only those with major match (>0) for relevance
-        const matched = results.filter(r => r.scores.majorScore > 0);
+        let matched = results.filter(r => r.scores.majorScore > 0);
+
+        // Strict Location Filter: province is a hard constraint if selected
+        if (studentData && studentData.provinsi) {
+            matched = matched.filter(r => r.Provinsi === studentData.provinsi);
+        }
+
         const sorted  = matched.sort((a, b) => b.totalScore - a.totalScore);
 
         // Deduplicate: one entry per unique campus+major (already unique in dataset)

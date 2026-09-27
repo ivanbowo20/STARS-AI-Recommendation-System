@@ -26,7 +26,7 @@ const STARS_LOCATION_DATA = {
     "Maluku":                 ["Ambon", "Tual"],
     "Maluku Utara":           ["Ternate", "Tidore Kepulauan"],
     "Nusa Tenggara Barat":    ["Bima", "Mataram", "Sumbawa"],
-    "Nusa Tenggara Timur":    ["Ende", "Kupang", "Maumere"],
+    "Nusa Tenggara Timur":    ["Alor", "Ende", "Kupang", "Manggarai", "Manggarai Barat", "Maumere", "Sikka", "Sumba Timur", "Timor Tengah Utara"],
     "Papua":                  ["Jayapura", "Merauke"],
     "Papua Barat":            ["Manokwari", "Sorong"],
     "Riau":                   ["Dumai", "Pekanbaru"],

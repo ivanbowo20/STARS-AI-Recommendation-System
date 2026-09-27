@@ -47,9 +47,9 @@
 
     <!-- Meta SEO -->
 
-    <meta name="description" content="Temukan rekomendasi jurusan kuliah terbaik berdasarkan nilai, minat, hobi, dan prestasimu menggunakan kecerdasan buatan (Decision Tree Classifier) secara akurat dan realistis.">
+    <meta name="description" content="Temukan rekomendasi jurusan kuliah yang paling sesuai berdasarkan nilai, minat, hobi, dan prestasimu menggunakan model Machine Learning Random Forest.">
 
-    <meta name="keywords" content="rekomendasi jurusan, tes minat bakat, AI kuliah, decision tree, STARS, student talent, cPanel deploy">
+    <meta name="keywords" content="rekomendasi jurusan, tes minat bakat, AI kuliah, random forest, STARS, student talent, cPanel deploy">
 
     <meta name="author" content="STARS Team">
 
@@ -390,7 +390,8 @@
             });
 
         </script>
-    </nav>
+
+    </nav>
 
 <!-- Main Content wrapper to push footer down -->
     <main class="flex-grow">
@@ -442,7 +443,7 @@
                 <!-- Editorial Subtitle with Frosted Glass -->
                 <div class="hero-glass-card relative px-4 py-3.5 sm:p-6 mt-5 sm:mt-6 w-[96%] sm:w-full rounded-xl sm:rounded-2xl" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
                     <p class="text-sm sm:text-lg md:text-xl text-[var(--text-primary)] leading-relaxed max-w-xl font-medium tracking-wide">
-                        Analisis rapor, minat, dan prestasimu dalam 3 menit. STARS menggunakan AI untuk memetakan potensimu ke program studi yang paling pas. Akurat, gratis, dan tanpa tebak-tebakan.
+                        Analisis rapor, minat, dan prestasimu dalam 3 menit. STARS menggunakan algoritma cerdas untuk memetakan potensimu ke program studi yang layak dieksplorasi. Praktis, gratis, dan sangat mudah digunakan.
                     </p>
                 </div>
 
@@ -484,15 +485,15 @@
 
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] leading-tight" data-aos="fade-up" data-aos-duration="800" data-aos-delay="0">
 
-                    Rekomendasi Pintar dengan <br>
+                    Bukan Asal Pilih Jurusan. <br>
 
-                    <span class="text-gradient-silver">Machine Learning Decision Tree</span>
+                    <span class="text-gradient-silver">Kenali Pilihanmu dengan Data.</span>
 
                 </h2>
 
                 <p class="text-sm text-[var(--text-secondary)] leading-relaxed" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
 
-                    STARS menggunakan algoritma <strong class="text-[var(--text-primary)]">Decision Tree Classifier</strong> untuk memetakan kepribadian, nilai, dan kompetensi siswa ke dalam kelompok jurusan kuliah yang paling ideal. Model dilatih menggunakan dataset komprehensif berisi riwayat minat dan prestasi dari ribuan profil pelajar.
+                    STARS mengolah nilai, minat, kemampuan, aktivitas, dan rencana kariermu menggunakan algoritma <strong class="text-[var(--text-primary)]">Random Forest</strong>. Kami membantu memetakan profilmu untuk menemukan beberapa pilihan jurusan kuliah yang layak dieksplorasi lebih jauh.
 
                 </p>
 
@@ -504,9 +505,9 @@
 
                         <div>
 
-                            <h4 class="text-sm font-bold text-[var(--text-primary)]">Analisis Profil 10.000 Siswa</h4>
+                            <h4 class="text-sm font-bold text-[var(--text-primary)]">Analisis 10.000+ Profil Siswa</h4>
 
-                            <p class="text-xs text-[var(--text-muted)] leading-relaxed">Model dioptimasi berdasarkan pola sebaran nilai dan kecenderungan hobi dari data riil lulusan.</p>
+                            <p class="text-xs text-[var(--text-muted)] leading-relaxed">STARS belajar dari ribuan data profil untuk mengenali pola hubungan antara karakteristik siswa dan pilihan jurusan yang relevan.</p>
 
                         </div>
 
@@ -518,9 +519,9 @@
 
                         <div>
 
-                            <h4 class="text-sm font-bold text-[var(--text-primary)]">20 Pilihan Jurusan Kuliah Utama</h4>
+                            <h4 class="text-sm font-bold text-[var(--text-primary)]">20 Pilihan Jurusan</h4>
 
-                            <p class="text-xs text-[var(--text-muted)] leading-relaxed">Meliputi rumpun Sains & Teknologi, Bisnis & Ekonomi, Sosial Humaniora, Pendidikan, Seni, hingga Olahraga.</p>
+                            <p class="text-xs text-[var(--text-muted)] leading-relaxed">Dari teknologi dan bisnis sampai kesehatan, sosial, pendidikan, desain, hingga ilmu keolahragaan.</p>
 
                         </div>
 
@@ -542,7 +543,7 @@
 
                     </span>
 
-                    <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mt-2">Data Siswa</span>
+                    <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mt-2">Profil Siswa</span>
 
                 </div>
 
@@ -568,11 +569,11 @@
 
                     <span class="text-sm font-bold text-[var(--text-primary)] flex items-center justify-center min-h-[40px]">
 
-                        AI Decision Tree
+                        Random Forest
 
                     </span>
 
-                    <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mt-2">Engine Classifier</span>
+                    <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mt-2">Engine Rekomendasi</span>
 
                 </div>
 
@@ -621,1263 +622,570 @@
 
         </div>
 
-        <form id="prediction-form" class="space-y-6 glass-card p-6 sm:p-10 rounded-3xl border border-white/5 shadow-2xl" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-
+<form id="prediction-form" class="space-y-6 glass-card p-6 sm:p-10 rounded-3xl border border-white/5 shadow-2xl relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+    <!-- Stepper Header -->
+    <div class="mb-10 border-b border-white/5 pb-8">
+        <div class="flex items-center justify-between relative mb-8 px-2 max-w-xl mx-auto">
+            <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 z-0"></div>
+            <div id="active-line" class="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-[var(--accent-1)] to-[var(--accent-2)] -translate-y-1/2 z-0 transition-all duration-300" style="width: 0%"></div>
             
+            <!-- Step 1 -->
+            <div class="flex flex-col items-center z-10">
+                <div class="step-circle h-10 w-10 flex items-center justify-center rounded-full border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)] step-active transition-all duration-300" data-step="1">
+                    <span class="step-num text-sm font-bold">1</span>
+                </div>
+                <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Akademik</span>
+            </div>
+            <!-- Step 2 -->
+            <div class="flex flex-col items-center z-10">
+                <div class="step-circle h-10 w-10 flex items-center justify-center rounded-full border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)] transition-all duration-300" data-step="2">
+                    <span class="step-num text-sm font-bold">2</span>
+                </div>
+                <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Aspirasi</span>
+            </div>
+            <!-- Step 3 -->
+            <div class="flex flex-col items-center z-10">
+                <div class="step-circle h-10 w-10 flex items-center justify-center rounded-full border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)] transition-all duration-300" data-step="3">
+                    <span class="step-num text-sm font-bold">3</span>
+                </div>
+                <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Aktivitas</span>
+            </div>
+            <!-- Step 4 -->
+            <div class="flex flex-col items-center z-10">
+                <div class="step-circle h-10 w-10 flex items-center justify-center rounded-full border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)] transition-all duration-300" data-step="4">
+                    <span class="step-num text-sm font-bold">4</span>
+                </div>
+                <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Review</span>
+            </div>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Progress Evaluasi</span>
+            <span class="text-xs font-mono text-zinc-400" id="step-indicator">Langkah 1 dari 4</span>
+        </div>
+        <div class="w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden border border-white/5">
+            <div id="form-progress" class="h-1.5 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(255,255,255,0.4)]" style="width: 25%; background: var(--accent-gradient);"></div>
+        </div>
+    </div>
 
-            <!-- Stepper Header -->
+    <!-- STEP 1: AKADEMIK -->
+    <div class="form-step active-step space-y-8" id="step-1">
+        <div class="space-y-2">
+            <h3 class="text-2xl font-bold text-[var(--text-primary)]">Rekam Akademik</h3>
+            <p class="text-sm text-[var(--text-muted)] max-w-lg">Masukkan nama dan rata-rata nilai rapor Anda. Anda tidak perlu mengisi semua mata pelajaran pilihan, cukup pilih mata pelajaran yang Anda ambil saja.</p>
+        </div>
+        
+        <div>
+            <label for="nama" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required placeholder="Contoh: Ivan Rizky"
+                class="w-full md:w-1/2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+        </div>
+        
+        <!-- Wajib -->
+        <div class="p-4 sm:p-5 rounded-2xl border border-white/5 bg-black/10">
+            <h4 class="text-sm font-bold text-[var(--text-primary)] mb-4 uppercase tracking-wide">Mata Pelajaran Umum</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="flex flex-col">
+                    <label for="Nilai_Matematika_Umum" class="text-xs text-[var(--text-secondary)] mb-1">Matematika Umum</label>
+                    <input type="number" id="Nilai_Matematika_Umum" name="Nilai_Matematika_Umum" min="0" max="100" value="80" required class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-3 sm:py-2 text-base sm:text-sm font-mono text-[var(--input-text)] focus:border-[var(--accent-1)] focus:outline-none">
+                </div>
+                <div class="flex flex-col">
+                    <label for="Nilai_Bahasa_Indonesia" class="text-xs text-[var(--text-secondary)] mb-1">Bahasa Indonesia</label>
+                    <input type="number" id="Nilai_Bahasa_Indonesia" name="Nilai_Bahasa_Indonesia" min="0" max="100" value="80" required class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-3 sm:py-2 text-base sm:text-sm font-mono text-[var(--input-text)] focus:border-[var(--accent-1)] focus:outline-none">
+                </div>
+                <div class="flex flex-col">
+                    <label for="Nilai_Bahasa_Inggris_Umum" class="text-xs text-[var(--text-secondary)] mb-1">Bahasa Inggris</label>
+                    <input type="number" id="Nilai_Bahasa_Inggris_Umum" name="Nilai_Bahasa_Inggris_Umum" min="0" max="100" value="80" required class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-3 sm:py-2 text-base sm:text-sm font-mono text-[var(--input-text)] focus:border-[var(--accent-1)] focus:outline-none">
+                </div>
+                <div class="flex flex-col">
+                    <label for="Nilai_Pendidikan_Pancasila" class="text-xs text-[var(--text-secondary)] mb-1">Pend. Pancasila</label>
+                    <input type="number" id="Nilai_Pendidikan_Pancasila" name="Nilai_Pendidikan_Pancasila" min="0" max="100" value="80" required class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-3 sm:py-2 text-base sm:text-sm font-mono text-[var(--input-text)] focus:border-[var(--accent-1)] focus:outline-none">
+                </div>
+            </div>
+        </div>
 
-            <div class="mb-10 border-b border-white/5 pb-8">
+        <!-- Pilihan (Progressive Disclosure) -->
+        <div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Mata Pelajaran Pilihan</h4>
+                <span class="text-xs text-[var(--text-muted)]">Pilih yang Anda ambil.</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <label class="subject-card group flex flex-col p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Mtk Lanjutan</span>
+                        <div class="h-4 w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Matematika_Lanjutan" min="0" max="100" placeholder="Nilai (0-100)" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">B.Ing Lanjutan</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Bahasa_Inggris_Lanjutan" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Informatika</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Informatika" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Fisika</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Fisika" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Kimia</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Kimia" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Biologi</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Biologi" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Ekonomi</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Ekonomi" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Sosiologi</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Sosiologi" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Geografi</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Geografi" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Sejarah</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Sejarah" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">B.Ind Lanjutan</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Bahasa_Indonesia_Lanjutan" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Seni Budaya</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_Seni_Budaya" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+                <label class="subject-card group flex flex-col p-4 sm:p-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:border-[var(--text-primary)] cursor-pointer transition-all">
+                    <div class="flex items-center justify-between w-full">
+                        <span class="text-sm sm:text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">PJOK</span>
+                        <div class="h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all"></div>
+                    </div>
+                    <div class="subject-input-wrapper hidden mt-3">
+                        <input type="number" name="Nilai_PJOK" min="0" max="100" placeholder="Nilai" class="w-full bg-[var(--bg-primary)] border border-white/10 rounded px-3 sm:px-2 py-2.5 sm:py-1.5 text-sm sm:text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
 
-                <!-- Stepper Circles -->
+    <!-- STEP 2: MINAT & ASPIRASI -->
+    <div class="form-step hidden space-y-10" id="step-2">
+        <div class="space-y-2">
+            <h3 class="text-2xl font-bold text-[var(--text-primary)]">Minat & Aspirasi</h3>
+            <p class="text-sm text-[var(--text-muted)] max-w-lg">Pilih mata pelajaran yang paling Anda sukai, bidang keilmuan yang membuat Anda penasaran, dan gambaran karier ideal di masa depan.</p>
+        </div>
+        
+        <!-- Favorit -->
+        <div>
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Mata Pelajaran Favorit</h4>
+                <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
+            </div>
+            <div class="flex flex-wrap gap-2.5" id="group-favorit">
+                <script>
+                    const favs = [
+                        ['Favorit_Matematika_Umum','Mtk Umum'], ['Favorit_Bahasa_Indonesia','B.Indonesia'], ['Favorit_Bahasa_Inggris_Umum','B.Inggris'],
+                        ['Favorit_Pendidikan_Pancasila','Pancasila'], ['Favorit_Matematika_Lanjutan','Mtk Lanjutan'], ['Favorit_Bahasa_Inggris_Lanjutan','B.Ing Lanjutan'],
+                        ['Favorit_Informatika','Informatika'], ['Favorit_Fisika','Fisika'], ['Favorit_Kimia','Kimia'], ['Favorit_Biologi','Biologi'],
+                        ['Favorit_Ekonomi','Ekonomi'], ['Favorit_Sosiologi','Sosiologi'], ['Favorit_Geografi','Geografi'], ['Favorit_Sejarah','Sejarah'],
+                        ['Favorit_Seni_Budaya','Seni Budaya'], ['Favorit_PJOK','PJOK']
+                    ];
+                    document.write(favs.map(f => `
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Favorit" value="${f[0]}" class="peer sr-only favorit-cb">
+                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                ${f[1]}
+                            </div>
+                        </label>
+                    `).join(''));
+                </script>
+            </div>
+        </div>
 
-                <div class="flex items-center justify-between relative mb-8 px-2 max-w-xl mx-auto">
+        <!-- Minat Bidang -->
+        <div>
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Minat Bidang Keilmuan</h4>
+                <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
+            </div>
+            <div class="flex flex-wrap gap-2.5" id="group-minat">
+                <script>
+                    const minats = [
+                        ['Minat_Teknologi','Teknologi'], ['Minat_Bisnis','Bisnis'], ['Minat_Kesehatan','Kesehatan'], ['Minat_Sosial','Sosial'],
+                        ['Minat_Hukum','Hukum'], ['Minat_Pendidikan','Pendidikan'], ['Minat_Seni','Seni'], ['Minat_Komunikasi','Komunikasi'],
+                        ['Minat_Teknik','Teknik'], ['Minat_Lingkungan','Lingkungan']
+                    ];
+                    document.write(minats.map(m => `
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Minat" value="${m[0]}" class="peer sr-only minat-cb">
+                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                ${m[1]}
+                            </div>
+                        </label>
+                    `).join(''));
+                </script>
+            </div>
+        </div>
 
-                    <!-- Connecting Line Background -->
+        <!-- Tujuan Karier -->
+        <div>
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Tujuan Karier Impian</h4>
+                <span class="text-xs text-[var(--text-muted)]">Maksimal 2 pilihan.</span>
+            </div>
+            <div class="flex flex-wrap gap-2.5" id="group-karier">
+                <script>
+                    const kariers = [
+                        ['Karier_Software_Engineer','Software Engineer'], ['Karier_Data_Scientist','Data Scientist'], ['Karier_Engineer','Engineer (Teknik)'],
+                        ['Karier_Dokter','Dokter'], ['Karier_Apoteker','Apoteker'], ['Karier_Akuntan','Akuntan'], ['Karier_Manajer','Manajer'],
+                        ['Karier_Pengusaha','Pengusaha / Bisnis'], ['Karier_Pengacara','Pengacara'], ['Karier_Guru','Guru / Pendidik'], ['Karier_Desainer','Desainer'],
+                        ['Karier_Komunikasi','Bidang Komunikasi'], ['Karier_Psikolog','Psikolog'], ['Karier_Atlet','Atlet'], ['Karier_Arsitek','Arsitek'],
+                        ['Karier_Administrasi','Administrasi'], ['Karier_Lingkungan','Bidang Lingkungan'], ['Karier_Peneliti','Peneliti / Ilmuwan'],
+                        ['Karier_Belum_Yakin','Masih Belum Yakin']
+                    ];
+                    document.write(kariers.map(k => `
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Karier" value="${k[0]}" class="peer sr-only karier-cb">
+                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                ${k[1]}
+                            </div>
+                        </label>
+                    `).join(''));
+                </script>
+            </div>
+        </div>
 
-                    <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 z-0"></div>
-
-                    <!-- Active Connecting Line -->
-
-                    <div id="active-line" class="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-[var(--accent-1)] to-[var(--accent-2)] -translate-y-1/2 z-0 transition-all duration-300" style="width: 0%"></div>
-
+        <!-- Preferensi Lokasi Kampus -->
+        <div class="border-t border-white/5 pt-8">
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Preferensi Lokasi Kampus</h4>
+                <span class="text-xs text-[var(--text-muted)]">Di wilayah mana kamu ingin mencari kampus? (Opsional)</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col">
+                    <label for="provinsi" class="text-xs text-[var(--text-secondary)] mb-1">Provinsi</label>
+                    <select id="provinsi" name="provinsi" class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-base sm:text-sm font-semibold text-[var(--text-primary)] focus:border-[var(--accent-1)] focus:outline-none cursor-pointer transition-all hover:border-[var(--text-muted)]">
+                        <option value="">Tidak ada preferensi lokasi</option>
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="kota" class="text-xs text-[var(--text-secondary)] mb-1">Kabupaten/Kota</label>
+                    <select id="kota" name="kota" class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-base sm:text-sm font-semibold text-[var(--text-primary)] focus:border-[var(--accent-1)] focus:outline-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:border-[var(--text-muted)]" disabled>
+                        <option value="">Pilih Kabupaten/Kota</option>
+                    </select>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof STARS_LOCATION_DATA === 'undefined') return;
+                    const provSelect = document.getElementById('provinsi');
+                    const kotaSelect = document.getElementById('kota');
+                    if (!provSelect || !kotaSelect) return;
                     
-
-                    <!-- Step 1 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)] step-active" data-step="1">
-
-                            <span class="step-num">1</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Akademik</span>
-
-                    </div>
-
-                    <!-- Step 2 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="2">
-
-                            <span class="step-num">2</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Minat</span>
-
-                    </div>
-
-                    <!-- Step 3 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="3">
-
-                            <span class="step-num">3</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Karakter</span>
-
-                    </div>
-
-                    <!-- Step 4 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="4">
-
-                            <span class="step-num">4</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Prestasi</span>
-
-                    </div>
-
-                    <!-- Step 5 (NEW: Lokasi) -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="5">
-
-                            <span class="step-num">5</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Lokasi</span>
-
-                    </div>
-
-                    <!-- Step 6 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="6">
-
-                            <span class="step-num">6</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Tinjau</span>
-
-                    </div>
-
-                    <!-- Step 7 -->
-
-                    <div class="flex flex-col items-center z-10">
-
-                        <div class="step-circle border-2 border-zinc-200 dark:border-zinc-800 bg-[var(--bg-secondary)] text-[var(--text-secondary)]" data-step="7">
-
-                            <span class="step-num">7</span>
-
-                        </div>
-
-                        <span class="text-[10px] font-semibold mt-1.5 uppercase tracking-wider text-[var(--text-muted)] hidden sm:block">Hasil</span>
-
-                    </div>
-
-                </div>
-
-                <div class="flex justify-between items-center mb-4">
-
-                    <span class="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Progress Evaluasi</span>
-
-                    <span class="text-xs font-mono text-zinc-400" id="step-indicator">Langkah 1 dari 7</span>
-
-                </div>
-
-                <!-- Progress Bar Container -->
-
-                <div class="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-white/5">
-
-                    <div id="form-progress" class="h-2 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(255,255,255,0.4)]" style="width: 16.66%; background: var(--accent-gradient);"></div>
-
-                </div>
-
-            </div>
-
-            <!-- STEP 1: DATA AKADEMIK -->
-
-            <div class="form-step active-step space-y-6" id="step-1">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-graduation-cap"></i></span>
-
-                        <span>Data & Nilai Akademik</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Masukkan nama lengkap dan rata-rata nilai rapor mata pelajaran pokok Anda.</p>
-
-                </div>
-
-                
-
-                <div class="space-y-4">
-
-                    <div>
-
-                        <label for="nama" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nama Lengkap</label>
-
-                        <input type="text" id="nama" name="nama" required placeholder="Contoh: Ivan Rizky"
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                    </div>
-
+                    const provinces = Object.keys(STARS_LOCATION_DATA).sort();
+                    provinces.forEach(p => {
+                        const opt = document.createElement('option');
+                        opt.value = p; opt.textContent = p;
+                        provSelect.appendChild(opt);
+                    });
                     
+                    provSelect.addEventListener('change', function() {
+                        kotaSelect.innerHTML = '<option value="">Semua Kabupaten/Kota</option>';
+                        const selectedProv = this.value;
+                        if (selectedProv && STARS_LOCATION_DATA[selectedProv]) {
+                            kotaSelect.disabled = false;
+                            STARS_LOCATION_DATA[selectedProv].sort().forEach(k => {
+                                const opt = document.createElement('option');
+                                opt.value = k; opt.textContent = k;
+                                kotaSelect.appendChild(opt);
+                            });
+                        } else {
+                            kotaSelect.disabled = true;
+                            kotaSelect.innerHTML = '<option value="">Pilih Kabupaten/Kota</option>';
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-
-                        <!-- Matematika -->
-
-                        <div class="space-y-2">
-
-                            <div class="flex justify-between items-center">
-
-                                <label for="matematika" class="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Matematika</label>
-
-                                <input type="number" id="matematika" name="matematika" min="0" max="100" value="80" required
-
-                                    class="w-16 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg text-center py-1 text-xs text-[var(--input-text)] font-mono focus:outline-none focus:border-[var(--accent-1)]">
-
+    <!-- STEP 3: KEKUATAN & AKTIVITAS -->
+    <div class="form-step hidden space-y-10" id="step-3">
+        <div class="space-y-2">
+            <h3 class="text-2xl font-bold text-[var(--text-primary)]">Kekuatan & Aktivitas</h3>
+            <p class="text-sm text-[var(--text-muted)] max-w-lg">Apa kekuatan terbesarmu? Apa yang kamu lakukan di waktu luang? Organisasi bersifat opsional, isi hanya jika kamu berpartisipasi.</p>
+        </div>
+        
+        <!-- Kekuatan -->
+        <div>
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Kekuatan Diri (Strength)</h4>
+                <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
+            </div>
+            <div class="flex flex-wrap gap-2.5" id="group-strength">
+                <script>
+                    const strengths = [
+                        ['Strength_Analisis_Data','Analisis Data'], ['Strength_Komunikasi','Komunikasi'], ['Strength_Kepemimpinan','Kepemimpinan'],
+                        ['Strength_Kreativitas','Kreativitas'], ['Strength_Teknologi_Digital','Teknologi Digital'], ['Strength_Spatial_Visual','Visual / Spasial'],
+                        ['Strength_Problem_Solving','Problem Solving']
+                    ];
+                    document.write(strengths.map(s => `
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Strength" value="${s[0]}" class="peer sr-only strength-cb">
+                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                ${s[1]}
                             </div>
+                        </label>
+                    `).join(''));
+                </script>
+            </div>
+        </div>
 
-                            <input type="range" id="matematika_slider" min="0" max="100" value="80" 
-
-                                class="w-full h-1 bg-[var(--bg-tertiary)] rounded-lg appearance-none cursor-pointer">
-
-                        </div>
-
-                        <!-- Bahasa Inggris -->
-
-                        <div class="space-y-2">
-
-                            <div class="flex justify-between items-center">
-
-                                <label for="bahasa_inggris" class="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Bahasa Inggris</label>
-
-                                <input type="number" id="bahasa_inggris" name="bahasa_inggris" min="0" max="100" value="80" required
-
-                                    class="w-16 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg text-center py-1 text-xs text-[var(--input-text)] font-mono focus:outline-none focus:border-[var(--accent-1)]">
-
+        <!-- Hobi -->
+        <div>
+            <div class="mb-4">
+                <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">Hobi & Waktu Luang</h4>
+                <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
+            </div>
+            <div class="flex flex-wrap gap-2.5" id="group-hobi">
+                <script>
+                    const hobis = [
+                        ['Hobi_Olahraga','Olahraga'], ['Hobi_Gaming','Gaming'], ['Hobi_Musik','Musik'], ['Hobi_Menggambar','Desain / Menggambar'],
+                        ['Hobi_Membaca','Membaca'], ['Hobi_Menulis','Menulis'], ['Hobi_Teknologi','Coding / Teknologi'], ['Hobi_Bisnis','Bisnis / Jualan'],
+                        ['Hobi_Sosial','Relawan / Sosial'], ['Hobi_Organisasi','Organisasi'], ['Hobi_Fotografi','Fotografi / Video'], ['Hobi_Memasak','Memasak']
+                    ];
+                    document.write(hobis.map(h => `
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Hobi" value="${h[0]}" class="peer sr-only hobi-cb">
+                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                ${h[1]}
                             </div>
-
-                            <input type="range" id="bahasa_inggris_slider" min="0" max="100" value="80" 
-
-                                class="w-full h-1 bg-[var(--bg-tertiary)] rounded-lg appearance-none cursor-pointer">
-
-                        </div>
-
-                        <!-- IPA -->
-
-                        <div class="space-y-2">
-
-                            <div class="flex justify-between items-center">
-
-                                <label for="ipa" class="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">IPA</label>
-
-                                <input type="number" id="ipa" name="ipa" min="0" max="100" value="75" required
-
-                                    class="w-16 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg text-center py-1 text-xs text-[var(--input-text)] font-mono focus:outline-none focus:border-[var(--accent-1)]">
-
-                            </div>
-
-                            <input type="range" id="ipa_slider" min="0" max="100" value="75" 
-
-                                class="w-full h-1 bg-[var(--bg-tertiary)] rounded-lg appearance-none cursor-pointer">
-
-                        </div>
-
-                        <!-- IPS -->
-
-                        <div class="space-y-2">
-
-                            <div class="flex justify-between items-center">
-
-                                <label for="ips" class="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">IPS</label>
-
-                                <input type="number" id="ips" name="ips" min="0" max="100" value="75" required
-
-                                    class="w-16 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg text-center py-1 text-xs text-[var(--input-text)] font-mono focus:outline-none focus:border-[var(--accent-1)]">
-
-                            </div>
-
-                            <input type="range" id="ips_slider" min="0" max="100" value="75" 
-
-                                class="w-full h-1 bg-[var(--bg-tertiary)] rounded-lg appearance-none cursor-pointer">
-
-                        </div>
-
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-
-                        <!-- Mata Pelajaran Favorit -->
-
-                        <div>
-
-                            <label for="mata_pelajaran_favorit" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Mata Pelajaran Favorit</label>
-
-                            <select id="mata_pelajaran_favorit" name="mata_pelajaran_favorit" required
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="" disabled selected>Pilih Mata Pelajaran</option>
-
-                                <option value="Matematika">Matematika</option>
-
-                                <option value="Fisika">Fisika</option>
-
-                                <option value="Kimia">Kimia</option>
-
-                                <option value="Biologi">Biologi</option>
-
-                                <option value="Ekonomi">Ekonomi</option>
-
-                                <option value="Informatika">Informatika</option>
-
-                                <option value="Bahasa Inggris">Bahasa Inggris</option>
-
-                                <option value="Geografi">Geografi</option>
-
-                                <option value="Sejarah">Sejarah</option>
-
-                                <option value="Sosiologi">Sosiologi</option>
-
-                                <option value="Seni Budaya">Seni Budaya</option>
-
-                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-
-                                <option value="PJOK">PJOK (Olahraga)</option>
-
-                            </select>
-
-                        </div>
-
-                        <!-- Gaya Belajar -->
-
-                        <div>
-
-                            <label for="gaya_belajar" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Gaya Belajar</label>
-
-                            <select id="gaya_belajar" name="gaya_belajar" required
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="" disabled selected>Pilih Gaya Belajar</option>
-
-                                <option value="Visual">Visual (Gambar/Grafis)</option>
-
-                                <option value="Auditori">Auditori (Mendengar/Diskusi)</option>
-
-                                <option value="Kinestetik">Kinestetik (Praktek/Gerak)</option>
-
-                                <option value="Membaca/Menulis">Membaca / Menulis</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+                        </label>
+                    `).join(''));
+                </script>
             </div>
-
-            <!-- STEP 2: MINAT & HOBI -->
-
-            <div class="form-step hidden space-y-6" id="step-2">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-heart"></i></span>
-
-                        <span>Minat & Hobi</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Pilih bidang minat utama Anda beserta hobi yang paling mewakili keseharian.</p>
-
-                </div>
-
-                
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Minat -->
-
-                    <div>
-
-                        <label for="minat" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Rumpun Minat Utama</label>
-
-                        <select id="minat" name="minat" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Rumpun Minat</option>
-
-                            <option value="Teknologi">Teknologi</option>
-
-                            <option value="Bisnis">Bisnis</option>
-
-                            <option value="Seni">Seni</option>
-
-                            <option value="Pendidikan">Pendidikan</option>
-
-                            <option value="Olahraga">Olahraga</option>
-
-                            <option value="Sosial">Sosial</option>
-
-                            <option value="Teknik">Teknik</option>
-
-                            <option value="Kesehatan">Kesehatan</option>
-
-                            <option value="Sains">Sains</option>
-
-                            <option value="Psikologi">Psikologi</option>
-
-                            <option value="Lingkungan">Lingkungan</option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- Searchable Hobi Dropdown -->
-
-                    <div class="relative">
-
-                        <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Pilih Hobi Utama</label>
-
-                        <button type="button" id="hobi-dropdown-btn"
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-left text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all flex items-center justify-between">
-
-                            <span class="text-[var(--input-placeholder)]">Pilih Hobi</span>
-
-                            <i class="fas fa-chevron-down text-xs text-[var(--input-placeholder)]"></i>
-
-                        </button>
-
-                        
-
-                        <!-- Hidden input to submit with the form -->
-
-                        <input type="hidden" id="hobi-hidden" name="hobi" required>
-
-                        <!-- Expandable searchable dropdown list -->
-
-                        <div id="hobi-dropdown-list" class="hidden absolute left-0 right-0 mt-2 p-2 bg-[var(--bg-secondary)] border border-[var(--card-border)] rounded-xl shadow-[var(--card-shadow)] z-20">
-
-                            <input type="text" id="hobi-search-input" placeholder="Cari hobi..." 
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-2 text-xs text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] mb-2">
-
-                            <div class="searchable-dropdown-list space-y-1 max-h-48 overflow-y-auto">
-
-                                                                <button type="button" data-value="Coding" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Coding                                </button>
-
-                                                                <button type="button" data-value="Membaca" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Membaca                                </button>
-
-                                                                <button type="button" data-value="Menggambar" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Menggambar                                </button>
-
-                                                                <button type="button" data-value="Taekwondo" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Taekwondo                                </button>
-
-                                                                <button type="button" data-value="Sepak Bola" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Sepak Bola                                </button>
-
-                                                                <button type="button" data-value="Musik" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Musik                                </button>
-
-                                                                <button type="button" data-value="Menulis" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Menulis                                </button>
-
-                                                                <button type="button" data-value="Berjualan" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Berjualan                                </button>
-
-                                                                <button type="button" data-value="Robotika" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Robotika                                </button>
-
-                                                                <button type="button" data-value="Web Development" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Web Development                                </button>
-
-                                                                <button type="button" data-value="UI/UX Design" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    UI/UX Design                                </button>
-
-                                                                <button type="button" data-value="Mobile Development" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Mobile Development                                </button>
-
-                                                                <button type="button" data-value="Video Editing" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Video Editing                                </button>
-
-                                                                <button type="button" data-value="Public Speaking" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Public Speaking                                </button>
-
-                                                                <button type="button" data-value="Content Creator" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Content Creator                                </button>
-
-                                                                <button type="button" data-value="Esport" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Esport                                </button>
-
-                                                                <button type="button" data-value="Atletik" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Atletik                                </button>
-
-                                                                <button type="button" data-value="Basket" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Basket                                </button>
-
-                                                                <button type="button" data-value="Renang" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Renang                                </button>
-
-                                                                <button type="button" data-value="Fotografi" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Fotografi                                </button>
-
-                                                                <button type="button" data-value="Desain Grafis" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Desain Grafis                                </button>
-
-                                                                <button type="button" data-value="Game Development" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Game Development                                </button>
-
-                                                                <button type="button" data-value="Merakit Elektronik" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Merakit Elektronik                                </button>
-
-                                                                <button type="button" data-value="Penelitian" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Penelitian                                </button>
-
-                                                                <button type="button" data-value="Volunteering" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Volunteering                                </button>
-
-                                                                <button type="button" data-value="PMR" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    PMR                                </button>
-
-                                                                <button type="button" data-value="Pramuka" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Pramuka                                </button>
-
-                                                                <button type="button" data-value="Debat" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Debat                                </button>
-
-                                                                <button type="button" data-value="Investasi" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Investasi                                </button>
-
-                                                                <button type="button" data-value="Olahraga" 
-
-                                    class="hobi-option w-full text-left px-3 py-2 text-xs rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-
-                                    Olahraga                                </button>
-
-                                                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Minat Spesifik -->
-
-                    <div>
-
-                        <label for="minat_spesifik" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Minat Spesifik <span class="text-[10px] text-[var(--text-muted)] font-medium">(Opsional)</span></label>
-
-                        <input type="text" id="minat_spesifik" name="minat_spesifik" placeholder="Contoh: AI, Cyber Security, Dokter Anak"
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                    </div>
-
-                    <!-- Hobi Tambahan -->
-
-                    <div>
-
-                        <label for="hobi_tambahan" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Hobi Tambahan <span class="text-[10px] text-[var(--text-muted)] font-medium">(Opsional)</span></label>
-
-                        <input type="text" id="hobi_tambahan" name="hobi_tambahan" placeholder="Contoh: Menonton film, Hiking, Memasak"
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- STEP 3: KEMAMPUAN & KARAKTER -->
-
-            <div class="form-step hidden space-y-6" id="step-3">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-brain"></i></span>
-
-                        <span>Kemampuan & Karakter</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Evaluasi tingkat kecakapan diri Anda untuk beberapa keahlian penting berikut.</p>
-
-                </div>
-
-                
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Kemampuan Komputer -->
-
-                    <div>
-
-                        <label for="kemampuan_komputer" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Komputer</label>
-
-                        <select id="kemampuan_komputer" name="kemampuan_komputer" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Dasar/Mengetik)</option>
-
-                            <option value="Sedang">Sedang (Office/Desain Dasar)</option>
-
-                            <option value="Tinggi">Tinggi (Coding/Hardware/Analisis)</option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- Kemampuan Komunikasi -->
-
-                    <div>
-
-                        <label for="kemampuan_komunikasi" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Komunikasi</label>
-
-                        <select id="kemampuan_komunikasi" name="kemampuan_komunikasi" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Tertutup/Pendengar)</option>
-
-                            <option value="Sedang">Sedang (Rata-rata/Interaksi Biasa)</option>
-
-                            <option value="Tinggi">Tinggi (Negosiasi/Public Speaking)</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Kemampuan Kepemimpinan -->
-
-                    <div>
-
-                        <label for="kemampuan_kepemimpinan" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Kepemimpinan</label>
-
-                        <select id="kemampuan_kepemimpinan" name="kemampuan_kepemimpinan" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Kurang Aktif Memimpin)</option>
-
-                            <option value="Sedang" selected>Sedang (Aktif dalam Kelompok)</option>
-
-                            <option value="Tinggi">Tinggi (Sering Menjadi Pemimpin)</option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- Kemampuan Analisis -->
-
-                    <div>
-
-                        <label for="kemampuan_analisis" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Analisis</label>
-
-                        <select id="kemampuan_analisis" name="kemampuan_analisis" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Berpikir Berdasarkan Fakta Sederhana)</option>
-
-                            <option value="Sedang">Sedang (Mampu Menganalisis Hubungan Sebab-Akibat)</option>
-
-                            <option value="Tinggi">Tinggi (Kritis, Menyukai Data & Logika Matematika)</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Kemampuan Kreativitas -->
-
-                    <div>
-
-                        <label for="kemampuan_kreativitas" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Kreativitas</label>
-
-                        <select id="kemampuan_kreativitas" name="kemampuan_kreativitas" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Lebih Suka Mengikuti Metode yang Sudah Ada)</option>
-
-                            <option value="Sedang">Sedang (Dapat Memodifikasi Ide & Membuat Variasi Baru)</option>
-
-                            <option value="Tinggi">Tinggi (Suka Berimajinasi & Menemukan Solusi Out-of-the-box)</option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- Kemampuan Problem Solving -->
-
-                    <div>
-
-                        <label for="kemampuan_problem_solving" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Kemampuan Problem Solving</label>
-
-                        <select id="kemampuan_problem_solving" name="kemampuan_problem_solving" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Tingkat</option>
-
-                            <option value="Rendah">Rendah (Cenderung Menunggu Bantuan Saat Menghadapi Masalah)</option>
-
-                            <option value="Sedang">Sedang (Mampu Mengatasi Masalah yang Bersifat Terstruktur)</option>
-
-                            <option value="Tinggi">Tinggi (Solutif & Mandiri dalam Mengurai Masalah Rumit)</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- STEP 4: ORGANISASI & PRESTASI -->
-
-            <div class="form-step hidden space-y-6" id="step-4">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-users"></i></span>
-
-                        <span>Organisasi, Karier & Prestasi</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Pilih riwayat organisasi sekolah/komunitas, tujuan karier impian, serta sertifikat prestasi Anda.</p>
-
-                </div>
-
-                
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Aktivitas Organisasi -->
-
-                    <div>
-
-                        <label for="aktivitas_organisasi" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Aktivitas Organisasi</label>
-
-                        <select id="aktivitas_organisasi" name="aktivitas_organisasi" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Keaktifan Organisasi</option>
-
-                            <option value="Tidak Aktif">Tidak Aktif</option>
-
-                            <option value="OSIS">OSIS</option>
-
-                            <option value="MPK">MPK</option>
-
-                            <option value="BEM">BEM</option>
-
-                            <option value="Pramuka">Pramuka</option>
-
-                            <option value="PMR">PMR</option>
-
-                            <option value="Paskibra">Paskibra</option>
-
-                            <option value="Komunitas IT">Komunitas IT</option>
-
-                            <option value="Komunitas Seni">Komunitas Seni</option>
-
-                            <option value="Komunitas Olahraga">Komunitas Olahraga</option>
-
-                            <option value="Karang Taruna">Karang Taruna</option>
-
-                            <option value="Organisasi Keagamaan">Organisasi Keagamaan</option>
-
-                            <option value="Volunteering">Volunteering (Relawan)</option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- Tujuan Karier -->
-
-                    <div>
-
-                        <label for="tujuan_karier" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Tujuan Karier</label>
-
-                        <select id="tujuan_karier" name="tujuan_karier" required
-
-                            class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                            <option value="" disabled selected>Pilih Sasaran Karier</option>
-
-                            <option value="Software Engineer">Software Engineer</option>
-
-                            <option value="Data Scientist">Data Scientist</option>
-
-                            <option value="Dokter">Dokter</option>
-
-                            <option value="Psikolog">Psikolog</option>
-
-                            <option value="Arsitek">Arsitek</option>
-
-                            <option value="Akuntan">Akuntan</option>
-
-                            <option value="Pengacara">Pengacara</option>
-
-                            <option value="Guru">Guru</option>
-
-                            <option value="Dosen">Dosen</option>
-
-                            <option value="Entrepreneur">Entrepreneur (Pengusaha)</option>
-
-                            <option value="Business Analyst">Business Analyst</option>
-
-                            <option value="UI UX Designer">UI UX Designer</option>
-
-                            <option value="Content Creator">Content Creator</option>
-
-                            <option value="Apoteker">Apoteker</option>
-
-                            <option value="Insinyur Sipil">Insinyur Sipil</option>
-
-                            <option value="Insinyur Mesin">Insinyur Mesin</option>
-
-                            <option value="Konsultan Lingkungan">Konsultan Lingkungan</option>
-
-                            <option value="Manajer">Manajer</option>
-
-                            <option value="Pelatih Olahraga">Pelatih Olahraga</option>
-
-                            <option value="Network Engineer">Network Engineer</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <!-- Prestasi Akademik -->
-
-                <div class="p-5 rounded-2xl bg-[var(--bg-tertiary)] border border-[var(--card-border)] space-y-4">
-
-                    <span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider block">Prestasi Akademik</span>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div>
-
-                            <label for="prestasi_akademik_tingkat" class="block text-xs font-medium text-[var(--text-secondary)] mb-2">Tingkat Prestasi</label>
-
-                            <select id="prestasi_akademik_tingkat" name="prestasi_akademik_tingkat" required
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-2 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="Tidak Ada" selected>Tidak Ada</option>
-
-                                <option value="Sekolah">Sekolah</option>
-
-                                <option value="Kecamatan">Kecamatan</option>
-
-                                <option value="Kabupaten">Kabupaten</option>
-
-                                <option value="Provinsi">Provinsi</option>
-
-                                <option value="Nasional">Nasional</option>
-
-                                <option value="Internasional">Internasional</option>
-
-                            </select>
-
-                        </div>
-
-                        <div id="prestasi_akademik_bidang_container" class="hidden">
-
-                            <label for="prestasi_akademik_bidang" class="block text-xs font-medium text-[var(--text-secondary)] mb-2">Bidang Prestasi</label>
-
-                            <select id="prestasi_akademik_bidang" name="prestasi_akademik_bidang"
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-2 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="Matematika" selected>Matematika</option>
-
-                                <option value="Fisika">Fisika</option>
-
-                                <option value="Kimia">Kimia</option>
-
-                                <option value="Biologi">Biologi</option>
-
-                                <option value="Informatika">Informatika</option>
-
-                                <option value="Debat">Debat</option>
-
-                                <option value="Bahasa Inggris">Bahasa Inggris</option>
-
-                                <option value="Sains">Sains / IPA</option>
-
-                                <option value="Ekonomi">Ekonomi / IPS</option>
-
-                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Prestasi Non-Akademik -->
-
-                <div class="p-5 rounded-2xl bg-[var(--bg-tertiary)] border border-[var(--card-border)] space-y-4">
-
-                    <span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider block">Prestasi Non-Akademik</span>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div>
-
-                            <label for="prestasi_non_akademik_tingkat" class="block text-xs font-medium text-[var(--text-secondary)] mb-2">Tingkat Prestasi</label>
-
-                            <select id="prestasi_non_akademik_tingkat" name="prestasi_non_akademik_tingkat" required
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-2 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="Tidak Ada" selected>Tidak Ada</option>
-
-                                <option value="Sekolah">Sekolah</option>
-
-                                <option value="Kecamatan">Kecamatan</option>
-
-                                <option value="Kabupaten">Kabupaten</option>
-
-                                <option value="Provinsi">Provinsi</option>
-
-                                <option value="Nasional">Nasional</option>
-
-                                <option value="Internasional">Internasional</option>
-
-                            </select>
-
-                        </div>
-
-                        <div id="prestasi_non_akademik_bidang_container" class="hidden">
-
-                            <label for="prestasi_non_akademik_bidang" class="block text-xs font-medium text-[var(--text-secondary)] mb-2">Bidang Prestasi</label>
-
-                            <select id="prestasi_non_akademik_bidang" name="prestasi_non_akademik_bidang"
-
-                                class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-2 text-sm text-[var(--input-text)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
-
-                                <option value="Olahraga" selected>Olahraga</option>
-
-                                <option value="Seni">Seni</option>
-
-                                <option value="Organisasi">Organisasi</option>
-
-                                <option value="Kepemimpinan">Kepemimpinan</option>
-
-                                <option value="PMR">PMR</option>
-
-                                <option value="Pramuka">Pramuka</option>
-
-                                <option value="Paskibra">Paskibra</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- STEP 5 (NEW): LOKASI SISWA -->
-
-            <div class="form-step hidden space-y-6" id="step-5">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-map-marker-alt"></i></span>
-
-                        <span>Lokasi Kamu</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Informasi lokasi digunakan untuk merekomendasikan kampus terdekat yang paling sesuai dengan profilmu.</p>
-
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-                    <!-- Provinsi -->
-
-                    <div class="space-y-2">
-
-                        <label for="provinsi" class="block text-sm font-semibold text-[var(--text-secondary)]">Provinsi <span class="text-red-500">*</span></label>
-
-                        <div class="relative">
-
-                            <select id="provinsi" name="provinsi" required
-
-                                class="w-full px-4 py-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-1)] transition-all appearance-none pr-10">
-
-                                <option value="">-- Pilih Provinsi --</option>
-
-                            </select>
-
-                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] pointer-events-none"></i>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Kota/Kabupaten -->
-
-                    <div class="space-y-2">
-
-                        <label for="kota" class="block text-sm font-semibold text-[var(--text-secondary)]">Kota / Kabupaten <span class="text-red-500">*</span></label>
-
-                        <div class="relative">
-
-                            <select id="kota" name="kota" required
-
-                                class="w-full px-4 py-3 rounded-xl border border-[var(--card-border)] bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-1)] transition-all appearance-none pr-10">
-
-                                <option value="">-- Pilih Provinsi Terlebih Dahulu --</option>
-
-                            </select>
-
-                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] pointer-events-none"></i>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Info Card -->
-
-                <div class="rounded-2xl border border-[var(--card-border)] p-4 flex items-start gap-3" style="background:var(--bg-tertiary);">
-
-                    <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-blue-400" style="background:rgba(59,130,246,0.1);">
-
-                        <i class="fas fa-info-circle"></i>
-
-                    </div>
-
-                    <p class="text-xs" style="color:var(--text-secondary);">
-
-                        Sistem akan menggunakan data lokasi ini untuk menghitung <strong>Campus Match Score</strong> dan merekomendasikan universitas yang paling dekat dan sesuai dengan minat serta karier kamu.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- STEP 6: REVIEW DATA (was step 5) -->
-
-            <div class="form-step hidden space-y-6" id="step-6">
-
-                <div class="space-y-1 mb-4">
-
-                    <h3 class="text-lg font-bold text-[var(--text-primary)] flex items-center space-x-2">
-
-                        <span class="h-6 w-6 rounded bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)] text-xs"><i class="fas fa-clipboard-check"></i></span>
-
-                        <span>Tinjau Profil Evaluasi Anda</span>
-
-                    </h3>
-
-                    <p class="text-xs text-[var(--text-muted)]">Tinjau kembali data di bawah ini sebelum menyerahkan form kepada model rekomendasi.</p>
-
-                </div>
-
-                
-
-                <div id="review-content" class="bg-[var(--bg-tertiary)] rounded-2xl border border-[var(--card-border)] p-4 sm:p-6 max-h-[350px] overflow-y-auto space-y-4 divide-y divide-[var(--card-border)] text-sm text-[var(--text-secondary)]">
-
-                    <!-- Populated by JavaScript -->
-
-                </div>
-
-            </div>
-
-            <!-- STEP 7: SUBMIT PREDICTION (was step 6) -->
-
-            <div class="form-step hidden text-center space-y-6 py-6" id="step-7">
-
-                <div class="space-y-3">
-
-                    <div class="w-16 h-16 mx-auto rounded-full bg-[var(--bg-secondary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-primary)] text-2xl animate-pulse">
-
-                        <i class="fas fa-sparkles"></i>
-
-                    </div>
-
-                    <h3 class="text-xl font-extrabold text-[var(--text-primary)]">Asesmen Siap Dijalankan</h3>
-
-                    <p class="text-xs text-[var(--text-secondary)] max-w-md mx-auto">Kami akan memproses data Anda menggunakan model Decision Tree STARS v6.0 yang dioptimasi dengan profil 10.000 siswa dan 20 program studi.</p>
-
-                </div>
-
-                <!-- V5: Student Profile Analysis — Unified Intelligence Dashboard -->
-
-                <div id="student-profile-analysis-dashboard" class="hidden text-left mt-4"></div>
-
-                <!-- Submit Button (shown/hidden by validation) -->
-
-                <div id="validation-submit-wrapper">
-
-                    <button type="submit" id="submit-prediction-btn"
-
-                        class="w-full py-4 px-6 rounded-xl bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold hover:opacity-90 transition-all shadow-lg flex items-center justify-center space-x-2">
-
-                        <span>Mulai Hitung Rekomendasi</span>
-
-                        <i class="fas fa-magic text-sm ml-1 animate-pulse"></i>
-
-                    </button>
-
-                </div>
-
-                <!-- Blocked message (shown when INVALID) -->
-
-                <div id="validation-blocked-msg" class="hidden">
-
-                    <button type="button" id="fix-input-btn"
-
-                        class="w-full py-4 px-6 rounded-xl border-2 border-red-500/30 bg-red-500/5 text-red-500 font-bold transition-all flex items-center justify-center space-x-2">
-
-                        <i class="fas fa-arrow-left text-sm mr-2"></i>
-
-                        <span>Perbaiki Data Input</span>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- Navigation Buttons -->
-
-            <div class="flex justify-between items-center pt-6 border-t border-[var(--card-border)] mt-6">
-
-                <button type="button" id="prev-step-btn" class="hidden px-5 py-3 border border-[var(--card-border)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-xs font-semibold rounded-xl transition-all">
-
-                    <i class="fas fa-arrow-left mr-2"></i> Sebelumnya
-
+        </div>
+
+        <!-- Ekskul (Progressive) -->
+        <div class="border-t border-white/5 pt-8">
+            <div id="ekskul-intro" class="text-center py-6 border border-dashed border-white/10 rounded-2xl bg-black/5">
+                <p class="text-sm text-[var(--text-secondary)] mb-4">Punya riwayat organisasi atau ekstrakurikuler?</p>
+                <button type="button" id="btn-tambah-ekskul" class="px-6 py-2.5 rounded-full border border-[var(--input-border)] text-[var(--text-primary)] bg-[var(--bg-secondary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-sm font-bold transition-all shadow-sm">
+                    + Tambahkan Aktivitas
                 </button>
-
-                <div class="flex-grow"></div>
-
-                <button type="button" id="next-step-btn" class="px-5 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] text-xs font-bold rounded-xl transition-all">
-
-                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
-
-                </button>
-
             </div>
 
-        </form>
+            <div id="ekskul-form" class="hidden space-y-6 p-6 border border-white/10 bg-black/10 rounded-3xl relative">
+                <button type="button" id="btn-tutup-ekskul" class="absolute top-5 right-5 text-[var(--text-muted)] hover:text-red-400 text-xs font-semibold transition-colors">
+                    Sembunyikan / Batal
+                </button>
+                <div>
+                    <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Pilih Ekstrakurikuler (Maks 2)</h4>
+                    <div class="flex flex-wrap gap-2.5" id="group-ekskul">
+                        <script>
+                            const ekskuls = [
+                                ['Ekskul_Olahraga','Olahraga'], ['Ekskul_Seni','Seni'], ['Ekskul_Teknologi','Teknologi'], ['Ekskul_Akademik','Akademik / Sains'],
+                                ['Ekskul_Organisasi','Organisasi Inti (OSIS/BEM)'], ['Ekskul_Sosial','Sosial (PMR/Pramuka)'], ['Ekskul_Keagamaan','Keagamaan']
+                            ];
+                            document.write(ekskuls.map(e => `
+                                <label class="cursor-pointer group">
+                                    <input type="checkbox" name="Ekskul" value="${e[0]}" class="peer sr-only ekskul-cb">
+                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                        ${e[1]}
+                                    </div>
+                                </label>
+                            `).join(''));
+                        </script>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Peran Anda</h4>
+                    <div class="flex flex-wrap gap-2.5" id="group-peran">
+                        <script>
+                            const perans = [
+                                ['Peran_Anggota','Anggota'], ['Peran_Pengurus','Pengurus Inti'], ['Peran_Ketua','Ketua'], ['Peran_Koordinator','Koordinator Bidang']
+                            ];
+                            document.write(perans.map(p => `
+                                <label class="cursor-pointer group">
+                                    <input type="checkbox" name="Peran" value="${p[0]}" class="peer sr-only peran-cb">
+                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                        ${p[1]}
+                                    </div>
+                                </label>
+                            `).join(''));
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 4: PRESTASI & REVIEW -->
+    <div class="form-step hidden space-y-10" id="step-4">
+        
+        <!-- Prestasi (Progressive) -->
+        <div class="space-y-6">
+            <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-[var(--text-primary)]">Prestasi & Review</h3>
+                <p class="text-sm text-[var(--text-muted)] max-w-lg">Prestasi ini opsional. Jika tidak ada, Anda bisa langsung melanjutkan ke langkah akhir.</p>
+            </div>
+            
+            <div id="prestasi-intro" class="text-center py-6 border border-dashed border-white/10 rounded-2xl bg-black/5">
+                <button type="button" id="btn-tambah-prestasi" class="px-6 py-2.5 rounded-full border border-[var(--input-border)] text-[var(--text-primary)] bg-[var(--bg-secondary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-sm font-bold transition-all shadow-sm">
+                    + Tambahkan Prestasi
+                </button>
+            </div>
+
+            <div id="prestasi-form" class="hidden space-y-6 p-6 border border-white/10 bg-black/10 rounded-3xl relative">
+                <button type="button" id="btn-tutup-prestasi" class="absolute top-5 right-5 text-[var(--text-muted)] hover:text-red-400 text-xs font-semibold transition-colors">
+                    Sembunyikan / Batal
+                </button>
+                <div>
+                    <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Bidang Prestasi (Maks 2)</h4>
+                    <div class="flex flex-wrap gap-2.5" id="group-prestasi">
+                        <script>
+                            const prestasis = [
+                                ['Prestasi_Akademik','Akademik / Sains'], ['Prestasi_Olahraga','Olahraga'], ['Prestasi_Seni','Seni'],
+                                ['Prestasi_Teknologi','Teknologi / Inovasi'], ['Prestasi_Organisasi','Organisasi / Debat'], ['Prestasi_Sosial','Sosial / Relawan']
+                            ];
+                            document.write(prestasis.map(p => `
+                                <label class="cursor-pointer group">
+                                    <input type="checkbox" name="Prestasi" value="${p[0]}" class="peer sr-only prestasi-cb">
+                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                        ${p[1]}
+                                    </div>
+                                </label>
+                            `).join(''));
+                        </script>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Tingkat Pencapaian Tertinggi</h4>
+                    <div class="flex flex-wrap gap-2.5" id="group-tingkat-prestasi">
+                        <script>
+                            const tingkats = [
+                                ['Prestasi_Sekolah','Tingkat Sekolah'], ['Prestasi_Kecamatan','Tingkat Kecamatan'], ['Prestasi_Kabupaten','Kabupaten/Kota'],
+                                ['Prestasi_Provinsi','Tingkat Provinsi'], ['Prestasi_Nasional','Nasional / Internasional']
+                            ];
+                            document.write(tingkats.map(t => `
+                                <label class="cursor-pointer group">
+                                    <input type="checkbox" name="PrestasiTingkat" value="${t[0]}" class="peer sr-only pt-cb">
+                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                        ${t[1]}
+                                    </div>
+                                </label>
+                            `).join(''));
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary / Review Block -->
+        <div class="mt-10 p-6 sm:p-8 rounded-3xl border border-[var(--accent-1)]/30 bg-[var(--accent-1)]/5 relative overflow-hidden" id="review-content">
+            <div class="absolute -top-10 -right-10 h-32 w-32 bg-[var(--accent-1)]/20 rounded-full blur-3xl"></div>
+            <h4 class="text-lg font-bold text-[var(--text-primary)] mb-1">Profil kamu sudah siap</h4>
+            <p class="text-sm text-[var(--text-secondary)] mb-6" id="review-greeting">Hai, silakan periksa ringkasan profilmu sebelum dikirim ke AI.</p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-sm border-t border-white/5 pt-6">
+                <div>
+                    <span class="block text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider">Akademik</span>
+                    <span class="font-bold text-[var(--text-primary)] mt-1.5 block text-lg" id="rev-akademik">-</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider">Minat</span>
+                    <span class="font-bold text-[var(--text-primary)] mt-1.5 block text-lg" id="rev-minat">-</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider">Karier</span>
+                    <span class="font-bold text-[var(--text-primary)] mt-1.5 block text-lg" id="rev-karier">-</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider">Kekuatan</span>
+                    <span class="font-bold text-[var(--text-primary)] mt-1.5 block text-lg" id="rev-kekuatan">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center mt-12 pt-8 border-t border-white/5 gap-4">
+        <button type="button" id="prev-step-btn" class="hidden w-full sm:w-auto font-bold text-sm px-6 py-4 sm:py-3 rounded-full border border-[var(--input-border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] transition-all focus:outline-none text-center">
+            <i class="fas fa-arrow-left mr-2"></i> Sebelumnya
+        </button>
+        <div class="flex-1 hidden sm:block"></div>
+        <button type="button" id="next-step-btn" class="w-full sm:w-auto font-bold text-sm px-8 py-4 sm:py-3.5 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] hover:scale-[1.02] transition-transform focus:outline-none shadow-md text-center">
+            Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+        <button type="submit" id="submit-btn" class="hidden w-full sm:w-auto font-bold text-sm px-8 py-4 sm:py-3.5 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] hover:scale-[1.02] transition-transform focus:outline-none shadow-lg text-center">
+            Dapatkan Rekomendasi <i class="fas fa-magic ml-2"></i>
+        </button>
+    </div>
+</form>
+
 
     </div>
 
@@ -2269,7 +1577,7 @@
 
 <script src="assets/js/campus.js"></script>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2"></script>
 
     </main>
 
@@ -2351,7 +1659,7 @@
 
                     <p class="text-sm text-[var(--text-secondary)] max-w-xs leading-relaxed">
 
-                        Student Talent And Recommendation System. Platform berbasis AI untuk merekomendasikan jurusan kuliah secara akurat, objektif, dan terpercaya.
+                        Student Talent And Recommendation System. Platform cerdas untuk membantu memetakan profilmu ke pilihan jurusan kuliah yang relevan, objektif, dan terarah.
 
                     </p>
 
@@ -2483,7 +1791,7 @@
 
                 <div class="text-center sm:text-right font-medium">
 
-                    <span>Powered by Decision Tree AI</span>
+                    <span>Powered by Random Forest</span>
 
                 </div>
 

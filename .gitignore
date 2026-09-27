@@ -54,3 +54,16 @@ storage/logs/*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# === INTERNAL & EXPERIMENT / DEV FILES ===
+.codegraph/
+scratch/
+rules/
+test_prediction_engine.py
+training/
+dataset/dataset_stars_v4_2_10000.csv
+assets/js/main_browser.js
+ntt.md
+phase_5_8_2_integration_audit.md
+SKILL gpt.md
+

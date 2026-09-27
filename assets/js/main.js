@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ==========================================
-    // 1. INPUT RANGE SLIDER AND NUMBER SYNC
     // ==========================================
     const academicScores = ['matematika', 'bahasa_inggris', 'ipa', 'ips'];
     
@@ -30,66 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // 2. SEARCHABLE DROPDOWN FOR HOBI
     // ==========================================
-    const hobiDropdownBtn = document.getElementById('hobi-dropdown-btn');
-    const hobiDropdownList = document.getElementById('hobi-dropdown-list');
-    const hobiSearchInput = document.getElementById('hobi-search-input');
-    const hobiHiddenInput = document.getElementById('hobi-hidden');
-    const hobiOptions = document.querySelectorAll('.hobi-option');
+    
 
-    if (hobiDropdownBtn && hobiDropdownList) {
-        // Toggle dropdown list visibility
-        hobiDropdownBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            hobiDropdownList.classList.toggle('hidden');
-            if (!hobiDropdownList.classList.contains('hidden')) {
-                hobiSearchInput.focus();
-            }
-        });
 
-        // Search logic
-        hobiSearchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            hobiOptions.forEach(opt => {
-                const text = opt.getAttribute('data-value').toLowerCase();
-                if (text.includes(query)) {
-                    opt.classList.remove('hidden');
-                } else {
-                    opt.classList.add('hidden');
-                }
-            });
-        });
-
-        // Select option logic
-        hobiOptions.forEach(opt => {
-            opt.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const selectedVal = this.getAttribute('data-value');
-                hobiHiddenInput.value = selectedVal;
-                
-                // Update button text
-                hobiDropdownBtn.querySelector('span').textContent = selectedVal;
-                hobiDropdownBtn.querySelector('span').classList.remove('text-zinc-500');
-                hobiDropdownBtn.querySelector('span').classList.add('text-white');
-                
-                // Close dropdown
-                hobiDropdownList.classList.add('hidden');
-            });
-        });
-
-        // Close on click outside
-        document.addEventListener('click', function() {
-            hobiDropdownList.classList.add('hidden');
-        });
-        
-        hobiDropdownList.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent closing when clicking inside the dropdown list
-        });
-    }
 
     // ==========================================
-    // 3. SHOW/HIDE PRESTASI BIDANG BASED ON TINGKAT
     // ==========================================
     const paTingkat = document.getElementById('prestasi_akademik_tingkat');
     const paBidangContainer = document.getElementById('prestasi_akademik_bidang_container');
@@ -119,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 4. MULTI-STEP WIZARD NAVIGATION
     // ==========================================
     let currentStep = 1;
-    const totalSteps = 7;
+    const totalSteps = 4;
     
     const prevBtn = document.getElementById('prev-step-btn');
     const nextBtn = document.getElementById('next-step-btn');
@@ -175,14 +120,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Change Next button text on Step 6 and Step 7
         if (nextBtn) {
-            if (currentStep === 6) {
-                nextBtn.innerHTML = `Lanjut Ke Analisis <i class="fas fa-arrow-right ml-2"></i>`;
+            if (currentStep === 3) {
+                nextBtn.innerHTML = `Lanjut Ke Review <i class="fas fa-arrow-right ml-2"></i>`;
                 nextBtn.classList.remove('hidden');
-            } else if (currentStep === 7) {
-                nextBtn.classList.add('hidden'); // submit button will handle action in step 7
+                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.add('hidden');
+            } else if (currentStep === 4) {
+                nextBtn.classList.add('hidden'); // submit button will handle action in step 4
+                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.remove('hidden');
             } else {
                 nextBtn.innerHTML = `Berikutnya <i class="fas fa-arrow-right ml-2"></i>`;
                 nextBtn.classList.remove('hidden');
+                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.add('hidden');
             }
         }
     }
@@ -223,124 +171,64 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
         });
-
-        // Special check for hobi in step 2
-        if (stepNum === 2) {
-            if (!hobiHiddenInput.value) {
-                hobiDropdownBtn.classList.add('border-red-500');
-                isValid = false;
-            } else {
-                hobiDropdownBtn.classList.remove('border-red-500');
-            }
-        }
         return isValid;
     }
+
 
     function populateReview() {
         const reviewContent = document.getElementById('review-content');
         if (!reviewContent) return;
-
-        const nama = document.getElementById('nama').value;
-        const mtk = document.getElementById('matematika').value;
-        const bing = document.getElementById('bahasa_inggris').value;
-        const ipa = document.getElementById('ipa').value;
-        const ips = document.getElementById('ips').value;
-        const mapel = document.getElementById('mata_pelajaran_favorit').value;
-        const gaya = document.getElementById('gaya_belajar').value;
-        const minat = document.getElementById('minat').value;
-        const hobi = document.getElementById('hobi-hidden').value;
-        const minatSpesifik = document.getElementById('minat_spesifik').value || '-';
-        const hobiTambahan = document.getElementById('hobi_tambahan').value || '-';
         
-        const komputer = document.getElementById('kemampuan_komputer').value;
-        const komunikasi = document.getElementById('kemampuan_komunikasi').value;
-        const kepemimpinan = document.getElementById('kemampuan_kepemimpinan').value;
-        const analisis = document.getElementById('kemampuan_analisis').value;
-        const kreativitas = document.getElementById('kemampuan_kreativitas').value;
-        const problemSolving = document.getElementById('kemampuan_problem_solving').value;
+        const nama = document.getElementById('nama') ? document.getElementById('nama').value : 'Pengguna';
+        const greeting = document.getElementById('review-greeting');
+        if (greeting) greeting.innerHTML = `Hai <strong class="text-[var(--text-primary)]">${nama}</strong>, profilmu sudah siap dianalisis.`;
 
-        const organisasi = document.getElementById('aktivitas_organisasi').value;
-        const karier = document.getElementById('tujuan_karier').value;
+        // Calculate stats for review
+        let countAkad = 4; // Wajib
+        document.querySelectorAll('.subject-input-wrapper:not(.hidden) input').forEach(inp => {
+            if(inp.value) countAkad++;
+        });
+        const rAkad = document.getElementById('rev-akademik');
+        if(rAkad) rAkad.textContent = `${countAkad} Mapel`;
 
-        const paTingkatValue = document.getElementById('prestasi_akademik_tingkat').value;
-        const paBidangValue = document.getElementById('prestasi_akademik_bidang').value;
-        const paCombined = paTingkatValue === 'Tidak Ada' ? 'Tidak Ada' : `${paTingkatValue} - ${paBidangValue}`;
+        const countMinat = document.querySelectorAll('input[name="Minat"]:checked').length;
+        const rMinat = document.getElementById('rev-minat');
+        if(rMinat) rMinat.textContent = `${countMinat}`;
 
-        const pnaTingkatValue = document.getElementById('prestasi_non_akademik_tingkat').value;
-        const pnaBidangValue = document.getElementById('prestasi_non_akademik_bidang').value;
-        const pnaCombined = pnaTingkatValue === 'Tidak Ada' ? 'Tidak Ada' : `${pnaBidangValue} - ${pnaTingkatValue}`;
+        const countKarier = document.querySelectorAll('input[name="Karier"]:checked').length;
+        const rKarier = document.getElementById('rev-karier');
+        if(rKarier) rKarier.textContent = `${countKarier}`;
 
-        const provinsi = document.getElementById('provinsi').value || '-';
-        const kota = document.getElementById('kota').value || '-';
-
-        reviewContent.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                <div class="space-y-1">
-                    <h4 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">1. DATA AKADEMIK</h4>
-                    <p><span class="text-[var(--text-muted)]">Nama:</span> <span class="font-semibold text-[var(--text-primary)]">${nama}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Nilai:</span> <span class="font-mono text-[var(--text-secondary)]">MTK: ${mtk} | B.Ing: ${bing} | IPA: ${ipa} | IPS: ${ips}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Favorit Mapel:</span> <span class="text-[var(--text-secondary)]">${mapel}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Gaya Belajar:</span> <span class="text-[var(--text-secondary)]">${gaya}</span></p>
-                </div>
-                <div class="space-y-1 border-t md:border-t-0 md:border-l border-[var(--card-border)] pt-4 md:pt-0 md:pl-6">
-                    <h4 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">2. MINAT &amp; HOBI</h4>
-                    <p><span class="text-[var(--text-muted)]">Rumpun Minat:</span> <span class="text-[var(--text-secondary)]">${minat}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Hobi Utama:</span> <span class="text-[var(--text-secondary)]">${hobi}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Minat Spesifik:</span> <span class="text-[var(--text-muted)] italic">${minatSpesifik}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Hobi Tambahan:</span> <span class="text-[var(--text-muted)] italic">${hobiTambahan}</span></p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 border-t border-[var(--card-border)]">
-                <div class="space-y-1">
-                    <h4 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">3. KEMAMPUAN &amp; KARAKTER</h4>
-                    <p><span class="text-[var(--text-muted)]">Komputer:</span> <span class="text-[var(--text-secondary)]">${komputer}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Komunikasi:</span> <span class="text-[var(--text-secondary)]">${komunikasi}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Kepemimpinan:</span> <span class="text-[var(--text-secondary)]">${kepemimpinan}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Analisis:</span> <span class="text-[var(--text-secondary)]">${analisis}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Kreativitas:</span> <span class="text-[var(--text-secondary)]">${kreativitas}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Problem Solving:</span> <span class="text-[var(--text-secondary)]">${problemSolving}</span></p>
-                </div>
-                <div class="space-y-1 border-t md:border-t-0 md:border-l border-[var(--card-border)] pt-4 md:pt-0 md:pl-6">
-                    <h4 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">4. ORGANISASI &amp; PRESTASI</h4>
-                    <p><span class="text-[var(--text-muted)]">Aktivitas Organisasi:</span> <span class="text-[var(--text-secondary)]">${organisasi}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Sasaran Karier:</span> <span class="text-[var(--text-secondary)]">${karier}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Prestasi Akademik:</span> <span class="text-[var(--text-primary)] font-semibold">${paCombined}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Prestasi Non-Akademik:</span> <span class="text-[var(--text-primary)] font-semibold">${pnaCombined}</span></p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 gap-6 pt-4 border-t border-[var(--card-border)]">
-                <div class="space-y-1">
-                    <h4 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">5. LOKASI EVALUASI</h4>
-                    <p><span class="text-[var(--text-muted)]">Provinsi:</span> <span class="font-semibold text-[var(--text-primary)]">${provinsi}</span></p>
-                    <p><span class="text-[var(--text-muted)]">Kota / Kabupaten:</span> <span class="font-semibold text-[var(--text-primary)]">${kota}</span></p>
-                </div>
-            </div>
-        `;
+        const countKekuatan = document.querySelectorAll('input[name="Strength"]:checked').length;
+        const rKekuatan = document.getElementById('rev-kekuatan');
+        if(rKekuatan) rKekuatan.textContent = `${countKekuatan}`;
     }
 
     if (nextBtn) {
         nextBtn.addEventListener('click', function() {
-            if (validateStep(currentStep)) {
+            console.log("nextBtn clicked, currentStep:", currentStep);
+            const isValid = validateStep(currentStep);
+            console.log("validateStep result:", isValid);
+            if (isValid) {
                 if (currentStep < totalSteps) {
                     const nextStep = currentStep + 1;
-                    if (nextStep === 6) {
-                        // Step 6 = Review: populate review data
+                    console.log("moving to nextStep:", nextStep);
+                    if (nextStep === 4) {
+                        // Step 4 = Review: populate review data
                         populateReview();
-                    }
-                    if (nextStep === 7) {
-                        // Step 7 = Analisis: run input quality validation
-                        runInputQualityValidation();
+                        if (typeof runInputQualityValidation === 'function') {
+                            runInputQualityValidation();
+                        }
                     }
                     showStep(nextStep);
                 }
             } else {
+                console.log("Validation failed for step:", currentStep);
                 // Focus first invalid element
                 const activeStepEl = document.getElementById(`step-${currentStep}`);
-                const invalidEl = activeStepEl.querySelector(':invalid');
+                const invalidEl = activeStepEl ? activeStepEl.querySelector(':invalid') : null;
                 if (invalidEl) {
                     invalidEl.focus();
-                } else if (currentStep === 2 && !hobiHiddenInput.value) {
-                    hobiDropdownBtn.focus();
                 }
             }
         });
@@ -481,6 +369,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
+    
+    // ==========================================
+    // Checkbox Limits Validation (V4.2)
+    // ==========================================
+    const limits = {
+        'Favorit': 3,
+        'Minat': 3,
+        'Karier': 2,
+        'Strength': 3,
+        'Hobi': 3,
+        'Ekskul': 2,
+        'Prestasi': 2
+    };
+
+    Object.keys(limits).forEach(name => {
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${name}"]`);
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checkedCount = document.querySelectorAll(`input[type="checkbox"][name="${name}"]:checked`).length;
+                if (checkedCount > limits[name]) {
+                    this.checked = false;
+                    alert(`Maksimal ${limits[name]} pilihan untuk bagian ini.`);
+                }
+            });
+        });
+    });
+
     // 6. AJAX PREDICTION FETCH AND RENDERING
     // ==========================================
     const predictionForm = document.getElementById('prediction-form');
@@ -493,15 +408,11 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
 
             // Validate that we are on the final step and hobi is selected
-            if (currentStep !== 7) {
+            if (currentStep !== 4) {
                 return;
             }
 
-            if (!hobiHiddenInput.value) {
-                alert('Pilih Hobi dari dropdown terlebih dahulu.');
-                showStep(2);
-                return;
-            }
+            
 
             // Check hard block (Input Quality INVALID)
             if (lastValidationResult && lastValidationResult.status === 'INVALID') {
@@ -510,21 +421,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // ── V5.1: Hybrid Reliability Gate ──────────────────────────
             const reliabilityScore = lastConfidenceResult ? lastConfidenceResult.score : 100;
-            const warningModal  = document.getElementById('reliability-warning-modal');
-            const blockedModal  = document.getElementById('reliability-blocked-modal');
             const bypassGate    = predictionForm.dataset.bypassGate === 'true';
 
-            if (!bypassGate && reliabilityScore < 30) {
-                // HARD BLOCK: show red modal, prevent prediction
-                if (blockedModal) blockedModal.classList.remove('hidden');
-                return;
-            }
-
-            if (!bypassGate && reliabilityScore < 50) {
-                // SOFT WARN: show yellow modal, let user choose
-                if (warningModal) warningModal.classList.remove('hidden');
-                return;
-            }
+            // STARS V4.2: We no longer block predictions based on reliability/consistency score.
+            // The model is trained to handle multidimensional profiles.
+            
+            // Score >= 0: proceed normally
 
             // Score >= 50: proceed normally
             // Show Results section and Loading Skeleton
@@ -537,11 +439,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Prepare form data
             const formData = new FormData(this);
+            const inputData = Object.fromEntries(formData.entries());
+            
+            
+            // The form directly contains V4.2 names thanks to Phase 5.8.7.
+            // We just need to parse checkboxes and numbers properly.
+            // Checkboxes might be arrays if multiple are selected, or we just want 1/0 for each checkbox name/value.
+            
+            // Loop through all inputs in form
+            const allInputs = predictionForm.querySelectorAll('input, select');
+            allInputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    if (input.checked) {
+                        inputData[input.value] = 1;
+                    }
+                } else if (input.type === 'number') {
+                    if (input.value === "") {
+                        delete inputData[input.name];
+                    } else {
+                        inputData[input.name] = parseInt(input.value);
+                    }
+                } else if (input.name) {
+                    inputData[input.name] = input.value;
+                }
+            });
+            // -------------------------------------
+
 
             // Fetch AJAX to predict proxy
             fetch('/api/prediksi', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(inputData)
             })
             .then(response => response.json())
             .then(data => {
@@ -753,4 +684,74 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         });
     }
+
+    // --- V4.2 FORM UX REDESIGN ADDITIONS ---
+    // Subject card toggle
+    const subjectCards = document.querySelectorAll('.subject-card');
+    subjectCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Ignore if they clicked the input itself
+            if(e.target.tagName === 'INPUT') return;
+            
+            const wrapper = this.querySelector('.subject-input-wrapper');
+            const input = this.querySelector('input');
+            const indicator = this.querySelector('.toggle-indicator');
+            
+            if (wrapper.classList.contains('hidden')) {
+                wrapper.classList.remove('hidden');
+                indicator.innerHTML = '<i class="fas fa-check text-[10px] text-[var(--text-primary)]"></i>';
+                indicator.classList.add('bg-[var(--text-primary)]', 'border-[var(--text-primary)]');
+                this.classList.add('border-[var(--text-primary)]');
+                input.focus();
+            } else {
+                wrapper.classList.add('hidden');
+                indicator.innerHTML = '';
+                indicator.classList.remove('bg-[var(--text-primary)]', 'border-[var(--text-primary)]');
+                this.classList.remove('border-[var(--text-primary)]');
+                input.value = ''; // clear when hidden
+            }
+        });
+    });
+
+    // Ekskul Form Toggle
+    const btnTambahEkskul = document.getElementById('btn-tambah-ekskul');
+    const btnTutupEkskul = document.getElementById('btn-tutup-ekskul');
+    const ekskulIntro = document.getElementById('ekskul-intro');
+    const ekskulForm = document.getElementById('ekskul-form');
+
+    if (btnTambahEkskul) {
+        btnTambahEkskul.addEventListener('click', () => {
+            ekskulIntro.classList.add('hidden');
+            ekskulForm.classList.remove('hidden');
+        });
+    }
+    if (btnTutupEkskul) {
+        btnTutupEkskul.addEventListener('click', () => {
+            ekskulForm.classList.add('hidden');
+            ekskulIntro.classList.remove('hidden');
+            // Uncheck everything
+            ekskulForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+    }
+
+    // Prestasi Form Toggle
+    const btnTambahPrestasi = document.getElementById('btn-tambah-prestasi');
+    const btnTutupPrestasi = document.getElementById('btn-tutup-prestasi');
+    const prestasiIntro = document.getElementById('prestasi-intro');
+    const prestasiForm = document.getElementById('prestasi-form');
+
+    if (btnTambahPrestasi) {
+        btnTambahPrestasi.addEventListener('click', () => {
+            prestasiIntro.classList.add('hidden');
+            prestasiForm.classList.remove('hidden');
+        });
+    }
+    if (btnTutupPrestasi) {
+        btnTutupPrestasi.addEventListener('click', () => {
+            prestasiForm.classList.add('hidden');
+            prestasiIntro.classList.remove('hidden');
+            prestasiForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+    }
+    
 });
