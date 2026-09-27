@@ -207,14 +207,20 @@ def soft_proba(proba_model: np.ndarray, siswa: dict, alpha: float = 0.70) -> np.
     total    = blended.sum()
     return blended / total if total > 0 else blended
 
-def proba_ke_kategori(prob: float) -> dict:
-    """Ubah float probabilitas → label + bintang + warna hex."""
-    pct = prob * 100
-    if   pct >= 90: return {"label":"Sangat Tinggi","bintang":"⭐⭐⭐⭐⭐","warna":"#1a7f37"}
-    elif pct >= 75: return {"label":"Tinggi",        "bintang":"⭐⭐⭐⭐",  "warna":"#0969da"}
-    elif pct >= 60: return {"label":"Cukup Tinggi",  "bintang":"⭐⭐⭐",    "warna":"#9a6700"}
-    elif pct >= 45: return {"label":"Sedang",        "bintang":"⭐⭐",      "warna":"#cf6900"}
-    else:           return {"label":"Rendah",        "bintang":"⭐",        "warna":"#cf222e"}
+def rank_ke_kategori(rank_index: int) -> dict:
+    """Ubah indeks ranking â†’ label + bintang + warna hex."""
+    if rank_index == 1:
+        return {"label":"Prediksi #1","bintang":"⭐⭐⭐⭐⭐","warna":"#1a7f37"}
+    elif rank_index == 2:
+        return {"label":"Prediksi #2","bintang":"⭐⭐⭐⭐","warna":"#0969da"}
+    elif rank_index == 3:
+        return {"label":"Prediksi #3","bintang":"⭐⭐⭐","warna":"#0969da"}
+    elif rank_index == 4:
+        return {"label":"Prediksi #4","bintang":"⭐⭐","warna":"#9a6700"}
+    elif rank_index == 5:
+        return {"label":"Prediksi #5","bintang":"⭐","warna":"#cf6900"}
+    else:
+        return {"label":f"Peringkat #{rank_index}","bintang":"","warna":"#6e7781"}
 
 def buat_alasan(siswa: dict, jurusan: str) -> list:
     """
@@ -233,32 +239,33 @@ def buat_alasan(siswa: dict, jurusan: str) -> list:
         # ambil top 2
         nilai_tertinggi.sort(key=lambda x: x[1], reverse=True)
         for mapel, v in nilai_tertinggi[:2]:
-            alasan.append(f"Nilai {mapel} sangat tinggi ({v}) — mendukung kuat bidang ini")
+            alasan.append(f"Nilai akademik pada {mapel} ({v}) turut berkontribusi terhadap bobot prediksi ini")
 
     # 2. Minat
     minat_siswa = [k.replace("Minat_", "") for k, v in siswa.items() if k.startswith("Minat_") and v == 1]
     if minat_siswa:
-        alasan.append(f"Minat pada bidang {', '.join(minat_siswa)} sangat relevan dengan profil lulusan {jurusan}")
+        alasan.append(f"Minat pada bidang {', '.join(minat_siswa)} sejalan dengan pola yang dipelajari model untuk jurusan {jurusan}")
 
     # 3. Strength
     strength_siswa = [k.replace("Strength_", "").replace("_", " ") for k, v in siswa.items() if k.startswith("Strength_") and v == 1]
     if strength_siswa:
-        alasan.append(f"Kekuatan utama di bidang {', '.join(strength_siswa)} menjadi nilai plus di jurusan ini")
+        alasan.append(f"Kekuatan di bidang {', '.join(strength_siswa)} menjadi faktor pendukung rekomendasi ini")
         
     # 4. Hobi
     hobi_siswa = [k.replace("Hobi_", "") for k, v in siswa.items() if k.startswith("Hobi_") and v == 1]
     if hobi_siswa:
-        alasan.append(f"Aktivitas hobi {', '.join(hobi_siswa)} mendukung pengembangan keahlian yang dibutuhkan")
+        alasan.append(f"Aktivitas hobi {', '.join(hobi_siswa)} tercatat sebagai atribut relevan dalam kalkulasi prediksi")
 
     # 5. Prestasi
     prestasi_siswa = [k.replace("Prestasi_", "") for k, v in siswa.items() if k.startswith("Prestasi_") and v == 1]
     if prestasi_siswa:
-        alasan.append(f"Rekam jejak prestasi di bidang {', '.join(prestasi_siswa)} menunjukkan potensi luar biasa")
+        alasan.append(f"Prestasi di bidang {', '.join(prestasi_siswa)} memberikan bobot tambahan pada profil prediksi Anda")
         
     if not alasan:
-        alasan.append(f"Kombinasi nilai dan profil Anda secara umum cocok dengan jurusan {jurusan}")
+        alasan.append(f"Kombinasi nilai dan preferensi Anda menghasilkan kecenderungan ke arah jurusan {jurusan}")
 
     return alasan
+
 
 def prediksi_jurusan(data_siswa: dict) -> dict:
     inp = data_siswa.copy()
@@ -300,7 +307,7 @@ def prediksi_jurusan(data_siswa: dict) -> dict:
             "jurusan"          : j,
             "probabilitas"     : round(float(p), 4),
             "persen"           : f"{p * 100:.1f}%",
-            "tingkat_kecocokan": proba_ke_kategori(p),
+            "tingkat_kecocokan": rank_ke_kategori(i + 1),
         }
         for i, (j, p) in enumerate(pasangan)
     ]
@@ -312,15 +319,16 @@ def prediksi_jurusan(data_siswa: dict) -> dict:
     alt_list = []
     for nama in ALTERNATIF.get(jurusan_utama, []):
         p_alt = next((r["probabilitas"] for r in ranking if r["jurusan"] == nama), 0.0)
+        rank_alt = next((r["rank"] for r in ranking if r["jurusan"] == nama), 99)
         alt_list.append({
             "jurusan"          : nama,
-            "tingkat_kecocokan": proba_ke_kategori(p_alt),
+            "tingkat_kecocokan": rank_ke_kategori(rank_alt),
         })
 
     return {
         "status"           : "success",
         "jurusan_utama"    : jurusan_utama,
-        "tingkat_kecocokan": proba_ke_kategori(prob_utama),
+        "tingkat_kecocokan": rank_ke_kategori(1),
         "alasan"           : buat_alasan(data_siswa, jurusan_utama),
         "alternatif"       : alt_list,
         "prospek_karier"   : KARIER.get(jurusan_utama, []),
@@ -365,22 +373,23 @@ def route_prediksi():
                 "jurusan": res['jurusan'],
                 "probabilitas": res['probability'],
                 "persen": f"{res['probability'] * 100:.1f}%",
-                "tingkat_kecocokan": proba_ke_kategori(res['probability'])
+                "tingkat_kecocokan": rank_ke_kategori(i + 1)
             })
             
         alt_list = []
         for nama in ALTERNATIF.get(jurusan_utama, []):
             # Attempt to find probability in results, otherwise 0.0
             p_alt = next((r["probability"] for r in results if r["jurusan"] == nama), 0.0)
+            rank_alt = next((i + 1 for i, r in enumerate(results) if r["jurusan"] == nama), 99)
             alt_list.append({
                 "jurusan": nama,
-                "tingkat_kecocokan": proba_ke_kategori(p_alt),
+                "tingkat_kecocokan": rank_ke_kategori(rank_alt),
             })
             
         return jsonify({
             "status": "success",
             "jurusan_utama": jurusan_utama,
-            "tingkat_kecocokan": proba_ke_kategori(prob_utama),
+            "tingkat_kecocokan": rank_ke_kategori(1),
             "alasan": buat_alasan(data, jurusan_utama),
             "alternatif": alt_list,
             "prospek_karier": KARIER.get(jurusan_utama, []),
