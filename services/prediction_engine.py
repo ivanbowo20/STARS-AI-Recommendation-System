@@ -30,7 +30,20 @@ class PredictionEngine:
             self.schema = json.load(f)
             
         print(f"Loading model from {MODEL_PATH}")
-        self.model_data = joblib.load(MODEL_PATH)
+        
+        # Artifact Validation
+        if not os.path.exists(MODEL_PATH):
+            raise FileNotFoundError(f"Model artifact not found at: {MODEL_PATH}")
+            
+        file_size = os.path.getsize(MODEL_PATH)
+        print(f"Artifact size: {file_size} bytes")
+        
+        # Check if it's a Git LFS pointer or incomplete file (<1MB)
+        if file_size < 1000000:
+            raise RuntimeError(f"Model artifact appears invalid or incomplete. Size: {file_size} bytes (Expected ~968MB)")
+            
+        # Load with mmap_mode='r' to prevent MemoryError
+        self.model_data = joblib.load(MODEL_PATH, mmap_mode='r')
         
         self.pipeline = self.model_data['pipeline']
         self.label_encoder = self.model_data['label_encoder']

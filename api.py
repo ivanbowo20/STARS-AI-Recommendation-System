@@ -387,7 +387,23 @@ def route_prediksi():
             "ranking": ranking,
         })
     except Exception as e:
-        logging.getLogger("api").error(f"Prediction error: {str(e)}")
+        logger = logging.getLogger("api")
+        logger.error("=== PREDICTION RUNTIME ERROR ===")
+        logger.error(f"Exception Type: {type(e).__name__}")
+        logger.error(f"Exception Message: {str(e)}")
+        
+        # Check environment state
+        model_exists = os.path.exists(MODEL_PATH)
+        file_size = os.path.getsize(MODEL_PATH) if model_exists else 0
+        from services.prediction_engine import PredictionEngine
+        initialized = getattr(PredictionEngine, '_initialized', False)
+        
+        logger.error(f"MODEL_PATH: {MODEL_PATH}")
+        logger.error(f"File exists: {model_exists}")
+        logger.error(f"File size: {file_size} bytes")
+        logger.error(f"Engine initialized: {initialized}")
+        logger.error("================================")
+        
         return jsonify({"status": "error", "error": "Failed to process prediction request."}), 500
 
 # ─────────────────────────────────────────────
