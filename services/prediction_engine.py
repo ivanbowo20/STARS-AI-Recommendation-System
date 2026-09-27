@@ -21,9 +21,8 @@ class PredictionEngine:
         return cls._instance
         
     def __init__(self):
-        if not self._initialized:
-            self._initialize()
-            PredictionEngine._initialized = True
+        # Model is lazy-loaded in predict_recommendations to prevent import-time crashes
+        pass
             
     def _initialize(self):
         print(f"Loading schema from {SCHEMA_PATH}")
@@ -46,6 +45,10 @@ class PredictionEngine:
         Missing numeric features should be np.nan.
         Missing binary features should be 0.
         """
+        if not self._initialized:
+            self._initialize()
+            PredictionEngine._initialized = True
+
         # Ensure all required features are present in input_data
         missing_features = {}
         for feature in self.features:

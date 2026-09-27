@@ -41,13 +41,21 @@ app = Flask(
 )
 CORS(app)  # Enable Cross-Origin Resource Sharing
 
-# Load model and encoders
-if not os.path.exists(MODEL_PATH) or not os.path.exists(ENCODER_PATH):
-    raise FileNotFoundError(f"Model or Encoders file not found in: {os.path.join(BASE_DIR, 'model')}")
+# Global variables for lazy loading
+model = None
+encoders = None
+label_jurusan = None
 
-model = joblib.load(MODEL_PATH)
-encoders = joblib.load(ENCODER_PATH)
-label_jurusan = encoders["Jurusan"].classes_
+def get_legacy_model():
+    global model, encoders, label_jurusan
+    if model is None:
+        if not os.path.exists(MODEL_PATH) or not os.path.exists(ENCODER_PATH):
+            raise FileNotFoundError(f"Model or Encoders file not found in: {os.path.join(BASE_DIR, 'model')}")
+        model = joblib.load(MODEL_PATH)
+        encoders = joblib.load(ENCODER_PATH)
+        label_jurusan = encoders["Jurusan"].classes_
+    return model, encoders, label_jurusan
+
 
 # Urutan kolom fitur — HARUS konsisten di seluruh kode (18 Fitur)
 KOLOM_FITUR = [
@@ -192,6 +200,7 @@ def soft_proba(proba_model: np.ndarray, siswa: dict, alpha: float = 0.70) -> np.
     Gabungkan proba model (70%) dengan skor kemiripan (30%).
     Hasilnya: distribusi lebih realistis, total tetap 1.0.
     """
+    _, _, label_jurusan = get_legacy_model()
     skor_sim = hitung_skor_kemiripan(siswa)
     sim_arr  = np.array([skor_sim.get(j, 0.0) for j in label_jurusan])
     blended  = alpha * proba_model + (1 - alpha) * sim_arr
@@ -253,6 +262,7 @@ def buat_alasan(siswa: dict, jurusan: str) -> list:
 
 def prediksi_jurusan(data_siswa: dict) -> dict:
     inp = data_siswa.copy()
+    model, encoders, label_jurusan = get_legacy_model()
 
     # Preprocess categorical inputs using loaded LabelEncoders
     for kolom in KOLOM_KATEGORIKAL:
