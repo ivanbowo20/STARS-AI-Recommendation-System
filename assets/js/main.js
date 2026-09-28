@@ -598,15 +598,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const matchPct = (primaryRank.probabilitas * 100).toFixed(1) + '%';
         
         const progressBar = document.getElementById('res-progress-bar');
-        progressBar.style.width = '0%';
         progressBar.textContent = matchPct;
-        
-        // Custom color classes for progress bar based on level
-        progressBar.style.backgroundColor = tk.warna;
-        
-        setTimeout(() => {
-            progressBar.style.width = matchPct;
-        }, 100);
+        progressBar.style.color = tk.warna;
 
         // 3. Alasan Rekomendasi
         const alasanContainer = document.getElementById('res-alasan-list');
@@ -668,11 +661,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td class="px-6 py-4 text-sm font-semibold text-[var(--text-muted)] text-center">${row.rank}</td>
                     <td class="px-6 py-4 text-sm font-bold text-[var(--text-primary)]">${row.jurusan}</td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3 min-w-[150px]">
-                            <div class="w-full bg-[var(--bg-tertiary)] rounded-full h-2 overflow-hidden">
-                                <div class="h-2 rounded-full animated-progress" style="width: ${rowPct}%; background-color: ${row.tingkat_kecocokan.warna}"></div>
-                            </div>
-                            <span class="text-xs font-mono font-semibold text-[var(--text-secondary)] w-10 text-right">${rowPct}%</span>
+                        <div class="flex items-center justify-center min-w-[100px]">
+                            <span class="text-sm font-mono font-bold" style="color: ${row.tingkat_kecocokan.warna}">${rowPct}%</span>
                         </div>
                     </td>
                     <td class="px-6 py-4 text-right">

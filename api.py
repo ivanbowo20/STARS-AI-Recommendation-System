@@ -315,14 +315,17 @@ def prediksi_jurusan(data_siswa: dict) -> dict:
     jurusan_utama = ranking[0]["jurusan"]
     prob_utama    = ranking[0]["probabilitas"]
 
-    # Alternatif: dari mapping statis + proba aktual
+    # Alternatif: dari ranking 2 dan 3 model
     alt_list = []
-    for nama in ALTERNATIF.get(jurusan_utama, []):
-        p_alt = next((r["probabilitas"] for r in ranking if r["jurusan"] == nama), 0.0)
-        rank_alt = next((r["rank"] for r in ranking if r["jurusan"] == nama), 99)
+    if len(ranking) > 1:
         alt_list.append({
-            "jurusan"          : nama,
-            "tingkat_kecocokan": rank_ke_kategori(rank_alt),
+            "jurusan"          : ranking[1]["jurusan"],
+            "tingkat_kecocokan": ranking[1]["tingkat_kecocokan"],
+        })
+    if len(ranking) > 2:
+        alt_list.append({
+            "jurusan"          : ranking[2]["jurusan"],
+            "tingkat_kecocokan": ranking[2]["tingkat_kecocokan"],
         })
 
     return {
@@ -376,14 +379,17 @@ def route_prediksi():
                 "tingkat_kecocokan": rank_ke_kategori(i + 1)
             })
             
+        # Alternatif: dari ranking 2 dan 3 model
         alt_list = []
-        for nama in ALTERNATIF.get(jurusan_utama, []):
-            # Attempt to find probability in results, otherwise 0.0
-            p_alt = next((r["probability"] for r in results if r["jurusan"] == nama), 0.0)
-            rank_alt = next((i + 1 for i, r in enumerate(results) if r["jurusan"] == nama), 99)
+        if len(ranking) > 1:
             alt_list.append({
-                "jurusan": nama,
-                "tingkat_kecocokan": rank_ke_kategori(rank_alt),
+                "jurusan": ranking[1]["jurusan"],
+                "tingkat_kecocokan": ranking[1]["tingkat_kecocokan"],
+            })
+        if len(ranking) > 2:
+            alt_list.append({
+                "jurusan": ranking[2]["jurusan"],
+                "tingkat_kecocokan": ranking[2]["tingkat_kecocokan"],
             })
             
         return jsonify({
