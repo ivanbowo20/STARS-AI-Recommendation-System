@@ -166,7 +166,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         inputs.forEach(input => {
             input.classList.remove('border-red-500');
-            if (!input.checkValidity()) {
+            
+            // Explicit validation for hidden inputs (provinsi and kota)
+            if (input.type === 'hidden' && (input.id === 'provinsi' || input.id === 'kota')) {
+                const searchProxy = document.getElementById(input.id + '-search');
+                const errorEl = document.getElementById(input.id + '-error');
+                
+                if (searchProxy) searchProxy.classList.remove('border-red-500');
+                if (errorEl) errorEl.classList.add('hidden');
+                
+                if (!input.value.trim()) {
+                    if (searchProxy) searchProxy.classList.add('border-red-500');
+                    if (errorEl) errorEl.classList.remove('hidden');
+                    isValid = false;
+                }
+            } else if (!input.checkValidity()) {
                 input.classList.add('border-red-500');
                 isValid = false;
             }
@@ -297,28 +311,307 @@ document.addEventListener('DOMContentLoaded', function() {
     // 4c. LOCATION DROPDOWN (V4.5)
     // Province → City cascade using STARS_LOCATION_DATA
     // ==========================================
-    const provinsiSelect = document.getElementById('provinsi');
-    const kotaSelect     = document.getElementById('kota');
+    const provinsiInput = document.getElementById('provinsi');
+    const provinsiSearch = document.getElementById('provinsi-search');
+    const provinsiDropdown = document.getElementById('provinsi-dropdown');
+    const provinsiIcon = document.getElementById('provinsi-icon');
+    
+    const kotaInput = document.getElementById('kota');
+    const kotaSearch = document.getElementById('kota-search');
+    const kotaDropdown = document.getElementById('kota-dropdown');
+    const kotaIcon = document.getElementById('kota-icon');
 
-    if (provinsiSelect && typeof STARS_LOCATION_DATA !== 'undefined') {
-        // Populate provinces
-        Object.keys(STARS_LOCATION_DATA).sort().forEach(prov => {
-            const opt = document.createElement('option');
-            opt.value = prov;
-            opt.textContent = prov;
-            provinsiSelect.appendChild(opt);
+    if (provinsiInput && provinsiSearch && typeof STARS_LOCATION_DATA !== 'undefined') {
+        const provinces = Object.keys(STARS_LOCATION_DATA).sort();
+        let currentFocus = -1;
+        
+        let availableCities = [];
+        let currentKotaFocus = -1;
+
+        const closeProvinsiDropdown = (skipAutoMatch = false) => {
+            if (!provinsiDropdown) return;
+            provinsiDropdown.classList.add('hidden');
+            if (provinsiIcon) provinsiIcon.classList.remove('rotate-180');
+            currentFocus = -1;
+            
+            if (!skipAutoMatch) {
+                const typedVal = (provinsiSearch.value || '').trim().toLowerCase();
+                const matchedProv = provinces.find(p => p.toLowerCase() === typedVal);
+                if (matchedProv && matchedProv !== provinsiInput.value) {
+                    selectProvince(matchedProv);
+                    return;
+                }
+            }
+            
+            // Validation on close: reset if invalid
+            if (!provinces.includes(provinsiSearch.value)) {
+                provinsiSearch.value = provinsiInput.value || '';
+            }
+        };
+
+        const closeKotaDropdown = () => {
+            if (!kotaDropdown) return;
+            kotaDropdown.classList.add('hidden');
+            if (kotaIcon) kotaIcon.classList.remove('rotate-180');
+            currentKotaFocus = -1;
+            
+            // Validation on close: reset if invalid
+            if (!availableCities.includes(kotaSearch.value)) {
+                kotaSearch.value = kotaInput.value || '';
+            }
+        };
+
+        const selectProvince = (prov) => {
+            provinsiSearch.value = prov;
+            provinsiInput.value = prov;
+            provinsiSearch.classList.remove('border-red-500');
+            const err = document.getElementById('provinsi-error');
+            if (err) err.classList.add('hidden');
+            closeProvinsiDropdown(true);
+            // Trigger change for existing validation and kota logic
+            provinsiInput.dispatchEvent(new Event('change', { bubbles: true }));
+        };
+
+        const selectKota = (city) => {
+            if(kotaSearch) {
+                kotaSearch.value = city;
+                kotaSearch.classList.remove('border-red-500');
+            }
+            if(kotaInput) kotaInput.value = city;
+            const err = document.getElementById('kota-error');
+            if (err) err.classList.add('hidden');
+            closeKotaDropdown();
+            // Trigger change just in case anything else listens
+            if(kotaInput) kotaInput.dispatchEvent(new Event('change', { bubbles: true }));
+        };
+
+        const renderProvinsiDropdown = (filterText = '') => {
+            provinsiDropdown.innerHTML = '';
+            const filtered = provinces.filter(p => p.toLowerCase().includes(filterText.toLowerCase().trim()));
+            
+            if (filtered.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'px-4 py-3 text-sm text-[var(--text-muted)] italic';
+                empty.textContent = 'Tidak ada provinsi ditemukan.';
+                provinsiDropdown.appendChild(empty);
+            } else {
+                filtered.forEach((prov) => {
+                    const item = document.createElement('div');
+                    item.className = 'px-4 py-3 text-sm font-semibold text-[var(--text-primary)] cursor-pointer hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent-1)] transition-colors dropdown-item';
+                    item.textContent = prov;
+                    item.dataset.value = prov;
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectProvince(prov);
+                    });
+                    provinsiDropdown.appendChild(item);
+                });
+            }
+        };
+
+        const renderKotaDropdown = (filterText = '') => {
+            if (!kotaDropdown) return;
+            kotaDropdown.innerHTML = '';
+            const filtered = availableCities.filter(c => c.toLowerCase().includes(filterText.toLowerCase().trim()));
+            
+            if (filtered.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'px-4 py-3 text-sm text-[var(--text-muted)] italic';
+                empty.textContent = 'Tidak ada kota/kabupaten ditemukan.';
+                kotaDropdown.appendChild(empty);
+            } else {
+                filtered.forEach((city) => {
+                    const item = document.createElement('div');
+                    item.className = 'px-4 py-3 text-sm font-semibold text-[var(--text-primary)] cursor-pointer hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent-1)] transition-colors dropdown-item';
+                    item.textContent = city;
+                    item.dataset.value = city;
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectKota(city);
+                    });
+                    kotaDropdown.appendChild(item);
+                });
+            }
+        };
+
+        provinsiSearch.addEventListener('focus', () => {
+            renderProvinsiDropdown(provinsiSearch.value !== provinsiInput.value ? provinsiSearch.value : '');
+            provinsiDropdown.classList.remove('hidden');
+            if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
         });
 
-        // On province change → populate cities
-        provinsiSelect.addEventListener('change', function () {
-            const cities = STARS_LOCATION_DATA[this.value] || [];
-            kotaSelect.innerHTML = '<option value="">-- Pilih Kota/Kabupaten --</option>';
-            cities.sort().forEach(city => {
-                const opt = document.createElement('option');
-                opt.value = city;
-                opt.textContent = city;
-                kotaSelect.appendChild(opt);
+        provinsiSearch.addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderProvinsiDropdown(provinsiSearch.value !== provinsiInput.value ? provinsiSearch.value : '');
+            provinsiDropdown.classList.remove('hidden');
+            if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
+        });
+
+        provinsiSearch.addEventListener('input', (e) => {
+            const typedVal = e.target.value.trim().toLowerCase();
+            renderProvinsiDropdown(e.target.value);
+            provinsiDropdown.classList.remove('hidden');
+            if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
+            
+            const matchedProv = provinces.find(p => p.toLowerCase() === typedVal);
+            if (matchedProv) {
+                // Exact match while typing! Auto commit.
+                selectProvince(matchedProv);
+            }
+        });
+
+        provinsiSearch.addEventListener('keydown', (e) => {
+            const items = provinsiDropdown.querySelectorAll('.dropdown-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                currentFocus++;
+                if (currentFocus >= items.length) currentFocus = 0;
+                addActive(items, currentFocus);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                currentFocus--;
+                if (currentFocus < 0) currentFocus = items.length - 1;
+                addActive(items, currentFocus);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentFocus > -1 && items[currentFocus]) {
+                    items[currentFocus].click();
+                } else if (items.length === 1 && provinsiDropdown.querySelector('.dropdown-item')) {
+                    items[0].click();
+                } else {
+                    const typedVal = (provinsiSearch.value || '').trim().toLowerCase();
+                    const matchedProv = provinces.find(p => p.toLowerCase() === typedVal);
+                    if (matchedProv) {
+                        selectProvince(matchedProv);
+                    }
+                }
+            } else if (e.key === 'Escape') {
+                closeProvinsiDropdown();
+            }
+        });
+
+        // Kota Event Listeners
+        function showKotaFeedback() {
+            const feedback = document.getElementById('kota-locked-feedback');
+            if (feedback) {
+                feedback.classList.remove('hidden');
+                setTimeout(() => feedback.classList.remove('opacity-0'), 10);
+                setTimeout(() => {
+                    feedback.classList.add('opacity-0');
+                    setTimeout(() => feedback.classList.add('hidden'), 300);
+                }, 3000);
+            }
+        }
+
+        if (kotaSearch) {
+            kotaSearch.addEventListener('focus', () => {
+                if (kotaSearch.disabled) {
+                    showKotaFeedback();
+                    return;
+                }
+                renderKotaDropdown(kotaSearch.value !== kotaInput.value ? kotaSearch.value : '');
+                kotaDropdown.classList.remove('hidden');
+                if (kotaIcon) kotaIcon.classList.add('rotate-180');
             });
+
+            kotaSearch.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (kotaSearch.disabled) {
+                    showKotaFeedback();
+                    return;
+                }
+                renderKotaDropdown(kotaSearch.value !== kotaInput.value ? kotaSearch.value : '');
+                kotaDropdown.classList.remove('hidden');
+                if (kotaIcon) kotaIcon.classList.add('rotate-180');
+            });
+
+            kotaSearch.addEventListener('input', (e) => {
+                if (kotaSearch.disabled) return;
+                renderKotaDropdown(e.target.value);
+                kotaDropdown.classList.remove('hidden');
+                if (kotaIcon) kotaIcon.classList.add('rotate-180');
+                // User is typing, clear the actual valid value
+                if (kotaInput) kotaInput.value = ''; 
+            });
+
+            kotaSearch.addEventListener('keydown', (e) => {
+                if (kotaSearch.disabled) return;
+                const items = kotaDropdown.querySelectorAll('.dropdown-item');
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    currentKotaFocus++;
+                    if (currentKotaFocus >= items.length) currentKotaFocus = 0;
+                    addActive(items, currentKotaFocus);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    currentKotaFocus--;
+                    if (currentKotaFocus < 0) currentKotaFocus = items.length - 1;
+                    addActive(items, currentKotaFocus);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (currentKotaFocus > -1 && items[currentKotaFocus]) {
+                        items[currentKotaFocus].click();
+                    } else if (items.length === 1 && kotaDropdown.querySelector('.dropdown-item')) {
+                        items[0].click();
+                    }
+                } else if (e.key === 'Escape') {
+                    closeKotaDropdown();
+                }
+            });
+        }
+
+        function addActive(items, focusIndex) {
+            if (!items || items.length === 0) return;
+            removeActive(items);
+            if (focusIndex >= items.length) focusIndex = 0;
+            if (focusIndex < 0) focusIndex = items.length - 1;
+            items[focusIndex].classList.add('bg-[var(--bg-tertiary)]', 'text-[var(--accent-1)]');
+            items[focusIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+
+        function removeActive(items) {
+            items.forEach(item => {
+                item.classList.remove('bg-[var(--bg-tertiary)]', 'text-[var(--accent-1)]');
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            const pContainer = document.getElementById('provinsi-container');
+            if (pContainer && !pContainer.contains(e.target)) {
+                closeProvinsiDropdown();
+            }
+            const kContainer = document.getElementById('kota-container');
+            if (kContainer && !kContainer.contains(e.target)) {
+                closeKotaDropdown();
+            }
+        });
+
+        // Setup kotaLockedOverlay
+        const kotaLockedOverlay = document.getElementById('kota-locked-overlay');
+        if (kotaLockedOverlay) {
+            kotaLockedOverlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showKotaFeedback();
+            });
+        }
+
+        // Retain exact existing logic for Kota processing on change
+        provinsiInput.addEventListener('change', function () {
+            if (kotaInput) kotaInput.value = '';
+            if (kotaSearch) kotaSearch.value = '';
+            availableCities = [];
+            
+            const selectedProv = this.value;
+            
+            if (selectedProv && STARS_LOCATION_DATA[selectedProv]) {
+                if (kotaSearch) kotaSearch.disabled = false;
+                if (kotaLockedOverlay) kotaLockedOverlay.classList.add('hidden');
+                availableCities = STARS_LOCATION_DATA[selectedProv].slice().sort();
+            } else {
+                if (kotaSearch) kotaSearch.disabled = true;
+                if (kotaLockedOverlay) kotaLockedOverlay.classList.remove('hidden');
+                closeKotaDropdown();
+            }
         });
     }
 
@@ -741,6 +1034,64 @@ document.addEventListener('DOMContentLoaded', function() {
             prestasiForm.classList.add('hidden');
             prestasiIntro.classList.remove('hidden');
             prestasiForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+    }
+
+    // ==========================================
+    // Desktop Navbar Glassy Dock Indicator
+    // ==========================================
+    const desktopNavContainer = document.getElementById('desktop-nav-container');
+    const navIndicator = document.getElementById('nav-indicator');
+    
+    if (desktopNavContainer && navIndicator) {
+        const navLinks = desktopNavContainer.querySelectorAll('.stars-nav-link');
+        let hideTimeout;
+        let isHovered = false;
+        
+        const moveIndicator = (el) => {
+            clearTimeout(hideTimeout);
+            const containerRect = desktopNavContainer.getBoundingClientRect();
+            const elRect = el.getBoundingClientRect();
+            
+            // Calculate relative position within the container
+            const left = elRect.left - containerRect.left;
+            const width = elRect.width;
+            
+            if (!isHovered) {
+                // Snap instantly to the first hovered item
+                navIndicator.style.transition = 'none';
+                navIndicator.style.transform = `translateX(${left}px)`;
+                navIndicator.style.width = `${width}px`;
+                
+                // Force reflow
+                void navIndicator.offsetWidth;
+                
+                // Restore CSS transition
+                navIndicator.style.transition = '';
+                navIndicator.style.opacity = '1';
+                isHovered = true;
+            } else {
+                // Slide smoothly between items
+                navIndicator.style.transform = `translateX(${left}px)`;
+                navIndicator.style.width = `${width}px`;
+                navIndicator.style.opacity = '1';
+            }
+        };
+        
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                moveIndicator(this);
+            });
+        });
+        
+        desktopNavContainer.addEventListener('mouseleave', function(e) {
+            // Ignore if moving within the container children
+            if (e.relatedTarget && desktopNavContainer.contains(e.relatedTarget)) return;
+            
+            hideTimeout = setTimeout(() => {
+                navIndicator.style.opacity = '0';
+                isHovered = false;
+            }, 100);
         });
     }
     

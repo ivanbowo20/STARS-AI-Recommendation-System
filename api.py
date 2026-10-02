@@ -360,6 +360,12 @@ def route_prediksi():
 
     if not data:
         return jsonify({"success": False, "error": "Request body is empty"}), 400
+        
+    # Validasi lokasi wajib
+    provinsi = data.get('provinsi', '').strip()
+    kota = data.get('kota', '').strip()
+    if not provinsi or not kota:
+        return jsonify({"status": "error", "error": "Provinsi dan Kabupaten/Kota wajib diisi."}), 400
             
     try:
         # Pass the payload directly to the new prediction engine.

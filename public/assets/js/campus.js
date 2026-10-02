@@ -155,7 +155,8 @@ const STARSCampus = (function () {
 
         // Strict Location Filter: province is a hard constraint if selected
         if (studentData && studentData.provinsi) {
-            matched = matched.filter(r => r.Provinsi === studentData.provinsi);
+            const stuProv = studentData.provinsi.toLowerCase().trim();
+            matched = matched.filter(r => r.Provinsi && r.Provinsi.toLowerCase().trim() === stuProv);
         }
 
         const sorted  = matched.sort((a, b) => b.totalScore - a.totalScore);
