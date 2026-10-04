@@ -577,6 +577,10 @@
             <label for="nama" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nama Lengkap</label>
             <input type="text" id="nama" name="nama" required placeholder="Contoh: Ivan Rizky"
                 class="w-full md:w-1/2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--input-text)] placeholder-[var(--input-placeholder)] focus:outline-none focus:border-[var(--accent-1)] transition-all">
+            <div id="nama-error" class="hidden mt-2 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span>Nama lengkap wajib diisi.</span>
+            </div>
         </div>
         
         <!-- Wajib -->
@@ -599,6 +603,10 @@
                     <label for="Nilai_Pendidikan_Pancasila" class="text-xs text-[var(--text-secondary)] mb-1">Pend. Pancasila</label>
                     <input type="number" id="Nilai_Pendidikan_Pancasila" name="Nilai_Pendidikan_Pancasila" min="0" max="100" value="80" required class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-3 sm:py-2 text-base sm:text-sm font-mono text-[var(--input-text)] focus:border-[var(--accent-1)] focus:outline-none">
                 </div>
+            </div>
+            <div id="mapel-umum-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span id="mapel-umum-error-text">Nilai mata pelajaran umum wajib diisi antara 0 hingga 100.</span>
             </div>
         </div>
 
@@ -727,6 +735,10 @@
                     </div>
                 </label>
             </div>
+            <div id="mapel-pilihan-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span id="mapel-pilihan-error-text">Pilih minimal 1 mata pelajaran pilihan dan isi nilainya.</span>
+            </div>
         </div>
     </div>
 
@@ -787,6 +799,10 @@
                     `).join(''));
                 </script>
             </div>
+            <div id="minat-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span>Pilih minimal 1 bidang minat keilmuan.</span>
+            </div>
         </div>
 
         <!-- Tujuan Karier -->
@@ -814,6 +830,10 @@
                         </label>
                     `).join(''));
                 </script>
+            </div>
+            <div id="karier-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span>Pilih minimal 1 tujuan karier impian.</span>
             </div>
         </div>
 
@@ -908,6 +928,10 @@
                     `).join(''));
                 </script>
             </div>
+            <div id="strength-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span>Pilih minimal 1 kekuatan diri Anda.</span>
+            </div>
         </div>
 
         <!-- Hobi -->
@@ -932,6 +956,10 @@
                         </label>
                     `).join(''));
                 </script>
+            </div>
+            <div id="hobi-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
+                <i class="fas fa-circle-exclamation flex-shrink-0"></i>
+                <span>Pilih minimal 1 hobi atau aktivitas waktu luang.</span>
             </div>
         </div>
 

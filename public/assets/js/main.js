@@ -157,36 +157,315 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // ==========================================
+    // FORM VALIDATION & INLINE NOTIFICATIONS
+    // ==========================================
+    function showInlineError(errorElId, message) {
+        const errorEl = document.getElementById(errorElId);
+        if (errorEl) {
+            if (message) {
+                const textSpan = errorEl.querySelector('span:not(.fas):not(.far)') || errorEl.querySelector('span');
+                if (textSpan) textSpan.textContent = message;
+            }
+            errorEl.classList.remove('hidden');
+        }
+    }
+
+    function hideInlineError(errorElId) {
+        const errorEl = document.getElementById(errorElId);
+        if (errorEl) {
+            errorEl.classList.add('hidden');
+        }
+    }
+
+    function checkMapelPilihanValidity() {
+        const activeWrappers = document.querySelectorAll('#step-1 .subject-input-wrapper:not(.hidden)');
+        if (activeWrappers.length === 0) return false;
+        
+        for (let wrapper of activeWrappers) {
+            const inp = wrapper.querySelector('input');
+            if (!inp) return false;
+            const rawVal = inp.value.trim();
+            const numVal = parseFloat(rawVal);
+            if (rawVal === '' || isNaN(numVal) || numVal < 0 || numVal > 100) {
+                return false;
+            }
+        }
+        hideInlineError('mapel-pilihan-error');
+        return true;
+    }
+
     function validateStep(stepNum) {
         const activeStepEl = document.getElementById(`step-${stepNum}`);
         if (!activeStepEl) return true;
 
-        const inputs = activeStepEl.querySelectorAll('input[required], select[required]');
         let isValid = true;
-        
-        inputs.forEach(input => {
-            input.classList.remove('border-red-500');
-            
-            // Explicit validation for hidden inputs (provinsi and kota)
-            if (input.type === 'hidden' && (input.id === 'provinsi' || input.id === 'kota')) {
-                const searchProxy = document.getElementById(input.id + '-search');
-                const errorEl = document.getElementById(input.id + '-error');
-                
+        let firstInvalidEl = null;
+
+        const markInvalid = (el) => {
+            isValid = false;
+            if (el) {
+                el.classList.add('border-red-500');
+                if (!firstInvalidEl) firstInvalidEl = el;
+            }
+        };
+
+        // --- STEP 1: AKADEMIK ---
+        if (stepNum === 1) {
+            // 1. Nama Lengkap
+            const namaInput = document.getElementById('nama');
+            const namaVal = namaInput ? namaInput.value.trim() : '';
+            if (!namaVal || namaVal.length < 2) {
+                showInlineError('nama-error', 'Nama lengkap wajib diisi.');
+                markInvalid(namaInput);
+            } else {
+                hideInlineError('nama-error');
+                if (namaInput) namaInput.classList.remove('border-red-500');
+            }
+
+            // 2. 4 Mata Pelajaran Umum
+            const mapelUmumConfig = [
+                { id: 'Nilai_Matematika_Umum', name: 'Matematika Umum' },
+                { id: 'Nilai_Bahasa_Indonesia', name: 'Bahasa Indonesia' },
+                { id: 'Nilai_Bahasa_Inggris_Umum', name: 'Bahasa Inggris' },
+                { id: 'Nilai_Pendidikan_Pancasila', name: 'Pend. Pancasila' }
+            ];
+
+            let firstMapelErrorMsg = null;
+            mapelUmumConfig.forEach(item => {
+                const inp = document.getElementById(item.id);
+                if (inp) {
+                    const rawVal = inp.value.trim();
+                    const numVal = parseFloat(rawVal);
+                    if (rawVal === '' || isNaN(numVal) || numVal < 0 || numVal > 100) {
+                        inp.classList.add('border-red-500');
+                        if (!firstMapelErrorMsg) {
+                            firstMapelErrorMsg = `Nilai ${item.name} wajib diisi antara 0 hingga 100.`;
+                        }
+                        if (!firstInvalidEl) firstInvalidEl = inp;
+                        isValid = false;
+                    } else {
+                        inp.classList.remove('border-red-500');
+                    }
+                }
+            });
+
+            if (firstMapelErrorMsg) {
+                showInlineError('mapel-umum-error', firstMapelErrorMsg);
+            } else {
+                hideInlineError('mapel-umum-error');
+            }
+
+            // 3. Mata Pelajaran Pilihan (Minimal 1 aktif, dan setiap aktif wajib bernilai 0-100)
+            const activeWrappers = document.querySelectorAll('#step-1 .subject-input-wrapper:not(.hidden)');
+            if (activeWrappers.length === 0) {
+                showInlineError('mapel-pilihan-error', 'Pilih minimal 1 mata pelajaran pilihan dan isi nilainya.');
+                const firstCard = document.querySelector('#step-1 .subject-card');
+                if (!firstInvalidEl && firstCard) firstInvalidEl = firstCard;
+                isValid = false;
+            } else {
+                let firstPilihanErrorMsg = null;
+                activeWrappers.forEach(wrapper => {
+                    const inp = wrapper.querySelector('input');
+                    const card = wrapper.closest('.subject-card');
+                    const subjectSpan = card ? card.querySelector('span') : null;
+                    const subjectName = subjectSpan ? subjectSpan.textContent.trim() : 'Pilihan';
+                    
+                    if (inp) {
+                        const rawVal = inp.value.trim();
+                        const numVal = parseFloat(rawVal);
+                        if (rawVal === '' || isNaN(numVal) || numVal < 0 || numVal > 100) {
+                            inp.classList.add('border-red-500');
+                            if (card) card.classList.add('border-red-500');
+                            if (!firstPilihanErrorMsg) {
+                                firstPilihanErrorMsg = `Nilai ${subjectName} belum diisi (0–100).`;
+                            }
+                            if (!firstInvalidEl) firstInvalidEl = inp;
+                            isValid = false;
+                        } else {
+                            inp.classList.remove('border-red-500');
+                            if (card) card.classList.remove('border-red-500');
+                        }
+                    }
+                });
+
+                if (firstPilihanErrorMsg) {
+                    showInlineError('mapel-pilihan-error', firstPilihanErrorMsg);
+                } else {
+                    hideInlineError('mapel-pilihan-error');
+                }
+            }
+        }
+
+        // --- STEP 2: MINAT & ASPIRASI ---
+        else if (stepNum === 2) {
+            // 1. Minat Bidang Keilmuan (Wajib minimal 1)
+            const countMinat = document.querySelectorAll('input[name="Minat"]:checked').length;
+            if (countMinat === 0) {
+                showInlineError('minat-error', 'Pilih minimal 1 bidang minat keilmuan.');
+                const groupMinat = document.getElementById('group-minat');
+                if (groupMinat && !firstInvalidEl) firstInvalidEl = groupMinat;
+                isValid = false;
+            } else {
+                hideInlineError('minat-error');
+            }
+
+            // 2. Tujuan Karier Impian (Wajib minimal 1)
+            const countKarier = document.querySelectorAll('input[name="Karier"]:checked').length;
+            if (countKarier === 0) {
+                showInlineError('karier-error', 'Pilih minimal 1 tujuan karier impian.');
+                const groupKarier = document.getElementById('group-karier');
+                if (groupKarier && !firstInvalidEl) firstInvalidEl = groupKarier;
+                isValid = false;
+            } else {
+                hideInlineError('karier-error');
+            }
+
+            // 3. Preferensi Lokasi Kampus (Provinsi & Kabupaten/Kota) — PRESERVE EXISTING LOGIC
+            const provinsiEl = document.getElementById('provinsi');
+            const kotaEl = document.getElementById('kota');
+            if (provinsiEl) {
+                const searchProxy = document.getElementById('provinsi-search');
+                const errorEl = document.getElementById('provinsi-error');
                 if (searchProxy) searchProxy.classList.remove('border-red-500');
                 if (errorEl) errorEl.classList.add('hidden');
-                
-                if (!input.value.trim()) {
+                if (!provinsiEl.value.trim()) {
                     if (searchProxy) searchProxy.classList.add('border-red-500');
                     if (errorEl) errorEl.classList.remove('hidden');
+                    if (!firstInvalidEl && searchProxy) firstInvalidEl = searchProxy;
                     isValid = false;
                 }
-            } else if (!input.checkValidity()) {
-                input.classList.add('border-red-500');
-                isValid = false;
             }
-        });
+            if (kotaEl) {
+                const searchProxy = document.getElementById('kota-search');
+                const errorEl = document.getElementById('kota-error');
+                if (searchProxy) searchProxy.classList.remove('border-red-500');
+                if (errorEl) errorEl.classList.add('hidden');
+                if (!kotaEl.value.trim()) {
+                    if (searchProxy) searchProxy.classList.add('border-red-500');
+                    if (errorEl) errorEl.classList.remove('hidden');
+                    if (!firstInvalidEl && searchProxy) firstInvalidEl = searchProxy;
+                    isValid = false;
+                }
+            }
+        }
+
+        // --- STEP 3: KEKUATAN & AKTIVITAS ---
+        else if (stepNum === 3) {
+            // 1. Kekuatan Diri (Strength) — Wajib minimal 1
+            const countStrength = document.querySelectorAll('input[name="Strength"]:checked').length;
+            if (countStrength === 0) {
+                showInlineError('strength-error', 'Pilih minimal 1 kekuatan diri Anda.');
+                const groupStrength = document.getElementById('group-strength');
+                if (groupStrength && !firstInvalidEl) firstInvalidEl = groupStrength;
+                isValid = false;
+            } else {
+                hideInlineError('strength-error');
+            }
+
+            // 2. Hobi & Waktu Luang — Wajib minimal 1
+            const countHobi = document.querySelectorAll('input[name="Hobi"]:checked').length;
+            if (countHobi === 0) {
+                showInlineError('hobi-error', 'Pilih minimal 1 hobi atau aktivitas waktu luang.');
+                const groupHobi = document.getElementById('group-hobi');
+                if (groupHobi && !firstInvalidEl) firstInvalidEl = groupHobi;
+                isValid = false;
+            } else {
+                hideInlineError('hobi-error');
+            }
+
+            // 3. Organisasi & Ekskul: SEPENUHNYA OPSIONAL! (Tidak ada pengecekan)
+        }
+
+        // --- STEP 4: PRESTASI & REVIEW ---
+        else if (stepNum === 4) {
+            // Prestasi: SEPENUHNYA OPSIONAL!
+            return true;
+        }
+
+        // Focus & smooth scroll to first error if invalid
+        if (!isValid && firstInvalidEl) {
+            try {
+                firstInvalidEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (typeof firstInvalidEl.focus === 'function' && firstInvalidEl.tagName !== 'DIV') {
+                    firstInvalidEl.focus();
+                }
+            } catch (err) {
+                // Fail-safe
+            }
+        }
+
         return isValid;
     }
+
+    // Auto-dismiss and real-time input handlers
+    const namaInput = document.getElementById('nama');
+    if (namaInput) {
+        namaInput.addEventListener('input', function() {
+            if (this.value.trim().length >= 2) {
+                hideInlineError('nama-error');
+                this.classList.remove('border-red-500');
+            }
+        });
+    }
+
+    const mapelUmumIds = ['Nilai_Matematika_Umum', 'Nilai_Bahasa_Indonesia', 'Nilai_Bahasa_Inggris_Umum', 'Nilai_Pendidikan_Pancasila'];
+    mapelUmumIds.forEach(id => {
+        const inp = document.getElementById(id);
+        if (inp) {
+            inp.addEventListener('input', function() {
+                const rawVal = this.value.trim();
+                const numVal = parseFloat(rawVal);
+                if (rawVal !== '' && !isNaN(numVal) && numVal >= 0 && numVal <= 100) {
+                    this.classList.remove('border-red-500');
+                    const allValid = mapelUmumIds.every(itemId => {
+                        const el = document.getElementById(itemId);
+                        if (!el) return true;
+                        const v = parseFloat(el.value.trim());
+                        return el.value.trim() !== '' && !isNaN(v) && v >= 0 && v <= 100;
+                    });
+                    if (allValid) hideInlineError('mapel-umum-error');
+                }
+            });
+        }
+    });
+
+    document.querySelectorAll('.subject-input-wrapper input').forEach(inp => {
+        inp.addEventListener('input', function() {
+            const rawVal = this.value.trim();
+            const numVal = parseFloat(rawVal);
+            const card = this.closest('.subject-card');
+            if (rawVal !== '' && !isNaN(numVal) && numVal >= 0 && numVal <= 100) {
+                this.classList.remove('border-red-500');
+                if (card) card.classList.remove('border-red-500');
+                checkMapelPilihanValidity();
+            }
+        });
+    });
+
+    function setupCheckboxGroup(name, maxLimit, errorElId) {
+        const cbs = document.querySelectorAll(`input[name="${name}"]`);
+        cbs.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+                if (maxLimit && checked.length > maxLimit) {
+                    this.checked = false;
+                    return;
+                }
+                if (errorElId && checked.length >= 1) {
+                    hideInlineError(errorElId);
+                }
+            });
+        });
+    }
+
+    setupCheckboxGroup('Favorit', 3, null);
+    setupCheckboxGroup('Minat', 3, 'minat-error');
+    setupCheckboxGroup('Karier', 2, 'karier-error');
+    setupCheckboxGroup('Strength', 3, 'strength-error');
+    setupCheckboxGroup('Hobi', 3, 'hobi-error');
+    setupCheckboxGroup('Ekskul', 2, null);
+    setupCheckboxGroup('Prestasi', 2, null);
 
 
     function populateReview() {
@@ -238,12 +517,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 console.log("Validation failed for step:", currentStep);
-                // Focus first invalid element
-                const activeStepEl = document.getElementById(`step-${currentStep}`);
-                const invalidEl = activeStepEl ? activeStepEl.querySelector(':invalid') : null;
-                if (invalidEl) {
-                    invalidEl.focus();
-                }
             }
         });
     }
@@ -700,17 +973,49 @@ document.addEventListener('DOMContentLoaded', function() {
         predictionForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Validate that we are on the final step and hobi is selected
+            // Validate that we are on the final step
             if (currentStep !== 4) {
                 return;
             }
 
-            
+            // Sanity pre-flight checks across all steps 1-3
+            if (!validateStep(1)) {
+                showStep(1);
+                return;
+            }
+            if (!validateStep(2)) {
+                showStep(2);
+                return;
+            }
+            if (!validateStep(3)) {
+                showStep(3);
+                return;
+            }
 
             // Check hard block (Input Quality INVALID)
             if (lastValidationResult && lastValidationResult.status === 'INVALID') {
                 return;
             }
+
+            // Button loading state & double-submit prevention
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                if (submitBtn.disabled) return;
+                submitBtn.disabled = true;
+                submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+                submitBtn.innerHTML = `Memproses rekomendasi... <i class="fas fa-spinner fa-spin ml-2"></i>`;
+            }
+
+            const restoreSubmitBtn = () => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                    if (submitBtn.dataset.originalHtml) {
+                        submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+                    }
+                }
+            };
 
             // ── V5.1: Hybrid Reliability Gate ──────────────────────────
             const reliabilityScore = lastConfidenceResult ? lastConfidenceResult.score : 100;
@@ -734,11 +1039,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(this);
             const inputData = Object.fromEntries(formData.entries());
             
-            
-            // The form directly contains V4.2 names thanks to Phase 5.8.7.
-            // We just need to parse checkboxes and numbers properly.
-            // Checkboxes might be arrays if multiple are selected, or we just want 1/0 for each checkbox name/value.
-            
             // Loop through all inputs in form
             const allInputs = predictionForm.querySelectorAll('input, select');
             allInputs.forEach(input => {
@@ -756,8 +1056,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     inputData[input.name] = input.value;
                 }
             });
-            // -------------------------------------
-
 
             // Fetch AJAX to predict proxy
             fetch('/api/prediksi', {
@@ -771,6 +1069,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 // Hide loading
                 resultLoading.classList.add('hidden');
+                restoreSubmitBtn();
                 
                 if (data.status === 'success') {
                     // Populate UI
@@ -812,6 +1111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 resultLoading.classList.add('hidden');
+                restoreSubmitBtn();
                 resultData.innerHTML = `
                     <div class="p-8 text-center border border-red-500/20 bg-red-500/5 rounded-3xl max-w-2xl mx-auto glass-card">
                         <i class="fas fa-wifi text-4xl text-red-500 mb-4"></i>
@@ -990,8 +1290,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 wrapper.classList.add('hidden');
                 indicator.innerHTML = '';
                 indicator.classList.remove('bg-[var(--text-primary)]', 'border-[var(--text-primary)]');
-                this.classList.remove('border-[var(--text-primary)]');
+                this.classList.remove('border-[var(--text-primary)]', 'border-red-500');
                 input.value = ''; // clear when hidden
+                input.classList.remove('border-red-500');
+            }
+            if (typeof checkMapelPilihanValidity === 'function') {
+                checkMapelPilihanValidity();
             }
         });
     });
