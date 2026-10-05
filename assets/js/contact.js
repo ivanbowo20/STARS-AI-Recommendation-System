@@ -75,8 +75,177 @@ function validateForm(nama, email, kategori, subjek, pesan) {
     return null;
 }
 
+// ─── Custom Glassmorphic Popover Dropdown ─────────────────────────────
+function initCustomKategoriDropdown() {
+    const dropdownContainer = document.getElementById('custom-kategori-dropdown');
+    if (!dropdownContainer) return;
+
+    const hiddenInput   = document.getElementById('kategori');
+    const trigger       = document.getElementById('kategori-trigger');
+    const selectedText  = document.getElementById('kategori-selected-text');
+    const chevron       = document.getElementById('kategori-chevron');
+    const menu          = document.getElementById('kategori-menu');
+    const options       = menu ? menu.querySelectorAll('.kategori-option') : [];
+
+    if (!hiddenInput || !trigger || !menu) return;
+
+    let isOpen = false;
+
+    function openMenu() {
+        if (isOpen) return;
+        isOpen = true;
+        menu.classList.remove('hidden', 'pointer-events-none');
+        menu.classList.add('pointer-events-auto');
+        requestAnimationFrame(() => {
+            menu.classList.remove('opacity-0', 'translate-y-1');
+            menu.classList.add('opacity-100', 'translate-y-0');
+        });
+        trigger.setAttribute('aria-expanded', 'true');
+        if (chevron) chevron.classList.add('rotate-180');
+        trigger.classList.add('border-[var(--accent-1)]');
+
+        // Focus selected option or first option
+        let targetOption = null;
+        options.forEach(opt => {
+            if (opt.getAttribute('data-value') === hiddenInput.value) {
+                targetOption = opt;
+            }
+        });
+        if (!targetOption && options.length > 0) {
+            targetOption = options[0];
+        }
+        if (targetOption) {
+            targetOption.focus();
+        }
+    }
+
+    function closeMenu(focusTrigger = false) {
+        if (!isOpen) return;
+        isOpen = false;
+        menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        menu.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+        setTimeout(() => {
+            if (!isOpen) menu.classList.add('hidden');
+        }, 200);
+        trigger.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.classList.remove('rotate-180');
+        trigger.classList.remove('border-[var(--accent-1)]');
+        if (focusTrigger) {
+            trigger.focus();
+        }
+    }
+
+    function selectOption(opt) {
+        const val = opt.getAttribute('data-value');
+        hiddenInput.value = val;
+
+        if (selectedText) {
+            selectedText.textContent = val;
+            selectedText.classList.remove('text-[var(--input-placeholder)]');
+            selectedText.classList.add('text-[var(--input-text)]', 'font-medium');
+        }
+
+        trigger.classList.remove('border-red-500');
+
+        options.forEach(o => {
+            const isMatch = o === opt;
+            o.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+            const check = o.querySelector('.kategori-check');
+            if (check) check.classList.toggle('opacity-100', isMatch);
+            o.classList.toggle('bg-black/5', isMatch);
+            o.classList.toggle('dark:bg-white/5', isMatch);
+        });
+
+        closeMenu(true);
+        hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // Trigger click
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // Trigger keydown
+    trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (!isOpen) {
+                openMenu();
+            } else if (options.length > 0) {
+                options[0].focus();
+            }
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeMenu();
+        }
+    });
+
+    // Options click & keyboard navigation
+    options.forEach((opt, idx) => {
+        opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectOption(opt);
+        });
+
+        opt.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectOption(opt);
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIdx = (idx + 1) % options.length;
+                options[nextIdx].focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevIdx = (idx - 1 + options.length) % options.length;
+                options[prevIdx].focus();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                closeMenu(true);
+            } else if (e.key === 'Tab') {
+                closeMenu();
+            }
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (isOpen && !dropdownContainer.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Form reset listener
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('reset', () => {
+            hiddenInput.value = '';
+            if (selectedText) {
+                selectedText.textContent = 'Pilih kategori pesan...';
+                selectedText.classList.remove('text-[var(--input-text)]', 'font-medium');
+                selectedText.classList.add('text-[var(--input-placeholder)]');
+            }
+            trigger.classList.remove('border-red-500');
+            options.forEach(o => {
+                o.setAttribute('aria-selected', 'false');
+                const check = o.querySelector('.kategori-check');
+                if (check) check.classList.remove('opacity-100');
+                o.classList.remove('bg-black/5', 'dark:bg-white/5');
+            });
+            closeMenu();
+        });
+    }
+}
+
 // ─── Main Contact Form Logic ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
+    initCustomKategoriDropdown();
+
     const contactForm      = document.getElementById('contact-form');
     const submitBtn        = document.getElementById('contact-submit-btn');
     const alertContainer   = document.getElementById('contact-alert-container');
@@ -103,6 +272,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const validationError = validateForm(nama, email, kategori, subjek, pesan);
         if (validationError) {
             showToast('error', validationError);
+            if (!kategori) {
+                const trigger = document.getElementById('kategori-trigger');
+                if (trigger) {
+                    trigger.classList.add('border-red-500');
+                    trigger.focus();
+                }
+            }
             return;
         }
 
