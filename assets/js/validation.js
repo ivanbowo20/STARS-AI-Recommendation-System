@@ -1738,6 +1738,30 @@ const STARSValidator = (function () {
         });
     }
 
+    // Helper: Clear all inline error notifications and error borders across the wizard
+    function clearValidationErrors() {
+        const errorIds = [
+            'nama-error',
+            'mapel-umum-error',
+            'mapel-pilihan-error',
+            'minat-error',
+            'karier-error',
+            'provinsi-error',
+            'kota-error',
+            'strength-error',
+            'hobi-error'
+        ];
+        errorIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        });
+
+        const invalidElements = document.querySelectorAll('.border-red-500');
+        invalidElements.forEach(el => {
+            el.classList.remove('border-red-500');
+        });
+    }
+
     // ============================================================
     // Public API (V5.1)
     // ============================================================
@@ -1749,6 +1773,7 @@ const STARSValidator = (function () {
         calculateConfidence,
         detectStrengths,
         renderUnifiedDashboard,
+        clearValidationErrors,
         // Legacy (kept for backward compat)
         renderValidationCard: () => {},
         renderStrengthCard: () => {},

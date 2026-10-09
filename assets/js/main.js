@@ -118,19 +118,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Change Next button text on Step 6 and Step 7
-        if (nextBtn) {
-            if (currentStep === 3) {
-                nextBtn.innerHTML = `Lanjut Ke Review <i class="fas fa-arrow-right ml-2"></i>`;
+        // Change Next button text and toggle Step 4 Action Cluster (Submit & Mulai Ulang)
+        const step4Actions = document.getElementById('step-4-actions');
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (currentStep === 4) {
+            if (nextBtn) nextBtn.classList.add('hidden');
+            if (step4Actions) step4Actions.classList.remove('hidden');
+            if (submitBtn) submitBtn.classList.remove('hidden');
+        } else {
+            if (step4Actions) step4Actions.classList.add('hidden');
+            if (submitBtn) submitBtn.classList.add('hidden');
+            if (nextBtn) {
                 nextBtn.classList.remove('hidden');
-                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.add('hidden');
-            } else if (currentStep === 4) {
-                nextBtn.classList.add('hidden'); // submit button will handle action in step 4
-                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.remove('hidden');
-            } else {
-                nextBtn.innerHTML = `Berikutnya <i class="fas fa-arrow-right ml-2"></i>`;
-                nextBtn.classList.remove('hidden');
-                if (document.getElementById('submit-btn')) document.getElementById('submit-btn').classList.add('hidden');
+                if (currentStep === 3) {
+                    nextBtn.innerHTML = `Lanjut Ke Review <i class="fas fa-arrow-right ml-2"></i>`;
+                } else {
+                    nextBtn.innerHTML = `Berikutnya <i class="fas fa-arrow-right ml-2"></i>`;
+                }
             }
         }
     }
@@ -594,12 +599,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const kotaDropdown = document.getElementById('kota-dropdown');
     const kotaIcon = document.getElementById('kota-icon');
 
+    let currentFocus = -1;
+    let availableCities = [];
+    let currentKotaFocus = -1;
+
     if (provinsiInput && provinsiSearch && typeof STARS_LOCATION_DATA !== 'undefined') {
         const provinces = Object.keys(STARS_LOCATION_DATA).sort();
-        let currentFocus = -1;
-        
-        let availableCities = [];
-        let currentKotaFocus = -1;
 
         const closeProvinsiDropdown = (skipAutoMatch = false) => {
             if (!provinsiDropdown) return;
@@ -978,22 +983,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Sanity pre-flight checks across all steps 1-3
+            // Sanity pre-flight checks across all steps 1-3 with user feedback
             if (!validateStep(1)) {
                 showStep(1);
+                validateStep(1);
+                alert('Mohon lengkapi data nilai akademik pada Langkah 1 sebelum mengirimkan rekomendasi.');
                 return;
             }
             if (!validateStep(2)) {
                 showStep(2);
+                validateStep(2);
+                alert('Mohon lengkapi data minat, karier, dan preferensi lokasi pada Langkah 2 sebelum mengirimkan rekomendasi.');
                 return;
             }
             if (!validateStep(3)) {
                 showStep(3);
-                return;
-            }
-
-            // Check hard block (Input Quality INVALID)
-            if (lastValidationResult && lastValidationResult.status === 'INVALID') {
+                validateStep(3);
+                alert('Mohon lengkapi data kekuatan diri dan hobi pada Langkah 3 sebelum mengirimkan rekomendasi.');
                 return;
             }
 
@@ -1004,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = true;
                 submitBtn.dataset.originalHtml = submitBtn.innerHTML;
                 submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
-                submitBtn.innerHTML = `Memproses rekomendasi... <i class="fas fa-spinner fa-spin ml-2"></i>`;
+                submitBtn.innerHTML = `Memproses rekomendasi... <svg class="animate-spin -mr-1 ml-2 h-4 w-4 text-current inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
             }
 
             const restoreSubmitBtn = () => {
@@ -1122,9 +1128,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 resultData.classList.remove('hidden');
 
-                document.getElementById('retry-predict-btn').addEventListener('click', function() {
-                    predictionForm.dispatchEvent(new Event('submit'));
-                });
+                const retryBtn = document.getElementById('retry-predict-btn');
+                if (retryBtn) {
+                    retryBtn.addEventListener('click', function() {
+                        if (predictionForm) predictionForm.dispatchEvent(new Event('submit'));
+                    });
+                }
             });
         });
     }
@@ -1176,96 +1185,333 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })();
 
-    // Helper to format output rendering dynamically
+    // ──────────────────────────────────────────────────────────────
+    // V4.2: MULAI ULANG ASESMEN (SOFT RESET WIZARD) & MODAL GUARDRAIL
+    // ──────────────────────────────────────────────────────────────
+    const resetWizardBtn = document.getElementById('reset-wizard-btn') || document.getElementById('reset-assessment-btn');
+    const cancelResetBtn = document.getElementById('cancel-reset-btn');
+    const confirmResetBtn = document.getElementById('confirm-reset-btn');
+    const resetModal = document.getElementById('reset-confirmation-modal');
+
+    function openResetModal() {
+        if (resetModal) resetModal.classList.remove('hidden');
+    }
+
+    function closeResetModal() {
+        if (resetModal) resetModal.classList.add('hidden');
+    }
+
+    function softResetAssessment() {
+        if (!predictionForm) return;
+
+        // a. Eksekusi form.reset()
+        predictionForm.reset();
+
+        // b. Reset Step 1: Kosongkan #nama, set nilai 4 mapel umum ke default '80'.
+        //    Hapus border aktif dan bersihkan nilai pada 13 kartu mapel pilihan.
+        const namaInput = document.getElementById('nama');
+        if (namaInput) {
+            namaInput.value = '';
+            namaInput.classList.remove('border-red-500');
+        }
+
+        const mapelUmumConfig = [
+            'Nilai_Matematika_Umum',
+            'Nilai_Bahasa_Indonesia',
+            'Nilai_Bahasa_Inggris_Umum',
+            'Nilai_Pendidikan_Pancasila'
+        ];
+        mapelUmumConfig.forEach(id => {
+            const inp = document.getElementById(id);
+            if (inp) {
+                inp.value = '80';
+                inp.classList.remove('border-red-500');
+            }
+        });
+
+        const subjectCards = document.querySelectorAll('#step-1 .subject-card');
+        subjectCards.forEach(card => {
+            card.classList.remove('border-[var(--text-primary)]', 'border-red-500');
+            const wrapper = card.querySelector('.subject-input-wrapper');
+            const input = card.querySelector('input');
+            const indicator = card.querySelector('.toggle-indicator');
+            if (wrapper) wrapper.classList.add('hidden');
+            if (input) {
+                input.value = '';
+                input.classList.remove('border-red-500');
+            }
+            if (indicator) {
+                indicator.innerHTML = '';
+                indicator.className = 'h-5 w-5 sm:h-4 sm:w-4 rounded-full border border-[var(--text-muted)] flex items-center justify-center toggle-indicator transition-all';
+            }
+        });
+
+        // c. Reset Step 2: Uncheck semua checkbox Favorit, Minat, Karier. Kosongkan #provinsi dan #kota.
+        const step2CheckboxGroups = ['Favorit', 'Minat', 'Karier'];
+        step2CheckboxGroups.forEach(name => {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${name}"]`);
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+            });
+        });
+
+        if (provinsiInput) provinsiInput.value = '';
+        if (provinsiSearch) {
+            provinsiSearch.value = '';
+            provinsiSearch.classList.remove('border-red-500');
+        }
+        if (provinsiDropdown) {
+            provinsiDropdown.classList.add('hidden');
+            provinsiDropdown.innerHTML = '';
+        }
+        if (provinsiIcon) provinsiIcon.classList.remove('rotate-180');
+
+        if (kotaInput) kotaInput.value = '';
+        if (kotaSearch) {
+            kotaSearch.value = '';
+            kotaSearch.disabled = true;
+            kotaSearch.classList.remove('border-red-500');
+        }
+        if (kotaDropdown) {
+            kotaDropdown.classList.add('hidden');
+            kotaDropdown.innerHTML = '';
+        }
+        if (kotaIcon) kotaIcon.classList.remove('rotate-180');
+        const lockedOverlay = document.getElementById('kota-locked-overlay');
+        if (lockedOverlay) lockedOverlay.classList.remove('hidden');
+
+        availableCities = [];
+        currentFocus = -1;
+        currentKotaFocus = -1;
+
+        // d. Reset Step 3 & Step 4: Uncheck checkbox Strength, Hobi, Ekskul, Prestasi,
+        //    serta reset ringkasan #rev-akademik s/d #rev-kekuatan kembali ke '-'.
+        const step34CheckboxGroups = ['Strength', 'Hobi', 'Ekskul', 'Peran', 'Prestasi', 'PrestasiTingkat'];
+        step34CheckboxGroups.forEach(name => {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${name}"]`);
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+            });
+        });
+
+        const ekskulIntro = document.getElementById('ekskul-intro');
+        const ekskulForm = document.getElementById('ekskul-form');
+        if (ekskulIntro) ekskulIntro.classList.remove('hidden');
+        if (ekskulForm) ekskulForm.classList.add('hidden');
+
+        const prestasiIntro = document.getElementById('prestasi-intro');
+        const prestasiForm = document.getElementById('prestasi-form');
+        if (prestasiIntro) prestasiIntro.classList.remove('hidden');
+        if (prestasiForm) prestasiForm.classList.add('hidden');
+
+        const revAkad = document.getElementById('rev-akademik');
+        const revMinat = document.getElementById('rev-minat');
+        const revKarier = document.getElementById('rev-karier');
+        const revKekuatan = document.getElementById('rev-kekuatan');
+        const revGreeting = document.getElementById('review-greeting');
+        if (revAkad) revAkad.textContent = '-';
+        if (revMinat) revMinat.textContent = '-';
+        if (revKarier) revKarier.textContent = '-';
+        if (revKekuatan) revKekuatan.textContent = '-';
+        if (revGreeting) revGreeting.innerHTML = 'Hai, silakan periksa ringkasan profilmu sebelum dikirim ke AI.';
+
+        // e. Sembunyikan seluruh pesan error inline.
+        if (typeof STARSValidator !== 'undefined' && typeof STARSValidator.clearValidationErrors === 'function') {
+            STARSValidator.clearValidationErrors();
+        } else {
+            [
+                'nama-error', 'mapel-umum-error', 'mapel-pilihan-error',
+                'minat-error', 'karier-error', 'provinsi-error',
+                'kota-error', 'strength-error', 'hobi-error'
+            ].forEach(errId => {
+                const el = document.getElementById(errId);
+                if (el) el.classList.add('hidden');
+            });
+            document.querySelectorAll('.border-red-500').forEach(el => {
+                el.classList.remove('border-red-500');
+            });
+        }
+
+        // State evaluasi internal
+        lastValidationResult = null;
+        lastStrengthResult = null;
+        lastConsistencyResult = null;
+        lastConfidenceResult = null;
+        delete predictionForm.dataset.bypassGate;
+
+        // Bersihkan area tampilan hasil prediksi jika ada
+        if (resultContainer) resultContainer.classList.add('hidden');
+        if (resultLoading) resultLoading.classList.add('hidden');
+        if (resultData) {
+            resultData.classList.add('hidden');
+            resultData.innerHTML = '';
+        }
+
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            if (submitBtn.dataset.originalHtml) {
+                submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+            }
+        }
+
+        // g. Panggil closeResetModal()
+        closeResetModal();
+
+        // f. Panggil showStep(1) untuk mengembalikan tampilan visual ke Bagian 1 dan perbarui progress bar ke 25%
+        showStep(1);
+
+        // h. Lakukan smooth scroll ke bagian atas form
+        const prediksiSection = document.getElementById('prediksi');
+        if (prediksiSection) {
+            prediksiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    const resetWizardForm = softResetAssessment;
+
+    if (resetWizardBtn) {
+        resetWizardBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openResetModal();
+        });
+    }
+
+    if (cancelResetBtn) {
+        cancelResetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeResetModal();
+        });
+    }
+
+    if (confirmResetBtn) {
+        confirmResetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            softResetAssessment();
+        });
+    }
+
+    if (resetModal) {
+        resetModal.addEventListener('click', (e) => {
+            if (e.target === resetModal) closeResetModal();
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && resetModal && !resetModal.classList.contains('hidden')) {
+            closeResetModal();
+        }
+    });
+
+    // Helper to format output rendering dynamically (Matt Pocock Defensive Style)
     function renderPredictionResults(data) {
+        if (!data) return;
+
         // 1. Jurusan Utama
-        document.getElementById('res-jurusan-utama').textContent = data.jurusan_utama;
+        const resJurusan = document.getElementById('res-jurusan-utama');
+        if (resJurusan) resJurusan.textContent = data.jurusan_utama || '-';
         
         // 2. Tingkat Kecocokan & Bintang
-        const tk = data.tingkat_kecocokan;
-        document.getElementById('res-tingkat-label').textContent = tk.label;
-        document.getElementById('res-tingkat-bintang').textContent = tk.bintang;
+        const tk = data.tingkat_kecocokan || {};
+        const resLabel = document.getElementById('res-tingkat-label');
+        if (resLabel) resLabel.textContent = tk.label || '';
+        const resBintang = document.getElementById('res-tingkat-bintang');
+        if (resBintang) resBintang.textContent = tk.bintang || '';
         
         // Match percentage calculating (taking the main ranking percent)
-        const primaryRank = data.ranking[0];
-        const matchPct = (primaryRank.probabilitas * 100).toFixed(1) + '%';
-        
-        const progressBar = document.getElementById('res-progress-bar');
-        progressBar.textContent = matchPct;
-        progressBar.style.color = tk.warna;
+        if (Array.isArray(data.ranking) && data.ranking.length > 0) {
+            const primaryRank = data.ranking[0];
+            const matchPct = (primaryRank.probabilitas * 100).toFixed(1) + '%';
+            const progressBar = document.getElementById('res-progress-bar');
+            if (progressBar) {
+                progressBar.textContent = matchPct;
+                if (tk.warna) progressBar.style.color = tk.warna;
+            }
+        }
 
         // 3. Alasan Rekomendasi
         const alasanContainer = document.getElementById('res-alasan-list');
-        alasanContainer.innerHTML = '';
-        data.alasan.forEach(alasan => {
-            alasanContainer.innerHTML += `
-                <li class="flex items-start space-x-3 text-sm text-[var(--text-secondary)]">
-                    <span class="text-green-500 mt-0.5"><i class="fas fa-check-circle"></i></span>
-                    <span>${alasan}</span>
-                </li>
-            `;
-        });
+        if (alasanContainer && Array.isArray(data.alasan)) {
+            alasanContainer.innerHTML = '';
+            data.alasan.forEach(alasan => {
+                alasanContainer.innerHTML += `
+                    <li class="flex items-start space-x-3 text-sm text-[var(--text-secondary)]">
+                        <span class="text-green-500 mt-0.5"><i class="fas fa-check-circle"></i></span>
+                        <span>${alasan}</span>
+                    </li>
+                `;
+            });
+        }
 
         // 4. Jurusan Alternatif (Top 3)
         const altContainer = document.getElementById('res-alternatif-cards');
-        altContainer.innerHTML = '';
-        
-        data.alternatif.forEach((alt, idx) => {
-            const icons = ['fa-graduation-cap', 'fa-book-open', 'fa-award'];
-            const medali = ['🥈 Kedua', '🥉 Ketiga'];
-            altContainer.innerHTML += `
-                <div class="p-5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-[var(--card-shadow)] flex flex-col justify-between hover:border-[var(--accent-1)] transition-all">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide">${medali[idx]}</span>
-                            <span class="h-8 w-8 rounded-full bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)]">
-                                <i class="fas ${icons[idx+1] || 'fa-graduation-cap'} text-xs"></i>
-                            </span>
+        if (altContainer && Array.isArray(data.alternatif)) {
+            altContainer.innerHTML = '';
+            const rankTitles = ['Pilihan Ke-2', 'Pilihan Ke-3'];
+            data.alternatif.forEach((alt, idx) => {
+                const icons = ['fa-graduation-cap', 'fa-book-open', 'fa-award'];
+                const rankTitle = rankTitles[idx] || `Pilihan Ke-${idx + 2}`;
+                const tkAlt = alt.tingkat_kecocokan || {};
+                altContainer.innerHTML += `
+                    <div class="p-5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-[var(--card-shadow)] flex flex-col justify-between hover:border-[var(--accent-1)] transition-all">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide">${rankTitle}</span>
+                                <span class="h-8 w-8 rounded-full bg-[var(--bg-tertiary)] border border-[var(--card-border)] flex items-center justify-center text-[var(--text-secondary)]">
+                                    <i class="fas ${icons[idx+1] || 'fa-graduation-cap'} text-xs"></i>
+                                </span>
+                            </div>
+                            <h4 class="text-base font-bold text-[var(--text-primary)] mb-2 leading-tight">${alt.jurusan}</h4>
                         </div>
-                        <h4 class="text-base font-bold text-[var(--text-primary)] mb-2 leading-tight">${alt.jurusan}</h4>
+                        <div class="mt-4 flex items-center space-x-2">
+                            <span class="text-xs font-medium px-2 py-0.5 rounded" style="background-color: ${tkAlt.warna || '#4F46E5'}20; color: ${tkAlt.warna || '#4F46E5'}">${tkAlt.label || ''}</span>
+                            <span class="text-[10px] text-[var(--text-muted)]">${tkAlt.bintang || ''}</span>
+                        </div>
                     </div>
-                    <div class="mt-4 flex items-center space-x-2">
-                        <span class="text-xs font-medium px-2 py-0.5 rounded" style="background-color: ${alt.tingkat_kecocokan.warna}20; color: ${alt.tingkat_kecocokan.warna}">${alt.tingkat_kecocokan.label}</span>
-                        <span class="text-[10px] text-[var(--text-muted)]">${alt.tingkat_kecocokan.bintang}</span>
-                    </div>
-                </div>
-            `;
-        });
+                `;
+            });
+        }
 
         // 5. Prospek Karier
         const karierContainer = document.getElementById('res-karier-badges');
-        karierContainer.innerHTML = '';
-        data.prospek_karier.forEach(job => {
-            karierContainer.innerHTML += `
-                <span class="text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)] transition-all cursor-default">
-                    <i class="fas fa-briefcase text-[10px] mr-1.5 text-[var(--text-muted)]"></i> ${job}
-                </span>
-            `;
-        });
+        if (karierContainer && Array.isArray(data.prospek_karier)) {
+            karierContainer.innerHTML = '';
+            data.prospek_karier.forEach(job => {
+                karierContainer.innerHTML += `
+                    <span class="text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)] transition-all cursor-default">
+                        <i class="fas fa-briefcase text-[10px] mr-1.5 text-[var(--text-muted)]"></i> ${job}
+                    </span>
+                `;
+            });
+        }
 
         // 6. Ranking Tabel Seluruh Jurusan (20 Jurusan)
         const rankingBody = document.getElementById('res-ranking-tbody');
-        rankingBody.innerHTML = '';
-        
-        data.ranking.forEach(row => {
-            const rowPct = (row.probabilitas * 100).toFixed(1);
-            rankingBody.innerHTML += `
-                <tr class="border-b border-[var(--card-border)] hover:bg-black/[0.01] dark:hover:bg-white/[0.01] transition-colors">
-                    <td class="px-6 py-4 text-sm font-semibold text-[var(--text-muted)] text-center">${row.rank}</td>
-                    <td class="px-6 py-4 text-sm font-bold text-[var(--text-primary)]">${row.jurusan}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center justify-center min-w-[100px]">
-                            <span class="text-sm font-mono font-bold" style="color: ${row.tingkat_kecocokan.warna}">${rowPct}%</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span class="text-xs font-medium px-2.5 py-0.5 rounded" style="background-color: ${row.tingkat_kecocokan.warna}15; color: ${row.tingkat_kecocokan.warna}">
-                            ${row.tingkat_kecocokan.label}
-                        </span>
-                    </td>
-                </tr>
-            `;
-        });
+        if (rankingBody && Array.isArray(data.ranking)) {
+            rankingBody.innerHTML = '';
+            data.ranking.forEach(row => {
+                const rowPct = (row.probabilitas * 100).toFixed(1);
+                const tkRow = row.tingkat_kecocokan || {};
+                rankingBody.innerHTML += `
+                    <tr class="border-b border-[var(--card-border)] hover:bg-black/[0.01] dark:hover:bg-white/[0.01] transition-colors">
+                        <td class="px-6 py-4 text-sm font-semibold text-[var(--text-muted)] text-center">${row.rank}</td>
+                        <td class="px-6 py-4 text-sm font-bold text-[var(--text-primary)]">${row.jurusan}</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center min-w-[100px]">
+                                <span class="text-sm font-mono font-bold" style="color: ${tkRow.warna || '#4F46E5'}">${rowPct}%</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <span class="text-xs font-medium px-2.5 py-0.5 rounded" style="background-color: ${tkRow.warna || '#4F46E5'}15; color: ${tkRow.warna || '#4F46E5'}">
+                                ${tkRow.label || ''}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
     }
 
     // --- V4.2 FORM UX REDESIGN ADDITIONS ---
@@ -1308,16 +1554,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (btnTambahEkskul) {
         btnTambahEkskul.addEventListener('click', () => {
-            ekskulIntro.classList.add('hidden');
-            ekskulForm.classList.remove('hidden');
+            if (ekskulIntro) ekskulIntro.classList.add('hidden');
+            if (ekskulForm) ekskulForm.classList.remove('hidden');
         });
     }
     if (btnTutupEkskul) {
         btnTutupEkskul.addEventListener('click', () => {
-            ekskulForm.classList.add('hidden');
-            ekskulIntro.classList.remove('hidden');
-            // Uncheck everything
-            ekskulForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            if (ekskulForm) {
+                ekskulForm.classList.add('hidden');
+                ekskulForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            }
+            if (ekskulIntro) ekskulIntro.classList.remove('hidden');
         });
     }
 
@@ -1329,15 +1576,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (btnTambahPrestasi) {
         btnTambahPrestasi.addEventListener('click', () => {
-            prestasiIntro.classList.add('hidden');
-            prestasiForm.classList.remove('hidden');
+            if (prestasiIntro) prestasiIntro.classList.add('hidden');
+            if (prestasiForm) prestasiForm.classList.remove('hidden');
         });
     }
     if (btnTutupPrestasi) {
         btnTutupPrestasi.addEventListener('click', () => {
-            prestasiForm.classList.add('hidden');
-            prestasiIntro.classList.remove('hidden');
-            prestasiForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            if (prestasiForm) {
+                prestasiForm.classList.add('hidden');
+                prestasiForm.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            }
+            if (prestasiIntro) prestasiIntro.classList.remove('hidden');
         });
     }
 
