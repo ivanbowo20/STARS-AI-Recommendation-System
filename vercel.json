@@ -1,12 +1,37 @@
 {
   "version": 2,
+  "regions": ["sin1"],
+  "cleanUrls": true,
   "functions": {
     "api/*.py": {
-      "includeFiles": "model/**,templates/**,dataset/**,services/**,api.py"
+      "includeFiles": "model/**,templates/**,dataset/**,services/**,api.py",
+      "maxDuration": 15
     }
   },
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(ico|png|jpg|jpeg|svg|webp|webm|mp4|woff2|woff)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "rewrites": [
-    { "source": "/kontak", "destination": "/api/kontak" },
-    { "source": "/((?!api/).*)", "destination": "/api/index" }
+    { "source": "/kontak", "destination": "/kontak.html" },
+    { "source": "/api/prediksi", "destination": "/api/prediksi.py" },
+    { "source": "/api/contact", "destination": "/api/contact.py" },
+    { "source": "/api/kontak", "destination": "/api/kontak.py" }
   ]
 }

@@ -55,64 +55,7 @@
 
     
 
-    <!-- Tailwind CSS & Flowbite CDN -->
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Neuton', 'serif'],
-                        display: ['"Playfair Display"', 'serif'],
-                    },
-                    colors: {
-
-                        dark: {
-
-                            950: '#030303',
-
-                            900: '#09090b',
-
-                            800: '#121214',
-
-                            700: '#18181b',
-
-                            600: '#27272a',
-
-                            500: '#3f3f46',
-
-                            400: '#a1a1aa'
-
-                        },
-
-                        silver: {
-
-                            100: '#f4f4f5',
-
-                            200: '#e4e4e7',
-
-                            300: '#d4d4d8',
-
-                            400: '#a1a1aa',
-
-                            500: '#71717a'
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    </script>
-
+    <!-- Tailwind CSS (Precompiled in style.css) & Flowbite CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
     
@@ -125,7 +68,7 @@
 
     <!-- Custom CSS -->
 
-    <link rel="stylesheet" href="assets/css/style.css?v=2.1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=2.2">
 
     
 
@@ -309,29 +252,39 @@
 
                 const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
 
-                function toggleTheme() {
-
+                function syncHeroVideo() {
                     const isLight = document.documentElement.classList.contains('light');
-
-                    if (isLight) {
-
-                        document.documentElement.classList.remove('light');
-
-                        document.documentElement.classList.add('dark');
-
-                        localStorage.setItem('theme', 'dark');
-
-                    } else {
-
-                        document.documentElement.classList.remove('dark');
-
-                        document.documentElement.classList.add('light');
-
-                        localStorage.setItem('theme', 'light');
-
+                    const activeVideo = isLight ? document.querySelector('.video-light') : document.querySelector('.video-dark');
+                    const inactiveVideo = isLight ? document.querySelector('.video-dark') : document.querySelector('.video-light');
+                    if (inactiveVideo) {
+                        inactiveVideo.pause();
                     }
-
+                    if (activeVideo) {
+                        if (!activeVideo.getAttribute('src') && activeVideo.dataset.src) {
+                            activeVideo.src = activeVideo.dataset.src;
+                            activeVideo.load();
+                        }
+                        const p = activeVideo.play();
+                        if (p !== undefined) p.catch(() => {});
+                    }
                 }
+
+                function toggleTheme() {
+                    const isLight = document.documentElement.classList.contains('light');
+                    if (isLight) {
+                        document.documentElement.classList.remove('light');
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.documentElement.classList.add('light');
+                        localStorage.setItem('theme', 'light');
+                    }
+                    syncHeroVideo();
+                }
+
+                // Initial video sync on load
+                syncHeroVideo();
 
                 if (themeToggleBtn) {
 
@@ -406,14 +359,12 @@
 
     <!-- Video Background (membentang di Hero & Tentang) -->
     <div class="hero-video-wrapper">
-        <!-- Video Dark Mode -->
-        <video class="hero-video video-dark" autoplay loop muted playsinline disablePictureInPicture>
-            <source src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790240412/Creating_space_environment_video_1080p_20260923203531.mp4" type="video/mp4">
+        <!-- Video Dark Mode (Lazy loaded by theme to save bandwidth) -->
+        <video class="hero-video video-dark" loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790240412/Creating_space_environment_video_1080p_20260923203531.mp4">
         </video>
         
-        <!-- Video Light Mode -->
-        <video class="hero-video video-light" autoplay loop muted playsinline disablePictureInPicture>
-            <source src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074533/Clouds_drifting_in_sky_1080p_20260922174746.mp4" type="video/mp4">
+        <!-- Video Light Mode (Lazy loaded by theme to save bandwidth) -->
+        <video class="hero-video video-light" loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074533/Clouds_drifting_in_sky_1080p_20260922174746.mp4">
         </video>
 
         <!-- Overlay Layer untuk Kontras Teks -->
@@ -756,23 +707,102 @@
                 <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
             </div>
             <div class="flex flex-wrap gap-2.5" id="group-favorit">
-                <script>
-                    const favs = [
-                        ['Favorit_Matematika_Umum','Mtk Umum'], ['Favorit_Bahasa_Indonesia','B.Indonesia'], ['Favorit_Bahasa_Inggris_Umum','B.Inggris'],
-                        ['Favorit_Pendidikan_Pancasila','Pancasila'], ['Favorit_Matematika_Lanjutan','Mtk Lanjutan'], ['Favorit_Bahasa_Inggris_Lanjutan','B.Ing Lanjutan'],
-                        ['Favorit_Informatika','Informatika'], ['Favorit_Fisika','Fisika'], ['Favorit_Kimia','Kimia'], ['Favorit_Biologi','Biologi'],
-                        ['Favorit_Ekonomi','Ekonomi'], ['Favorit_Sosiologi','Sosiologi'], ['Favorit_Geografi','Geografi'], ['Favorit_Sejarah','Sejarah'],
-                        ['Favorit_Seni_Budaya','Seni Budaya'], ['Favorit_PJOK','PJOK']
-                    ];
-                    document.write(favs.map(f => `
-                        <label class="cursor-pointer group">
-                            <input type="checkbox" name="Favorit" value="${f[0]}" class="peer sr-only favorit-cb">
-                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                ${f[1]}
-                            </div>
-                        </label>
-                    `).join(''));
-                </script>
+                                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Matematika_Umum" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Mtk Umum
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Bahasa_Indonesia" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        B.Indonesia
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Bahasa_Inggris_Umum" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        B.Inggris
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Pendidikan_Pancasila" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Pancasila
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Matematika_Lanjutan" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Mtk Lanjutan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Bahasa_Inggris_Lanjutan" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        B.Ing Lanjutan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Informatika" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Informatika
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Fisika" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Fisika
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Kimia" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Kimia
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Biologi" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Biologi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Ekonomi" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Ekonomi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Sosiologi" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Sosiologi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Geografi" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Geografi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Sejarah" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Sejarah
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_Seni_Budaya" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Seni Budaya
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Favorit" value="Favorit_PJOK" class="peer sr-only favorit-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        PJOK
+                    </div>
+                </label>
             </div>
         </div>
 
@@ -783,21 +813,66 @@
                 <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
             </div>
             <div class="flex flex-wrap gap-2.5" id="group-minat">
-                <script>
-                    const minats = [
-                        ['Minat_Teknologi','Teknologi'], ['Minat_Bisnis','Bisnis'], ['Minat_Kesehatan','Kesehatan'], ['Minat_Sosial','Sosial'],
-                        ['Minat_Hukum','Hukum'], ['Minat_Pendidikan','Pendidikan'], ['Minat_Seni','Seni'], ['Minat_Komunikasi','Komunikasi'],
-                        ['Minat_Teknik','Teknik'], ['Minat_Lingkungan','Lingkungan']
-                    ];
-                    document.write(minats.map(m => `
-                        <label class="cursor-pointer group">
-                            <input type="checkbox" name="Minat" value="${m[0]}" class="peer sr-only minat-cb">
-                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                ${m[1]}
-                            </div>
-                        </label>
-                    `).join(''));
-                </script>
+                                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Teknologi" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Teknologi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Bisnis" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Bisnis
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Kesehatan" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Kesehatan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Sosial" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Sosial
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Hukum" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Hukum
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Pendidikan" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Pendidikan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Seni" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Seni
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Komunikasi" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Komunikasi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Teknik" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Teknik
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Minat" value="Minat_Lingkungan" class="peer sr-only minat-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Lingkungan
+                    </div>
+                </label>
             </div>
             <div id="minat-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
                 <i class="fas fa-circle-exclamation flex-shrink-0"></i>
@@ -812,24 +887,120 @@
                 <span class="text-xs text-[var(--text-muted)]">Maksimal 2 pilihan.</span>
             </div>
             <div class="flex flex-wrap gap-2.5" id="group-karier">
-                <script>
-                    const kariers = [
-                        ['Karier_Software_Engineer','Software Engineer'], ['Karier_Data_Scientist','Data Scientist'], ['Karier_Engineer','Engineer (Teknik)'],
-                        ['Karier_Dokter','Dokter'], ['Karier_Apoteker','Apoteker'], ['Karier_Akuntan','Akuntan'], ['Karier_Manajer','Manajer'],
-                        ['Karier_Pengusaha','Pengusaha / Bisnis'], ['Karier_Pengacara','Pengacara'], ['Karier_Guru','Guru / Pendidik'], ['Karier_Desainer','Desainer'],
-                        ['Karier_Komunikasi','Bidang Komunikasi'], ['Karier_Psikolog','Psikolog'], ['Karier_Atlet','Atlet'], ['Karier_Arsitek','Arsitek'],
-                        ['Karier_Administrasi','Administrasi'], ['Karier_Lingkungan','Bidang Lingkungan'], ['Karier_Peneliti','Peneliti / Ilmuwan'],
-                        ['Karier_Belum_Yakin','Masih Belum Yakin']
-                    ];
-                    document.write(kariers.map(k => `
-                        <label class="cursor-pointer group">
-                            <input type="checkbox" name="Karier" value="${k[0]}" class="peer sr-only karier-cb">
-                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                ${k[1]}
-                            </div>
-                        </label>
-                    `).join(''));
-                </script>
+                                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Software_Engineer" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Software Engineer
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Data_Scientist" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Data Scientist
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Engineer" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Engineer (Teknik)
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Dokter" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Dokter
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Apoteker" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Apoteker
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Akuntan" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Akuntan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Manajer" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Manajer
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Pengusaha" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Pengusaha / Bisnis
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Pengacara" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Pengacara
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Guru" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Guru / Pendidik
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Desainer" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Desainer
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Komunikasi" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Bidang Komunikasi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Psikolog" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Psikolog
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Atlet" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Atlet
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Arsitek" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Arsitek
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Administrasi" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Administrasi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Lingkungan" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Bidang Lingkungan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Peneliti" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Peneliti / Ilmuwan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Karier" value="Karier_Belum_Yakin" class="peer sr-only karier-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Masih Belum Yakin
+                    </div>
+                </label>
             </div>
             <div id="karier-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
                 <i class="fas fa-circle-exclamation flex-shrink-0"></i>
@@ -912,21 +1083,48 @@
                 <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
             </div>
             <div class="flex flex-wrap gap-2.5" id="group-strength">
-                <script>
-                    const strengths = [
-                        ['Strength_Analisis_Data','Analisis Data'], ['Strength_Komunikasi','Komunikasi'], ['Strength_Kepemimpinan','Kepemimpinan'],
-                        ['Strength_Kreativitas','Kreativitas'], ['Strength_Teknologi_Digital','Teknologi Digital'], ['Strength_Spatial_Visual','Visual / Spasial'],
-                        ['Strength_Problem_Solving','Problem Solving']
-                    ];
-                    document.write(strengths.map(s => `
-                        <label class="cursor-pointer group">
-                            <input type="checkbox" name="Strength" value="${s[0]}" class="peer sr-only strength-cb">
-                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                ${s[1]}
-                            </div>
-                        </label>
-                    `).join(''));
-                </script>
+                                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Analisis_Data" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Analisis Data
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Komunikasi" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Komunikasi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Kepemimpinan" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Kepemimpinan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Kreativitas" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Kreativitas
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Teknologi_Digital" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Teknologi Digital
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Spatial_Visual" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Visual / Spasial
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Strength" value="Strength_Problem_Solving" class="peer sr-only strength-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Problem Solving
+                    </div>
+                </label>
             </div>
             <div id="strength-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
                 <i class="fas fa-circle-exclamation flex-shrink-0"></i>
@@ -941,21 +1139,78 @@
                 <span class="text-xs text-[var(--text-muted)]">Maksimal 3 pilihan.</span>
             </div>
             <div class="flex flex-wrap gap-2.5" id="group-hobi">
-                <script>
-                    const hobis = [
-                        ['Hobi_Olahraga','Olahraga'], ['Hobi_Gaming','Gaming'], ['Hobi_Musik','Musik'], ['Hobi_Menggambar','Desain / Menggambar'],
-                        ['Hobi_Membaca','Membaca'], ['Hobi_Menulis','Menulis'], ['Hobi_Teknologi','Coding / Teknologi'], ['Hobi_Bisnis','Bisnis / Jualan'],
-                        ['Hobi_Sosial','Relawan / Sosial'], ['Hobi_Organisasi','Organisasi'], ['Hobi_Fotografi','Fotografi / Video'], ['Hobi_Memasak','Memasak']
-                    ];
-                    document.write(hobis.map(h => `
-                        <label class="cursor-pointer group">
-                            <input type="checkbox" name="Hobi" value="${h[0]}" class="peer sr-only hobi-cb">
-                            <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                ${h[1]}
-                            </div>
-                        </label>
-                    `).join(''));
-                </script>
+                                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Olahraga" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Olahraga
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Gaming" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Gaming
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Musik" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Musik
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Menggambar" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Desain / Menggambar
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Membaca" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Membaca
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Menulis" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Menulis
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Teknologi" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Coding / Teknologi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Bisnis" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Bisnis / Jualan
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Sosial" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Relawan / Sosial
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Organisasi" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Organisasi
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Fotografi" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Fotografi / Video
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="checkbox" name="Hobi" value="Hobi_Memasak" class="peer sr-only hobi-cb">
+                    <div class="px-4 py-3 sm:py-2 rounded-full border border-[var(--card-border)] bg-[var(--bg-secondary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                        Memasak
+                    </div>
+                </label>
             </div>
             <div id="hobi-error" class="hidden mt-3 px-3.5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 transition-all">
                 <i class="fas fa-circle-exclamation flex-shrink-0"></i>
@@ -979,38 +1234,77 @@
                 <div>
                     <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Pilih Ekstrakurikuler (Maks 2)</h4>
                     <div class="flex flex-wrap gap-2.5" id="group-ekskul">
-                        <script>
-                            const ekskuls = [
-                                ['Ekskul_Olahraga','Olahraga'], ['Ekskul_Seni','Seni'], ['Ekskul_Teknologi','Teknologi'], ['Ekskul_Akademik','Akademik / Sains'],
-                                ['Ekskul_Organisasi','Organisasi Inti (OSIS/BEM)'], ['Ekskul_Sosial','Sosial (PMR/Pramuka)'], ['Ekskul_Keagamaan','Keagamaan']
-                            ];
-                            document.write(ekskuls.map(e => `
-                                <label class="cursor-pointer group">
-                                    <input type="checkbox" name="Ekskul" value="${e[0]}" class="peer sr-only ekskul-cb">
-                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                        ${e[1]}
-                                    </div>
-                                </label>
-                            `).join(''));
-                        </script>
+                                                <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Olahraga" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Olahraga
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Seni" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Seni
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Teknologi" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Teknologi
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Akademik" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Akademik / Sains
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Organisasi" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Organisasi Inti (OSIS/BEM)
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Sosial" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Sosial (PMR/Pramuka)
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Ekskul" value="Ekskul_Keagamaan" class="peer sr-only ekskul-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Keagamaan
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Peran Anda</h4>
                     <div class="flex flex-wrap gap-2.5" id="group-peran">
-                        <script>
-                            const perans = [
-                                ['Peran_Anggota','Anggota'], ['Peran_Pengurus','Pengurus Inti'], ['Peran_Ketua','Ketua'], ['Peran_Koordinator','Koordinator Bidang']
-                            ];
-                            document.write(perans.map(p => `
-                                <label class="cursor-pointer group">
-                                    <input type="checkbox" name="Peran" value="${p[0]}" class="peer sr-only peran-cb">
-                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                        ${p[1]}
-                                    </div>
-                                </label>
-                            `).join(''));
-                        </script>
+                                                <label class="cursor-pointer group">
+                            <input type="checkbox" name="Peran" value="Peran_Anggota" class="peer sr-only peran-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Anggota
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Peran" value="Peran_Pengurus" class="peer sr-only peran-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Pengurus Inti
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Peran" value="Peran_Ketua" class="peer sr-only peran-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Ketua
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Peran" value="Peran_Koordinator" class="peer sr-only peran-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Koordinator Bidang
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -1040,39 +1334,77 @@
                 <div>
                     <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Bidang Prestasi (Maks 2)</h4>
                     <div class="flex flex-wrap gap-2.5" id="group-prestasi">
-                        <script>
-                            const prestasis = [
-                                ['Prestasi_Akademik','Akademik / Sains'], ['Prestasi_Olahraga','Olahraga'], ['Prestasi_Seni','Seni'],
-                                ['Prestasi_Teknologi','Teknologi / Inovasi'], ['Prestasi_Organisasi','Organisasi / Debat'], ['Prestasi_Sosial','Sosial / Relawan']
-                            ];
-                            document.write(prestasis.map(p => `
-                                <label class="cursor-pointer group">
-                                    <input type="checkbox" name="Prestasi" value="${p[0]}" class="peer sr-only prestasi-cb">
-                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                        ${p[1]}
-                                    </div>
-                                </label>
-                            `).join(''));
-                        </script>
+                                                <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Akademik" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Akademik / Sains
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Olahraga" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Olahraga
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Seni" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Seni
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Teknologi" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Teknologi / Inovasi
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Organisasi" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Organisasi / Debat
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="Prestasi" value="Prestasi_Sosial" class="peer sr-only prestasi-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Sosial / Relawan
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide mb-3">Tingkat Pencapaian Tertinggi</h4>
                     <div class="flex flex-wrap gap-2.5" id="group-tingkat-prestasi">
-                        <script>
-                            const tingkats = [
-                                ['Prestasi_Sekolah','Tingkat Sekolah'], ['Prestasi_Kecamatan','Tingkat Kecamatan'], ['Prestasi_Kabupaten','Kabupaten/Kota'],
-                                ['Prestasi_Provinsi','Tingkat Provinsi'], ['Prestasi_Nasional','Nasional / Internasional']
-                            ];
-                            document.write(tingkats.map(t => `
-                                <label class="cursor-pointer group">
-                                    <input type="checkbox" name="PrestasiTingkat" value="${t[0]}" class="peer sr-only pt-cb">
-                                    <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
-                                        ${t[1]}
-                                    </div>
-                                </label>
-                            `).join(''));
-                        </script>
+                                                <label class="cursor-pointer group">
+                            <input type="checkbox" name="PrestasiTingkat" value="Prestasi_Sekolah" class="peer sr-only pt-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Tingkat Sekolah
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="PrestasiTingkat" value="Prestasi_Kecamatan" class="peer sr-only pt-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Tingkat Kecamatan
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="PrestasiTingkat" value="Prestasi_Kabupaten" class="peer sr-only pt-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Kabupaten/Kota
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="PrestasiTingkat" value="Prestasi_Provinsi" class="peer sr-only pt-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Tingkat Provinsi
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="checkbox" name="PrestasiTingkat" value="Prestasi_Nasional" class="peer sr-only pt-cb">
+                            <div class="px-4 sm:px-3 py-2.5 sm:py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--bg-primary)] text-sm sm:text-xs font-semibold text-[var(--text-secondary)] peer-checked:bg-[var(--text-primary)] peer-checked:text-[var(--bg-primary)] peer-checked:border-[var(--text-primary)] group-hover:border-[var(--text-muted)] transition-all">
+                                Nasional / Internasional
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>

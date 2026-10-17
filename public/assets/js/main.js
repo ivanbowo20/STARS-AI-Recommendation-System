@@ -725,9 +725,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
         });
 
-        provinsiSearch.addEventListener('input', (e) => {
-            const typedVal = e.target.value.trim().toLowerCase();
-            renderProvinsiDropdown(e.target.value);
+        const debounce = (func, delay = 150) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => func(...args), delay);
+            };
+        };
+
+        const debouncedRenderProvinsi = debounce((val) => {
+            const typedVal = val.trim().toLowerCase();
+            renderProvinsiDropdown(val);
             provinsiDropdown.classList.remove('hidden');
             if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
             
@@ -736,6 +744,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Exact match while typing! Auto commit.
                 selectProvince(matchedProv);
             }
+        }, 150);
+
+        provinsiSearch.addEventListener('input', (e) => {
+            debouncedRenderProvinsi(e.target.value);
         });
 
         provinsiSearch.addEventListener('keydown', (e) => {
@@ -803,13 +815,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (kotaIcon) kotaIcon.classList.add('rotate-180');
             });
 
-            kotaSearch.addEventListener('input', (e) => {
-                if (kotaSearch.disabled) return;
-                renderKotaDropdown(e.target.value);
+            const debouncedRenderKota = debounce((val) => {
+                renderKotaDropdown(val);
                 kotaDropdown.classList.remove('hidden');
                 if (kotaIcon) kotaIcon.classList.add('rotate-180');
-                // User is typing, clear the actual valid value
+            }, 150);
+
+            kotaSearch.addEventListener('input', (e) => {
+                if (kotaSearch.disabled) return;
+                // User is typing, clear the actual valid value immediately
                 if (kotaInput) kotaInput.value = ''; 
+                debouncedRenderKota(e.target.value);
             });
 
             kotaSearch.addEventListener('keydown', (e) => {
