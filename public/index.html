@@ -253,13 +253,19 @@
                 const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
 
                 function syncHeroVideo() {
+                    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     const isLight = document.documentElement.classList.contains('light');
                     const activeVideo = isLight ? document.querySelector('.video-light') : document.querySelector('.video-dark');
                     const inactiveVideo = isLight ? document.querySelector('.video-dark') : document.querySelector('.video-light');
                     if (inactiveVideo) {
                         inactiveVideo.pause();
                     }
+                    if (prefersReducedMotion) {
+                        if (activeVideo) activeVideo.pause();
+                        return;
+                    }
                     if (activeVideo) {
+                        activeVideo.autoplay = true;
                         if (!activeVideo.getAttribute('src') && activeVideo.dataset.src) {
                             activeVideo.src = activeVideo.dataset.src;
                             activeVideo.load();
@@ -360,11 +366,11 @@
     <!-- Video Background (membentang di Hero & Tentang) -->
     <div class="hero-video-wrapper">
         <!-- Video Dark Mode (Lazy loaded by theme to save bandwidth) -->
-        <video class="hero-video video-dark" loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790240412/Creating_space_environment_video_1080p_20260923203531.mp4">
+        <video class="hero-video video-dark" autoplay loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790240412/Creating_space_environment_video_1080p_20260923203531.mp4">
         </video>
         
         <!-- Video Light Mode (Lazy loaded by theme to save bandwidth) -->
-        <video class="hero-video video-light" loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074533/Clouds_drifting_in_sky_1080p_20260922174746.mp4">
+        <video class="hero-video video-light" autoplay loop muted playsinline disablePictureInPicture preload="none" data-src="https://res.cloudinary.com/eu7rdzvj/video/upload/v1790074533/Clouds_drifting_in_sky_1080p_20260922174746.mp4">
         </video>
 
         <!-- Overlay Layer untuk Kontras Teks -->
@@ -2123,10 +2129,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Application Logic scripts (STARS V4.2) -->
-    <script src="assets/js/validation.js?v=8"></script>
-    <script src="assets/js/location_data.js?v=8"></script>
-    <script src="assets/js/campus.js?v=8"></script>
-    <script src="assets/js/main.js?v=8"></script>
+    <script src="/assets/js/validation.js?v=8"></script>
+    <script src="/assets/js/location_data.js?v=8"></script>
+    <script src="/assets/js/campus.js?v=8"></script>
+    <script src="/assets/js/main.js?v=8"></script>
 
     <!-- Custom scripts -->
 

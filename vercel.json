@@ -5,6 +5,7 @@
   "functions": {
     "api/*.py": {
       "includeFiles": "model/**,templates/**,dataset/**,services/**,api.py",
+      "excludeFiles": "public/**,assets/**,docs/**,graphify-out/**,training/**",
       "maxDuration": 15
     }
   },
@@ -31,7 +32,6 @@
   "rewrites": [
     { "source": "/kontak", "destination": "/kontak.html" },
     { "source": "/api/prediksi", "destination": "/api/prediksi.py" },
-    { "source": "/api/contact", "destination": "/api/contact.py" },
-    { "source": "/api/kontak", "destination": "/api/kontak.py" }
+    { "source": "/api/contact", "destination": "/api/contact.py" }
   ]
 }

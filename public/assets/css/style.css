@@ -874,5 +874,9 @@ html.dark .premium-glass-card {
     .stars-nav-indicator {
         transition: opacity 0.3s ease !important;
     }
+    .hero-aurora-blob, .space-star, .galaxy-nebula, .hero-video, .light-blob {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 

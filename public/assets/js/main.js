@@ -747,6 +747,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
 
         provinsiSearch.addEventListener('input', (e) => {
+            currentFocus = -1;
             debouncedRenderProvinsi(e.target.value);
         });
 
@@ -823,6 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             kotaSearch.addEventListener('input', (e) => {
                 if (kotaSearch.disabled) return;
+                currentKotaFocus = -1;
                 // User is typing, clear the actual valid value immediately
                 if (kotaInput) kotaInput.value = ''; 
                 debouncedRenderKota(e.target.value);
