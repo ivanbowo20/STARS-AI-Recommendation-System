@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Ping Vercel AI Endpoint
         env:
-          DEFAULT_URL: "https://stars-ai-recommendation-system.vercel.app"
+          DEFAULT_URL: "https://stars-edu.vercel.app"
           CUSTOM_URL: ${{ secrets.VERCEL_APP_URL }}
         run: |
           TARGET_URL="${CUSTOM_URL:-$DEFAULT_URL}"
