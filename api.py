@@ -350,7 +350,9 @@ def index():
 def kontak():
     return render_template("kontak.html")
 
-@app.route("/api/prediksi", methods=["POST"])
+@app.route("/api/prediksi", methods=["POST", "OPTIONS"])
+@app.route("/api/prediksi.py", methods=["POST", "OPTIONS"])
+@app.route("/prediksi", methods=["POST", "OPTIONS"])
 def route_prediksi():
     # Support both JSON and form data
     if request.is_json:
@@ -441,7 +443,10 @@ def is_valid_email(email: str) -> bool:
     pattern = r'^[\w.+\-]+@[\w\-]+(\.[\w\-]{2,})+$'
     return bool(re.match(pattern, email))
 
-@app.route("/api/contact", methods=["POST"])
+@app.route("/api/contact", methods=["POST", "OPTIONS"])
+@app.route("/api/contact.py", methods=["POST", "OPTIONS"])
+@app.route("/api/kontak", methods=["POST", "OPTIONS"])
+@app.route("/contact", methods=["POST", "OPTIONS"])
 def route_contact():
     data = request.get_json()
     if not data:

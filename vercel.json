@@ -39,8 +39,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/kontak", "destination": "/kontak.html" },
-    { "source": "/api/prediksi", "destination": "/api/prediksi.py" },
-    { "source": "/api/contact", "destination": "/api/contact.py" }
+    { "source": "/kontak", "destination": "/kontak.html" }
   ]
 }
