@@ -1,0 +1,39 @@
+name: Keep-Alive Serverless Engine
+
+on:
+  schedule:
+    # Run every 14 minutes to prevent Vercel Serverless cold-starts
+    - cron: '*/14 * * * *'
+  workflow_dispatch: # Enable manual one-click trigger from GitHub Actions tab
+
+jobs:
+  warmup:
+    name: Ping AI Serverless Engine
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Ping Vercel AI Endpoint
+        env:
+          DEFAULT_URL: "https://stars-ai-recommendation-system.vercel.app"
+          CUSTOM_URL: ${{ secrets.VERCEL_APP_URL }}
+        run: |
+          TARGET_URL="${CUSTOM_URL:-$DEFAULT_URL}"
+          ENDPOINT="${TARGET_URL}/api/prediksi?warmup=1"
+          echo "Pinging AI serverless engine at: ${ENDPOINT}..."
+          
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}\nTIME_TOTAL:%{time_total}s" --max-time 30 -X GET "${ENDPOINT}")
+          
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS" | cut -d':' -f2)
+          TIME_TOTAL=$(echo "$RESPONSE" | grep "TIME_TOTAL" | cut -d':' -f2)
+          BODY=$(echo "$RESPONSE" | sed '/HTTP_STATUS/d' | sed '/TIME_TOTAL/d')
+          
+          echo "Response Body: ${BODY}"
+          echo "HTTP Status: ${HTTP_STATUS}"
+          echo "Total Latency: ${TIME_TOTAL}"
+          
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "SUCCESS: STARS AI Engine is warm, loaded in RAM, and ready!"
+          else
+            echo "WARNING: Unexpected HTTP status ${HTTP_STATUS}"
+          fi

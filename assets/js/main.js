@@ -1727,4 +1727,31 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof STARSCampus !== 'undefined') {
         STARSCampus.init('/dataset/kampus_indonesia.csv');
     }
+
+    // Pre-warm AI serverless container in the background (Silent Keep-Alive)
+    let aiPrewarmed = false;
+    function prewarmAIEngine() {
+        if (aiPrewarmed) return;
+        aiPrewarmed = true;
+        fetch('/api/prediksi?warmup=1', { method: 'GET' })
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.status === 'warm') {
+                    console.log('STARS AI Engine pre-warmed successfully.');
+                }
+            })
+            .catch(() => {});
+    }
+
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => setTimeout(prewarmAIEngine, 1000));
+    } else {
+        setTimeout(prewarmAIEngine, 1500);
+    }
+
+    const firstStepContainer = document.getElementById('step-1');
+    if (firstStepContainer) {
+        firstStepContainer.addEventListener('focusin', prewarmAIEngine, { once: true });
+        firstStepContainer.addEventListener('click', prewarmAIEngine, { once: true });
+    }
 });

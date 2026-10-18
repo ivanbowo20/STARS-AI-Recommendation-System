@@ -350,10 +350,31 @@ def index():
 def kontak():
     return render_template("kontak.html")
 
-@app.route("/api/prediksi", methods=["POST", "OPTIONS"])
-@app.route("/api/prediksi.py", methods=["POST", "OPTIONS"])
-@app.route("/prediksi", methods=["POST", "OPTIONS"])
+@app.route("/api/prediksi", methods=["GET", "POST", "OPTIONS"])
+@app.route("/api/prediksi.py", methods=["GET", "POST", "OPTIONS"])
+@app.route("/prediksi", methods=["GET", "POST", "OPTIONS"])
+@app.route("/api/health", methods=["GET"])
 def route_prediksi():
+    if request.method == "OPTIONS":
+        return "", 204
+
+    # Keep-Alive / Warm-Up Handler (Pre-loads Random Forest model into RAM)
+    if request.method == "GET":
+        try:
+            from services.prediction_engine import PredictionEngine
+            engine = PredictionEngine()
+            if not engine._initialized:
+                engine._initialize()
+                engine.__class__._initialized = True
+                engine._initialized = True
+            return jsonify({
+                "status": "warm",
+                "model_loaded": True,
+                "message": "STARS AI Engine is warm and ready"
+            }), 200
+        except Exception as e:
+            return jsonify({"status": "error", "error": str(e)}), 500
+
     # Support both JSON and form data
     if request.is_json:
         data = request.get_json()
