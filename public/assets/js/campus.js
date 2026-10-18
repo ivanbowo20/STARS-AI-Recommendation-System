@@ -387,13 +387,29 @@ const STARSCampus = (function () {
         }
     }
 
-    // ---- Init: load campus CSV via fetch ----
+    // ---- Init: load campus CSV via fetch with promise caching & fallback ----
+    let initPromise = null;
+
     function init(csvPath) {
-        if (campusData.length) return Promise.resolve(campusData);
-        return fetch(csvPath)
-            .then(r => r.text())
+        if (campusData && campusData.length > 0) return Promise.resolve(campusData);
+        if (initPromise) return initPromise;
+
+        const path = csvPath || '/dataset/kampus_indonesia.csv';
+        initPromise = fetch(path)
+            .then(r => {
+                if (!r.ok) {
+                    // Try fallback path if first path failed
+                    const altPath = path.startsWith('/') ? path.slice(1) : '/' + path;
+                    return fetch(altPath).then(r2 => {
+                        if (!r2.ok) throw new Error(`HTTP ${r.status} / ${r2.status}`);
+                        return r2.text();
+                    });
+                }
+                return r.text();
+            })
             .then(text => {
                 const lines = text.trim().split('\n');
+                if (!lines.length || !lines[0].trim()) return [];
                 const headers = lines[0].split(',').map(h => h.trim());
                 campusData = lines.slice(1).map(line => {
                     // Handle commas inside keunggulan column
@@ -414,9 +430,12 @@ const STARSCampus = (function () {
             })
             .catch(err => {
                 console.warn('STARS Campus: failed to load CSV', err);
+                initPromise = null;
                 return [];
             });
+
+        return initPromise;
     }
 
-    return { init, renderCampusSection, sortTable: () => {} };
+    return { init, renderCampusSection, isLoaded: () => (campusData && campusData.length > 0), sortTable: () => {} };
 })();

@@ -20,7 +20,16 @@
       ]
     },
     {
-      "source": "/(.*)\\.(ico|png|jpg|jpeg|svg|webp|webm|mp4|woff2|woff)",
+      "source": "/dataset/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(ico|png|jpg|jpeg|svg|webp|webm|mp4|woff2|woff|csv)",
       "headers": [
         {
           "key": "Cache-Control",

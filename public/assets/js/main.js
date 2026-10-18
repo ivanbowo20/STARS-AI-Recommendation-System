@@ -992,9 +992,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultLoading = document.getElementById('result-loading');
     const resultData = document.getElementById('result-data');
 
+    // Submission lock flag to prevent duplicate in-flight requests
+    let isSubmitting = false;
+
+    function resetSubmitState() {
+        isSubmitting = false;
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            if (submitBtn.dataset.originalHtml) {
+                submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+            }
+        }
+    }
+
     if (predictionForm) {
+        // Prevent accidental form submission on Enter key in inputs
+        predictionForm.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                if (isSubmitting) return;
+
+                if (currentStep < totalSteps) {
+                    if (validateStep(currentStep)) {
+                        currentStep++;
+                        showStep(currentStep);
+                        updateStepIndicator();
+                    }
+                } else if (currentStep === totalSteps) {
+                    predictionForm.dispatchEvent(new Event('submit', { cancelable: true }));
+                }
+            }
+        });
+
         predictionForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Prevent multiple in-flight prediction submissions
+            if (isSubmitting) {
+                return;
+            }
 
             // Validate that we are on the final step
             if (currentStep !== 4) {
@@ -1021,25 +1059,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Lock submission immediately
+            isSubmitting = true;
+
             // Button loading state & double-submit prevention
             const submitBtn = document.getElementById('submit-btn');
             if (submitBtn) {
-                if (submitBtn.disabled) return;
                 submitBtn.disabled = true;
                 submitBtn.dataset.originalHtml = submitBtn.innerHTML;
                 submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
                 submitBtn.innerHTML = `Memproses rekomendasi... <svg class="animate-spin -mr-1 ml-2 h-4 w-4 text-current inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
             }
 
-            const restoreSubmitBtn = () => {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    if (submitBtn.dataset.originalHtml) {
-                        submitBtn.innerHTML = submitBtn.dataset.originalHtml;
-                    }
-                }
-            };
+            const restoreSubmitBtn = resetSubmitState;
 
             // ── V5.1: Hybrid Reliability Gate ──────────────────────────
             const reliabilityScore = lastConfidenceResult ? lastConfidenceResult.score : 100;
@@ -1114,7 +1146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             tujuan_karier:         (document.getElementById('tujuan_karier')?.value || ''),
                         };
                         const strengthScore = lastStrengthResult ? lastStrengthResult.totalScore : null;
-                        STARSCampus.init('dataset/kampus_indonesia.csv').then(() => {
+                        STARSCampus.init('/dataset/kampus_indonesia.csv').then(() => {
                             STARSCampus.renderCampusSection(
                                 data.jurusan_utama, studentData, strengthScore, campusSection
                             );
@@ -1221,6 +1253,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function softResetAssessment() {
         if (!predictionForm) return;
+
+        // Reset submit lock state
+        resetSubmitState();
 
         // a. Eksekusi form.reset()
         predictionForm.reset();
@@ -1677,4 +1712,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Pre-warm Campus recommendation CSV in the background
+    if (typeof STARSCampus !== 'undefined') {
+        STARSCampus.init('/dataset/kampus_indonesia.csv');
+    }
 });

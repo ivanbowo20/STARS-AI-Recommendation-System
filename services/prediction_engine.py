@@ -38,12 +38,12 @@ class PredictionEngine:
         file_size = os.path.getsize(MODEL_PATH)
         print(f"Artifact size: {file_size} bytes")
         
-        # Check if it's a Git LFS pointer or incomplete file (<1MB)
-        if file_size < 1000000:
-            raise RuntimeError(f"Model artifact appears invalid or incomplete. Size: {file_size} bytes (Expected ~968MB)")
+        # Check if it's a Git LFS pointer or incomplete file (<10MB)
+        if file_size < 10000000:
+            raise RuntimeError(f"Model artifact appears invalid or incomplete. Size: {file_size} bytes (Expected ~37MB compressed)")
             
-        # Load with mmap_mode='r' to prevent MemoryError
-        self.model_data = joblib.load(MODEL_PATH, mmap_mode='r')
+        # Cleanly load compressed model artifact
+        self.model_data = joblib.load(MODEL_PATH)
         
         self.pipeline = self.model_data['pipeline']
         self.label_encoder = self.model_data['label_encoder']
