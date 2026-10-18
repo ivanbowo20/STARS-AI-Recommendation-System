@@ -149,6 +149,7 @@ const STARSCampus = (function () {
                 reasons: buildReasons(campus, scores, studentData),
             };
         });
+
         // Filter to only those with major match (>0) for relevance
         let matched = results.filter(r => r.scores.majorScore > 0);
 
@@ -168,8 +169,7 @@ const STARSCampus = (function () {
     function renderTop3Cards(top10, container) {
         if (!container) return;
         if (!top10.length) {
-            const provText = studentData && studentData.provinsi ? ` di wilayah ${studentData.provinsi}` : '';
-            container.innerHTML = `<p class="text-sm text-center py-8" style="color:var(--text-muted);">Tidak ada rekomendasi kampus yang sesuai untuk jurusan ini${provText}.</p>`;
+            container.innerHTML = `<p class="text-sm text-center py-8" style="color:var(--text-muted);">Tidak ada rekomendasi kampus tersedia untuk jurusan ini.</p>`;
             return;
         }
 
@@ -387,15 +387,31 @@ const STARSCampus = (function () {
         }
     }
 
-    // ---- Init: load campus CSV via fetch ----
+    // ---- Init: load campus CSV via fetch with promise caching & fallback ----
+    let initPromise = null;
+
     function init(csvPath) {
-        if (campusData.length) return Promise.resolve(campusData);
-        return fetch(csvPath)
-            .then(r => r.text())
+        if (campusData && campusData.length > 0) return Promise.resolve(campusData);
+        if (initPromise) return initPromise;
+
+        const path = csvPath || '/dataset/kampus_indonesia.csv';
+        initPromise = fetch(path)
+            .then(r => {
+                if (!r.ok) {
+                    // Try fallback path if first path failed
+                    const altPath = path.startsWith('/') ? path.slice(1) : '/' + path;
+                    return fetch(altPath).then(r2 => {
+                        if (!r2.ok) throw new Error(`HTTP ${r.status} / ${r2.status}`);
+                        return r2.text();
+                    });
+                }
+                return r.text();
+            })
             .then(text => {
                 const lines = text.trim().split('\n');
+                if (!lines.length || !lines[0].trim()) return [];
                 const headers = lines[0].split(',').map(h => h.trim());
-                campusData = lines.slice(1).map(line => {
+                campusData = lines.slice(1).filter(l => l.trim().length > 0).map(line => {
                     // Handle commas inside keunggulan column
                     const cols = line.split(',');
                     const obj = {};
@@ -414,9 +430,12 @@ const STARSCampus = (function () {
             })
             .catch(err => {
                 console.warn('STARS Campus: failed to load CSV', err);
+                initPromise = null;
                 return [];
             });
+
+        return initPromise;
     }
 
-    return { init, renderCampusSection, sortTable: () => {} };
+    return { init, renderCampusSection, isLoaded: () => (Array.isArray(campusData) && campusData.length > 0), sortTable: () => {} };
 })();

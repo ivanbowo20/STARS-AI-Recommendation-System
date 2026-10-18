@@ -725,9 +725,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
         });
 
-        provinsiSearch.addEventListener('input', (e) => {
-            const typedVal = e.target.value.trim().toLowerCase();
-            renderProvinsiDropdown(e.target.value);
+        const debounce = (func, delay = 150) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => func(...args), delay);
+            };
+        };
+
+        const debouncedRenderProvinsi = debounce((val) => {
+            const typedVal = val.trim().toLowerCase();
+            renderProvinsiDropdown(val);
             provinsiDropdown.classList.remove('hidden');
             if (provinsiIcon) provinsiIcon.classList.add('rotate-180');
             
@@ -736,6 +744,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Exact match while typing! Auto commit.
                 selectProvince(matchedProv);
             }
+        }, 150);
+
+        provinsiSearch.addEventListener('input', (e) => {
+            currentFocus = -1;
+            debouncedRenderProvinsi(e.target.value);
         });
 
         provinsiSearch.addEventListener('keydown', (e) => {
@@ -752,6 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addActive(items, currentFocus);
             } else if (e.key === 'Enter') {
                 e.preventDefault();
+                e.stopPropagation();
                 if (currentFocus > -1 && items[currentFocus]) {
                     items[currentFocus].click();
                 } else if (items.length === 1 && provinsiDropdown.querySelector('.dropdown-item')) {
@@ -803,13 +817,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (kotaIcon) kotaIcon.classList.add('rotate-180');
             });
 
-            kotaSearch.addEventListener('input', (e) => {
-                if (kotaSearch.disabled) return;
-                renderKotaDropdown(e.target.value);
+            const debouncedRenderKota = debounce((val) => {
+                renderKotaDropdown(val);
                 kotaDropdown.classList.remove('hidden');
                 if (kotaIcon) kotaIcon.classList.add('rotate-180');
-                // User is typing, clear the actual valid value
+            }, 150);
+
+            kotaSearch.addEventListener('input', (e) => {
+                if (kotaSearch.disabled) return;
+                currentKotaFocus = -1;
+                // User is typing, clear the actual valid value immediately
                 if (kotaInput) kotaInput.value = ''; 
+                debouncedRenderKota(e.target.value);
             });
 
             kotaSearch.addEventListener('keydown', (e) => {
@@ -827,6 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     addActive(items, currentKotaFocus);
                 } else if (e.key === 'Enter') {
                     e.preventDefault();
+                    e.stopPropagation();
                     if (currentKotaFocus > -1 && items[currentKotaFocus]) {
                         items[currentKotaFocus].click();
                     } else if (items.length === 1 && kotaDropdown.querySelector('.dropdown-item')) {
@@ -974,9 +994,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultLoading = document.getElementById('result-loading');
     const resultData = document.getElementById('result-data');
 
+    // Submission lock flag to prevent duplicate in-flight requests
+    let isSubmitting = false;
+
+    function resetSubmitState() {
+        isSubmitting = false;
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            if (submitBtn.dataset.originalHtml) {
+                submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+            }
+        }
+    }
+
     if (predictionForm) {
+        // Prevent accidental form submission on Enter key in inputs
+        predictionForm.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                if (e.defaultPrevented) return;
+                e.preventDefault();
+                if (isSubmitting) return;
+
+                if (currentStep < totalSteps) {
+                    if (nextBtn) {
+                        nextBtn.click();
+                    }
+                } else if (currentStep === totalSteps) {
+                    const submitBtn = document.getElementById('submit-btn');
+                    if (submitBtn && !submitBtn.disabled) {
+                        submitBtn.click();
+                    }
+                }
+            }
+        });
+
         predictionForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Prevent multiple in-flight prediction submissions
+            if (isSubmitting) {
+                return;
+            }
 
             // Validate that we are on the final step
             if (currentStep !== 4) {
@@ -1003,25 +1063,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Lock submission immediately
+            isSubmitting = true;
+
             // Button loading state & double-submit prevention
             const submitBtn = document.getElementById('submit-btn');
             if (submitBtn) {
-                if (submitBtn.disabled) return;
                 submitBtn.disabled = true;
                 submitBtn.dataset.originalHtml = submitBtn.innerHTML;
                 submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
                 submitBtn.innerHTML = `Memproses rekomendasi... <svg class="animate-spin -mr-1 ml-2 h-4 w-4 text-current inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
             }
 
-            const restoreSubmitBtn = () => {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    if (submitBtn.dataset.originalHtml) {
-                        submitBtn.innerHTML = submitBtn.dataset.originalHtml;
-                    }
-                }
-            };
+            const restoreSubmitBtn = resetSubmitState;
 
             // ── V5.1: Hybrid Reliability Gate ──────────────────────────
             const reliabilityScore = lastConfidenceResult ? lastConfidenceResult.score : 100;
@@ -1096,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             tujuan_karier:         (document.getElementById('tujuan_karier')?.value || ''),
                         };
                         const strengthScore = lastStrengthResult ? lastStrengthResult.totalScore : null;
-                        STARSCampus.init('dataset/kampus_indonesia.csv').then(() => {
+                        STARSCampus.init('/dataset/kampus_indonesia.csv').then(() => {
                             STARSCampus.renderCampusSection(
                                 data.jurusan_utama, studentData, strengthScore, campusSection
                             );
@@ -1109,10 +1163,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4 animate-bounce"></i>
                             <h4 class="text-xl font-bold text-[var(--text-primary)] mb-2">Gagal Menjalankan Prediksi</h4>
                             <p class="text-sm text-[var(--text-secondary)] mb-6">${data.error || 'Server internal bermasalah.'}</p>
-                            <button type="submit" class="px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-xl transition-all shadow-md">Coba Lagi</button>
+                            <button type="button" id="retry-fail-btn" class="px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-xl transition-all shadow-md">Coba Lagi</button>
                         </div>
                     `;
                     resultData.classList.remove('hidden');
+
+                    const retryFailBtn = document.getElementById('retry-fail-btn');
+                    if (retryFailBtn) {
+                        retryFailBtn.addEventListener('click', function() {
+                            if (predictionForm) predictionForm.dispatchEvent(new Event('submit', { cancelable: true }));
+                        });
+                    }
                 }
             })
             .catch(error => {
@@ -1203,6 +1264,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function softResetAssessment() {
         if (!predictionForm) return;
+
+        // Reset submit lock state
+        resetSubmitState();
 
         // a. Eksekusi form.reset()
         predictionForm.reset();
@@ -1659,4 +1723,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Pre-warm Campus recommendation CSV in the background
+    if (typeof STARSCampus !== 'undefined') {
+        STARSCampus.init('/dataset/kampus_indonesia.csv');
+    }
 });

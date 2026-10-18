@@ -411,7 +411,7 @@ const STARSCampus = (function () {
                 const lines = text.trim().split('\n');
                 if (!lines.length || !lines[0].trim()) return [];
                 const headers = lines[0].split(',').map(h => h.trim());
-                campusData = lines.slice(1).map(line => {
+                campusData = lines.slice(1).filter(l => l.trim().length > 0).map(line => {
                     // Handle commas inside keunggulan column
                     const cols = line.split(',');
                     const obj = {};
@@ -437,5 +437,5 @@ const STARSCampus = (function () {
         return initPromise;
     }
 
-    return { init, renderCampusSection, isLoaded: () => (campusData && campusData.length > 0), sortTable: () => {} };
+    return { init, renderCampusSection, isLoaded: () => (Array.isArray(campusData) && campusData.length > 0), sortTable: () => {} };
 })();

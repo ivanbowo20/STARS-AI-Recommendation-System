@@ -765,6 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addActive(items, currentFocus);
             } else if (e.key === 'Enter') {
                 e.preventDefault();
+                e.stopPropagation();
                 if (currentFocus > -1 && items[currentFocus]) {
                     items[currentFocus].click();
                 } else if (items.length === 1 && provinsiDropdown.querySelector('.dropdown-item')) {
@@ -845,6 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     addActive(items, currentKotaFocus);
                 } else if (e.key === 'Enter') {
                     e.preventDefault();
+                    e.stopPropagation();
                     if (currentKotaFocus > -1 && items[currentKotaFocus]) {
                         items[currentKotaFocus].click();
                     } else if (items.length === 1 && kotaDropdown.querySelector('.dropdown-item')) {
@@ -1011,17 +1013,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prevent accidental form submission on Enter key in inputs
         predictionForm.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                if (e.defaultPrevented) return;
                 e.preventDefault();
                 if (isSubmitting) return;
 
                 if (currentStep < totalSteps) {
-                    if (validateStep(currentStep)) {
-                        currentStep++;
-                        showStep(currentStep);
-                        updateStepIndicator();
+                    if (nextBtn) {
+                        nextBtn.click();
                     }
                 } else if (currentStep === totalSteps) {
-                    predictionForm.dispatchEvent(new Event('submit', { cancelable: true }));
+                    const submitBtn = document.getElementById('submit-btn');
+                    if (submitBtn && !submitBtn.disabled) {
+                        submitBtn.click();
+                    }
                 }
             }
         });
@@ -1159,10 +1163,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4 animate-bounce"></i>
                             <h4 class="text-xl font-bold text-[var(--text-primary)] mb-2">Gagal Menjalankan Prediksi</h4>
                             <p class="text-sm text-[var(--text-secondary)] mb-6">${data.error || 'Server internal bermasalah.'}</p>
-                            <button type="submit" class="px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-xl transition-all shadow-md">Coba Lagi</button>
+                            <button type="button" id="retry-fail-btn" class="px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] font-bold rounded-xl transition-all shadow-md">Coba Lagi</button>
                         </div>
                     `;
                     resultData.classList.remove('hidden');
+
+                    const retryFailBtn = document.getElementById('retry-fail-btn');
+                    if (retryFailBtn) {
+                        retryFailBtn.addEventListener('click', function() {
+                            if (predictionForm) predictionForm.dispatchEvent(new Event('submit', { cancelable: true }));
+                        });
+                    }
                 }
             })
             .catch(error => {

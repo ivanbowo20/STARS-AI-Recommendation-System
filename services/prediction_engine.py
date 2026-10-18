@@ -60,22 +60,26 @@ class PredictionEngine:
         """
         if not self._initialized:
             self._initialize()
-            PredictionEngine._initialized = True
+            self.__class__._initialized = True
+            self._initialized = True
+
+        # Copy input_data to prevent mutating the caller's dictionary
+        data = input_data.copy()
 
         # Ensure all required features are present in input_data
         missing_features = {}
         for feature in self.features:
-            if feature not in input_data:
+            if feature not in data:
                 if feature in self.schema['numeric_features']:
                     missing_features[feature] = np.nan
                 else:
                     missing_features[feature] = 0
                     
         # Add missing features
-        input_data.update(missing_features)
+        data.update(missing_features)
         
         # Create a dataframe with a single row
-        df_input = pd.DataFrame([input_data])
+        df_input = pd.DataFrame([data])
                     
         # Reorder columns to match exactly what the model expects
         df_input = df_input[self.features]
